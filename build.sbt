@@ -1,4 +1,5 @@
 lazy val cats = (project in file("."))
+.settings(publishSettings:_*)
 .enablePlugins(ExerciseCompilerPlugin)
 .settings(
   organization := "org.scala-exercises",
