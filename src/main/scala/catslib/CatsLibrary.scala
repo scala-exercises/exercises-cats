@@ -8,7 +8,7 @@ object CatsLibrary extends exercise.Library {
   override def owner = "scala-exercises"
   override def repository = "exercises-cats"
 
-  override def color = Some("#4CAAF6")
+  override def color = Some("#5B5988")
 
   override def sections = List(
     MonoidSection,
