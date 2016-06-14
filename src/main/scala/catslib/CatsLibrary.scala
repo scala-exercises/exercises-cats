@@ -11,8 +11,8 @@ object CatsLibrary extends exercise.Library {
   override def color = Some("#5B5988")
 
   override def sections = List(
-    MonoidSection,
     SemigroupSection,
+    MonoidSection,
     FunctorSection,
     ApplySection,
     ApplicativeSection,
