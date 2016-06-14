@@ -15,8 +15,8 @@ import cats.implicits._
   *
   * `Foldable[F]` is implemented in terms of two basic methods:
   *
-  * - `foldLeft(fa, b)(f)` eagerly folds `fa` from left-to-right.
-  * - `foldRight(fa, b)(f)` lazily folds `fa` from right-to-left.
+  *   - `foldLeft(fa, b)(f)` eagerly folds `fa` from left-to-right.
+  *   - `foldRight(fa, b)(f)` lazily folds `fa` from right-to-left.
   *
   *
   * These form the basis for many other operations, see also:
