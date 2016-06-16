@@ -7,7 +7,8 @@ script:
   - git clone https://github.com/scala-exercises/site.git site
   - pushd site; sbt 'definitions/publishLocal' 'runtime/publishLocal' 'compiler/publishLocal' 'sbt-exercise/publishLocal' ; popd
   - sbt test
-after_success:
-  - echo $KEYS_PASSPHRASE | gpg --passphrase-fd 0 keys.tar.gpg
-  - tar xfv keys.tar.gz
-  - sbt publishSigned
+deploy:
+  provider: script
+  script: deploy.sh
+  on:
+    branch: master
