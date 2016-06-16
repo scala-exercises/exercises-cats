@@ -97,8 +97,8 @@ object MonadSection extends FlatSpec with Matchers with exercise.Section {
 
   /** = Composition =
     *
-    * Unlike `Functor`s and `Applicative`s, you cannot derive a Monad instance for a generic `M[N[_]]` 
-    * where both `M[_]` and `N[_]` are Monads.
+    * Unlike `Functor`s and `Applicative`s, you cannot derive a monad instance for a generic `M[N[_]]` 
+    * where both `M[_]` and `N[_]` have an instance of a monad.
     * 
     * However, it is common to want to compose the effects of both `M[_]` and `N[_]`. One way of expressing this 
     * is to provide instructions on how to compose any outer monad (`F` in the following example) with a specific 
