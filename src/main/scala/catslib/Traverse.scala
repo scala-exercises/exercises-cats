@@ -181,7 +181,7 @@ object TraverseSection extends FlatSpec with Matchers with exercise.Section {
     * We say "when run" because a `Job` is some function that requires a `Context` before producing
     * the value we want.
     *
-    * One example of a "context" can be found in the [Spark](http://spark.apache.org/) project. In
+    * One example of a "context" can be found in the [[http://spark.apache.org/ Spark]] project. In
     * Spark, information needed to run a Spark job (where the master node is, memory allocated, etc.)
     * resides in a `SparkContext`. Going back to the above example, we can see how one may define
     * topic-specific Spark jobs (`type Job[A] = Reader[SparkContext, A]`) and then run several
