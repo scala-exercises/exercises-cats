@@ -8,4 +8,4 @@ script:
   - pushd site; sbt 'definitions/publishLocal' 'runtime/publishLocal' 'compiler/publishLocal' 'sbt-exercise/publishLocal' ; popd
   - sbt test
 after_success:
-  - ./deploy.sh
+  - bash deploy.sh
