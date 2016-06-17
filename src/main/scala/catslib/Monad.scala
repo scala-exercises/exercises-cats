@@ -97,14 +97,12 @@ object MonadSection extends FlatSpec with Matchers with exercise.Section {
 
   /** = Composition =
     *
-    * Unlike `Functor`s and `Applicative`s
-    * not all `Monad`s compose. This means that even if `M[_]` and `N[_]` are
-    * both `Monad`s, `M[N[_]]` is not guaranteed to be a `Monad`.
-    *
-    * However, many common cases do. One way of expressing this is to provide
-    * instructions on how to compose any outer monad (`F` in the following
-    * example) with a specific inner monad (`Option` in the following
-    * example).
+    * Unlike `Functor`s and `Applicative`s, you cannot derive a monad instance for a generic `M[N[_]]` 
+    * where both `M[_]` and `N[_]` have an instance of a monad.
+    * 
+    * However, it is common to want to compose the effects of both `M[_]` and `N[_]`. One way of expressing this 
+    * is to provide instructions on how to compose any outer monad (`F` in the following example) with a specific 
+    * inner monad (`Option` in the following example).
     *
     * {{{
     * case class OptionT[F[_], A](value: F[Option[A]])
