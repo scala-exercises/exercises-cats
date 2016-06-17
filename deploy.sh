@@ -1,11 +1,11 @@
 #!/bin/sh
 
-function decipherKeys{
+function decipherKeys {
    echo $KEYS_PASSPHRASE | gpg --passphrase-fd 0 keys.tar.gpg
-   tar xfv keys.tar.gz
+   tar xfv keys.tar
 }
 
-function publish{
+function publish {
    sbt compile publishSigned
 }
 
@@ -14,7 +14,7 @@ function release {
     publish
 }
 
-if [[ $TRAVIS_BRANCH == 'master' ]]
+if [[ $TRAVIS_BRANCH == 'master' ]]; then
    echo "Master branch, releasing..."
    release
 else
