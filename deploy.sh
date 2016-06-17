@@ -19,7 +19,5 @@ if [[ $TRAVIS_BRANCH == 'master' ]]; then
    release
 else
     echo "Not in master branch, skipping release"
-    # fixme: adding it here for testing in a non-master branch
-    release
 fi
 
