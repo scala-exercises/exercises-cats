@@ -255,11 +255,11 @@ object ValidatedSection extends FlatSpec with Matchers with exercise.Section {
     *                                         config.parse[Int]("house_number").toValidatedNel,
     *                                         config.parse[String]("street").toValidatedNel) {
     *  case (name, age, houseNumber, street) => Person(name, age, Address(houseNumber, street))
-    * }
+    * }}}
     *
     * We can now rewrite validations in terms of `Apply`.
     *
-    * = Of `flatMap`s and `Xor`s ==
+    * == Of `flatMap`s and `Xor`s ==
     *
     * `Option` has `flatMap`, `Xor` has `flatMap`, where's `Validated`'s? Let's try to implement it - better yet,
     * let's implement the `Monad` type class.
