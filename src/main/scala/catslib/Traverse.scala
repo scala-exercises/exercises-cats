@@ -118,13 +118,17 @@ object TraverseSection extends FlatSpec with Matchers with exercise.Section {
 
   /** We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for
     * `ValidatedNel`.
+    *
+    * {{{
+    *     implicit def nelSemigroup[A]: Semigroup[NonEmptyList[A]] =
+    *       OneAnd.oneAndSemigroupK[List].algebra[A]
+    * }}}
+    *
+    * Now that we've provided such evidence, we can use `ValidatedNel` as an applicative.
     */
   def traverseuValidated(res0: Boolean) = {
     import cats.Semigroup
     import cats.data.{ NonEmptyList, OneAnd, ValidatedNel }
-
-    implicit def nelSemigroup[A]: Semigroup[NonEmptyList[A]] =
-      OneAnd.oneAndSemigroupK[List].algebra[A]
 
     List("1", "2", "3").traverseU(parseIntValidated).isValid should be(res0)
   }

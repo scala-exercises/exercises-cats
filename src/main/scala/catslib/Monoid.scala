@@ -6,6 +6,8 @@ import cats._
 import cats.std.all._
 import cats.syntax.all._
 
+import MonoidHelpers._
+
 /** `Monoid` extends the `Semigroup` type class, adding an
   * `empty` method to semigroup's `combine`. The `empty` method must return a
   * value that when combined with any other instance of that type returns the
@@ -69,19 +71,21 @@ object MonoidSection extends FlatSpec with Matchers with exercise.Section {
     * that will be valid for any tuple where the types it contains also have a
     * `Monoid` available.
     *
+    * {{{
+    *     implicit def monoidTuple[A: Monoid, B: Monoid]: Monoid[(A, B)] =
+    *       new Monoid[(A, B)] {
+    *         def combine(x: (A, B), y: (A, B)): (A, B) = {
+    *           val (xa, xb) = x
+    *           val (ya, yb) = y
+    *           (Monoid[A].combine(xa, ya), Monoid[B].combine(xb, yb))
+    *         }
+    *         def empty: (A, B) = (Monoid[A].empty, Monoid[B].empty)
+    *       }
+    * }}}
+    *
     * This way we are able to combine both values in one pass, hurrah!
     */
   def tupleMonoid(res0: (Int, String)) = {
-    implicit def tupleMonoid[A: Monoid, B: Monoid]: Monoid[(A, B)] =
-      new Monoid[(A, B)] {
-        def combine(x: (A, B), y: (A, B)): (A, B) = {
-          val (xa, xb) = x
-          val (ya, yb) = y
-          (Monoid[A].combine(xa, ya), Monoid[B].combine(xb, yb))
-        }
-        def empty: (A, B) = (Monoid[A].empty, Monoid[B].empty)
-      }
-
     val l = List(1, 2, 3, 4, 5)
     l.foldMap(i ⇒ (i, i.toString)) should be(res0)
   }
