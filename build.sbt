@@ -7,14 +7,15 @@ lazy val cats = (project in file("."))
   scalaVersion := "2.11.7",
   version := "0.1.0",
   resolvers ++= Seq(
-    Resolver.sonatypeRepo("snapshots")
+    Resolver.sonatypeRepo("snapshots"),
+    Resolver.sonatypeRepo("releases")
   ),
   libraryDependencies ++= Seq(
     "org.typelevel" %% "cats-core" % "0.4.1",
     "com.chuusai" %% "shapeless" % "2.2.5",
     "org.scalatest" %% "scalatest" % "2.2.4",
-    "org.scala-exercises" %% "runtime" % "0.0.0-SNAPSHOT" changing(),
-    "org.scala-exercises" %% "definitions" % "0.0.0-SNAPSHOT" changing(),
+    "org.scala-exercises" %% "runtime" % "0.1.+" changing(),
+    "org.scala-exercises" %% "definitions" % "0.1.+" changing(),
     "org.scalacheck" %% "scalacheck" % "1.12.5",
     "com.github.alexarchambault" %% "scalacheck-shapeless_1.12" % "0.3.1",
     compilerPlugin("org.spire-math" %% "kind-projector" % "0.7.1")
