@@ -14,8 +14,8 @@ lazy val cats = (project in file("."))
     "org.typelevel" %% "cats-core" % "0.4.1",
     "com.chuusai" %% "shapeless" % "2.2.5",
     "org.scalatest" %% "scalatest" % "2.2.4",
-    "org.scala-exercises" %% "exercise-compiler" % "0.1.+" changing(),
-    "org.scala-exercises" %% "definitions" % "0.1.+" changing(),
+    "org.scala-exercises" %% "exercise-compiler" % version.value,
+    "org.scala-exercises" %% "definitions" % version.value,
     "org.scalacheck" %% "scalacheck" % "1.12.5",
     "com.github.alexarchambault" %% "scalacheck-shapeless_1.12" % "0.3.1",
     compilerPlugin("org.spire-math" %% "kind-projector" % "0.7.1")
