@@ -5,7 +5,7 @@ lazy val cats = (project in file("."))
   organization := "org.scala-exercises",
   name         := "exercises-cats",
   scalaVersion := "2.11.7",
-  version := "0.1.1",
+  version := "0.1.2",
   resolvers ++= Seq(
     Resolver.sonatypeRepo("snapshots"),
     Resolver.sonatypeRepo("releases")
