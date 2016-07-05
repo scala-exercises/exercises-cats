@@ -27,7 +27,7 @@ import MonoidHelpers._
   *
   * @param name monoid
   */
-object MonoidSection extends FlatSpec with Matchers with exercise.Section {
+object MonoidSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** First some imports.
     *
     * {{{

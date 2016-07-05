@@ -67,7 +67,7 @@ import cats.std.list._
   *
   * @param name functor
   */
-object FunctorSection extends FlatSpec with Matchers with exercise.Section {
+object FunctorSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** = Using Functor =
     *
     * == map ==

@@ -33,7 +33,7 @@ import cats.implicits._
   *
   * @param name foldable
   */
-object FoldableSection extends FlatSpec with Matchers with exercise.Section {
+object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** = foldLeft =
     *
     * `foldLeft` is an eager left-associative fold on `F` using the given function.

@@ -14,7 +14,7 @@ import cats.std.all._
   *
   * @param name applicative
   */
-object ApplicativeSection extends FlatSpec with Matchers with exercise.Section {
+object ApplicativeSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** This method takes any value and returns the value in the context of
     * the functor. For many familiar functors, how to do this is
