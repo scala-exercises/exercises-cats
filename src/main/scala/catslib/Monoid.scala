@@ -6,8 +6,6 @@ import cats._
 import cats.std.all._
 import cats.syntax.all._
 
-import MonoidHelpers._
-
 /** `Monoid` extends the `Semigroup` type class, adding an
   * `empty` method to semigroup's `combine`. The `empty` method must return a
   * value that when combined with any other instance of that type returns the
@@ -69,7 +67,7 @@ object MonoidSection extends FlatSpec with Matchers with org.scalaexercises.defi
   /** To use this
     * with a function that produces a tuple, we can define a `Monoid` for a tuple
     * that will be valid for any tuple where the types it contains also have a
-    * `Monoid` available.
+    * `Monoid` available. Note that cats already defines it for you.
     *
     * {{{
     *     implicit def monoidTuple[A: Monoid, B: Monoid]: Monoid[(A, B)] =
