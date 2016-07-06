@@ -31,7 +31,7 @@ import cats._
   *
   * @param name semigroup
   */
-object SemigroupSection extends FlatSpec with Matchers with exercise.Section {
+object SemigroupSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** Now that you've learned about the `Semigroup` instance for `Int` try to
     * guess how it works in the following examples:
     *

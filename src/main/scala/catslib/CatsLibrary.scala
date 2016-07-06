@@ -4,7 +4,7 @@ package catslib
   *
   * @param name cats
   */
-object CatsLibrary extends exercise.Library {
+object CatsLibrary extends org.scalaexercises.definitions.Library {
   override def owner = "scala-exercises"
   override def repository = "exercises-cats"
 

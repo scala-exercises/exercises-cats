@@ -81,7 +81,7 @@ import TraverseHelpers._
   *
   * @param name traverse
   */
-object TraverseSection extends FlatSpec with Matchers with exercise.Section {
+object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** == Choose your effect ==
     *
     * The type signature of `Traverse` appears highly abstract, and indeed it is - what `traverse` does as it

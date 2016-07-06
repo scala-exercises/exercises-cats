@@ -162,7 +162,7 @@ import ValidatedHelpers._
   *
   * @param name validated
   */
-object ValidatedSection extends FlatSpec with Matchers with exercise.Section {
+object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** When no errors are present in the configuration, we get a `ConnectionParams` wrapped in a `Valid` instance.
     */
   def noErrors(res0: Boolean, res1: String, res2: Int) = {

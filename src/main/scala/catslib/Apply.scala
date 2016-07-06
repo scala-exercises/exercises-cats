@@ -42,7 +42,7 @@ import cats.syntax.cartesian._
   *
   * @param name apply
   */
-object ApplySection extends FlatSpec with Matchers with exercise.Section {
+object ApplySection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** = map =
     *
     * Since `Apply` extends `Functor`, we can use the `map` method from `Functor`:
