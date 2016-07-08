@@ -1,6 +1,6 @@
 package catslib
 
-/** Cats is an experimental library intended to provide abstractions for functional programming in Scala.
+/** Cats is a library which provides abstractions for functional programming in the Scala programming language.
   *
   * @param name cats
   */
