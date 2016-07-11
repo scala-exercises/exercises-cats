@@ -1,13 +1,11 @@
-package exercises
+package catslib
 
-import catslib._
-import shapeless.HNil
 import cats.data.Xor
-
+import org.scalacheck.Shapeless._
+import org.scalaexercises.Test
 import org.scalatest.Spec
 import org.scalatest.prop.Checkers
-import org.scalaexercises.Test
-import org.scalacheck.Shapeless._
+import shapeless.HNil
 
 class XorSpec extends Spec with Checkers {
   def `is right biased` = {

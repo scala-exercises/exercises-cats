@@ -1,14 +1,10 @@
-package exercises
-
-import catslib._
-import cats.data.{ Xor, Validated, ValidatedNel }
-import shapeless.HNil
-
-import org.scalatest.Spec
-import org.scalatest.prop.Checkers
-import org.scalaexercises.Test
+package catslib
 
 import org.scalacheck.Shapeless._
+import org.scalaexercises.Test
+import org.scalatest.Spec
+import org.scalatest.prop.Checkers
+import shapeless.HNil
 
 class TraverseSpec extends Spec with Checkers {
   def `traverseu function with xor` = {
