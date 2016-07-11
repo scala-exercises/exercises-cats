@@ -1,12 +1,10 @@
-package exercises
-
-import catslib._
-import shapeless.HNil
-
-import org.scalatest.Spec
-import org.scalatest.prop.Checkers
+package catslib
 
 import org.scalacheck.Shapeless._
+import org.scalaexercises.Test
+import org.scalatest.Spec
+import org.scalatest.prop.Checkers
+import shapeless.HNil
 
 class ApplicativeSpec extends Spec with Checkers {
   def `pure method` = {
