@@ -44,7 +44,7 @@ import TraverseHelpers._
   * We could try familiar combinators like `map`.
   *
   * {{{
-  * def profilesFor(users: List[User]) = users.map(userInfo)
+  * def profilesFor(users: List[User]): List[Future[Profile]] = users.map(userInfo)
   * }}}
   *
   * Note the return type `List[Future[Profile]]`. This makes sense given the type signatures, but seems unwieldy.
