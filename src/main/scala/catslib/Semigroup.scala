@@ -66,7 +66,7 @@ object SemigroupSection extends FlatSpec with Matchers with exercise.Section {
     * since the first version uses the Semigroup's `combine` operation, it will merge
     * the map's values with `combine`.
     */
-  def composingSemigroups(res0: Option[Map[String, Int]]) = {
+  def composingSemigroups(res0: Map[String, Int]) = {
     import cats.implicits._
 
     val aMap = Map("foo" → Map("bar" → 5))
