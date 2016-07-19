@@ -20,7 +20,7 @@ class SemigroupSpec extends Spec with Checkers {
     check(
       Test.testSuccess(
         SemigroupSection.composingSemigroups _,
-        Option(Map("bar" → 11)) :: HNil
+        Map("bar" → 11) :: HNil
       )
     )
   }

@@ -66,14 +66,14 @@ object SemigroupSection extends FlatSpec with Matchers with org.scalaexercises.d
     * since the first version uses the Semigroup's `combine` operation, it will merge
     * the map's values with `combine`.
     */
-  def composingSemigroups(res0: Option[Map[String, Int]]) = {
+  def composingSemigroups(res0: Map[String, Int]) = {
     import cats.implicits._
 
     val aMap = Map("foo" → Map("bar" → 5))
     val anotherMap = Map("foo" → Map("bar" → 6))
     val combinedMap = Semigroup[Map[String, Map[String, Int]]].combine(aMap, anotherMap)
 
-    combinedMap.get("foo") should be(res0)
+    combinedMap.get("foo") should be(Some(res0))
   }
 
   /** There is inline syntax available for `Semigroup`. Here we are
