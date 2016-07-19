@@ -20,7 +20,7 @@ import cats.implicits._
   *
   *
   * These form the basis for many other operations, see also:
-  * [[https://www.cs.nott.ac.uk/~gmh/fold.pdf A tutorial on the universality and expressiveness of fold]]
+  * [[http://www.cs.nott.ac.uk/~pszgmh/fold.pdf A tutorial on the universality and expressiveness of fold]]
   *
   * First some standard imports.
   *
@@ -33,7 +33,7 @@ import cats.implicits._
   *
   * @param name foldable
   */
-object FoldableSection extends FlatSpec with Matchers with exercise.Section {
+object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
   /** = foldLeft =
     *
     * `foldLeft` is an eager left-associative fold on `F` using the given function.

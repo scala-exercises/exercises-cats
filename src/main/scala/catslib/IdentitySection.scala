@@ -26,7 +26,7 @@ import org.scalatest._
   *
   * @param name identity
   */
-object IdentitySection extends FlatSpec with Matchers with exercise.Section {
+object IdentitySection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** We can freely compare values of `Id[T]` with unadorned
     * values of type `T`.

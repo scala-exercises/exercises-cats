@@ -107,7 +107,7 @@ object XorStyleWithAdts {
   *
   * @param name xor
   */
-object XorSection extends FlatSpec with Matchers with exercise.Section {
+object XorSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** More often than not we want to just bias towards one side and call it a day - by convention,
     * the right side is most often chosen. This is the primary difference between `Xor` and `Either` -
