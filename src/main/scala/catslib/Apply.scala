@@ -137,6 +137,7 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
     res4: Option[(Int, Int)],
     res5: Option[(Int, Int, Int)]
   ) = {
+    import cats.implicits._
     val option2 = Option(1) |@| Option(2)
     val option3 = option2 |@| Option.empty[Int]
 
