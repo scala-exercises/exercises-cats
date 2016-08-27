@@ -56,7 +56,7 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
 
     Apply[Option].map(Some(1))(intToString) should be(res0)
     Apply[Option].map(Some(1))(double) should be(res1)
-    Apply[Option].map(None)(double) should be(res2)
+    Apply[Option].map(None)(addTwo) should be(res2)
   }
 
   /** = compose =
