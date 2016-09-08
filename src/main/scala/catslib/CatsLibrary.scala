@@ -23,4 +23,6 @@ object CatsLibrary extends org.scalaexercises.definitions.Library {
     XorSection,
     ValidatedSection
   )
+
+  override def logoPath = "cats"
 }
