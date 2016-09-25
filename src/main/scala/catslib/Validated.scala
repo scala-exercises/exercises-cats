@@ -8,7 +8,7 @@ import cats.data.Xor
 
 import ValidatedHelpers._
 
-/** Imagine you are filling out a web form to signup for an account. You input your username and password and submit.
+/** Imagine you are filling out a web form to sign up for an account. You input your username and password and submit.
   * Response comes back saying your username can't have dashes in it, so you make some changes and resubmit. Can't
   * have special characters either. Change, resubmit. Passwords need to have at least one capital letter. Change,
   * resubmit. Password needs to have at least one number.
@@ -28,7 +28,7 @@ import ValidatedHelpers._
   * You run your program and it says key "url" not found, turns out the key was "endpoint". So you change your code
   * and re-run. Now it says the "port" key was not a well-formed integer.
   *
-  * It would be nice to have all of these errors be reported simultaneously. That the username can't have dashes can
+  * It would be nice to have all of these errors reported simultaneously. That the username can't have dashes can
   * be validated separately from it not having special characters, as well as from the password needing to have certain
   * requirements. A misspelled (or missing) field in a config can be validated separately from another field not being
   * well-formed.
@@ -43,7 +43,7 @@ import ValidatedHelpers._
   *
   * As our running example, we will look at config parsing. Our config will be represented by a
   * `Map[String, String]`. Parsing will be handled by a `Read` type class - we provide instances
-  * just for `String` and `Int` for brevity.
+  * only for `String` and `Int` for brevity.
   *
   * {{{
   * trait Read[A] {
@@ -65,7 +65,7 @@ import ValidatedHelpers._
   * }
   * }}}
   *
-  * Then we enumerate our errors - when asking for a config value, one of two things can
+  * Then we enumerate our errors—when asking for a config value, one of two things can
   * go wrong: the field is missing, or it is not well-formed with regards to the expected
   * type.
   *
@@ -76,7 +76,7 @@ import ValidatedHelpers._
   * }}}
   *
   * We need a data type that can represent either a successful value (a parsed configuration),
-  * or an error. It'd look like in the following example, which cats provides in `cats.data.Validated`.
+  * or an error. It would look like the following, which cats provides in `cats.data.Validated`:
   *
   * {{{
   * sealed abstract class Validated[+E, +A]
@@ -122,7 +122,7 @@ import ValidatedHelpers._
   *
   * We've run into a problem. In the case where both have errors, we want to report both. But we have
   * no way of combining the two errors into one error! Perhaps we can put both errors into a `List`,
-  * but that seems needlessly specific - clients may want to define their own way of combining errors.
+  * but that seems needlessly specific—clients may want to define their own way of combining errors.
   *
   * How then do we abstract over a binary operation? The `Semigroup` type class captures this idea.
   *
@@ -138,9 +138,9 @@ import ValidatedHelpers._
   * }
   * }}}
   *
-  * Perfect! But.. going back to our example, we don't have a way to combine `ConfigError`s. But as clients,
+  * Perfect! But, going back to our example, we don't have a way to combine `ConfigError`s. But as clients,
   * we can change our `Validated` values where the error can be combined, say, a `List[ConfigError]`. It is
-  * more common however to use a `NonEmptyList[ConfigError]` - the `NonEmptyList` statically guarantees we
+  * more common however to use a `NonEmptyList[ConfigError]`—the `NonEmptyList` statically guarantees we
   * have at least one value, which aligns with the fact that if we have an `Invalid`, then we most
   * certainly have at least one error. This technique is so common there is a convenient method on `Validated`
   * called `toValidatedNel` that turns any `Validated[E, A]` value to a `Validated[NonEmptyList[E], A]`.
@@ -178,7 +178,7 @@ object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.d
   }
 
   /** But what happens when having one or more errors? They are accumulated in a `NonEmptyList`
-    * wrapped in a `Invalid` instance.
+    * wrapped in an `Invalid` instance.
     */
   def someErrors(res0: Boolean, res1: Boolean) = {
     val config = Config(Map(("endpoint", "127.0.0.1"), ("port", "not a number")))
@@ -255,13 +255,14 @@ object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.d
     *                                         config.parse[Int]("house_number").toValidatedNel,
     *                                         config.parse[String]("street").toValidatedNel) {
     *  case (name, age, houseNumber, street) => Person(name, age, Address(houseNumber, street))
+    * }
     * }}}
     *
     * We can now rewrite validations in terms of `Apply`.
     *
     * == Of `flatMap`s and `Xor`s ==
     *
-    * `Option` has `flatMap`, `Xor` has `flatMap`, where's `Validated`'s? Let's try to implement it - better yet,
+    * `Option` has `flatMap`, `Xor` has `flatMap`, where's `Validated`'s? Let's try to implement it—better yet,
     * let's implement the `Monad` type class.
     *
     * {{{
@@ -307,11 +308,11 @@ object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.d
     *
     * = Sequential Validation =
     *
-    * If you do want error accumulation but occasionally run into places where you sequential validation is needed, then `Validated` provides a couple methods that may be helpful.
+    * If you do want error accumulation but occasionally run into places where sequential validation is needed, then `Validated` provides a couple methods that may be helpful.
     *
     * == `andThen` ===
     *
-    * The `andThen` method is similar to `flatMap` (such as `Xor.flatMap`). In the cause of success, it passes the valid value into a function that returns a new `Validated` instance.
+    * The `andThen` method is similar to `flatMap` (such as `Xor.flatMap`). In the case of success, it passes the valid value into a function that returns a new `Validated` instance.
     *
     * {{{
     * val houseNumber = config.parse[Int]("house_number").andThen{ n =>
