@@ -3,8 +3,7 @@ package catslib
 import org.scalatest._
 
 import cats._
-import cats.std.all._
-import cats.syntax.all._
+import cats.implicits._
 
 /** `Monoid` extends the `Semigroup` type class, adding an
   * `empty` method to semigroup's `combine`. The `empty` method must return a

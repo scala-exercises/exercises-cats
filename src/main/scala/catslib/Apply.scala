@@ -4,7 +4,7 @@ import org.scalatest._
 import ApplyHelpers._
 
 import cats._
-import cats.std.all._
+import cats.implicits._
 import cats.syntax.apply._
 import cats.syntax.cartesian._
 
@@ -48,7 +48,7 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
     * Since `Apply` extends `Functor`, we can use the `map` method from `Functor`:
     */
   def applyExtendsFunctor(res0: Option[String], res1: Option[Int], res2: Option[Int]) = {
-    import cats.std.all._
+    import cats.implicits._
 
     val intToString: Int ⇒ String = _.toString
     val double: Int ⇒ Int = _ * 2

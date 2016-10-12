@@ -15,6 +15,9 @@ object MonadHelpers {
             case Some(a) ⇒ f(a).value
           }
         }
+
+      def tailRecM[A, B](a: A)(f: A => OptionT[F, Either[A, B]]): OptionT[F, B] =
+        defaultTailRecM(a)(f)
     }
   }
 }

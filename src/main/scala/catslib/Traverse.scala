@@ -3,8 +3,7 @@ package catslib
 import org.scalatest._
 
 import cats.data.{ Xor, ValidatedNel }
-import cats.std.all._
-import cats.syntax.all._
+import cats.implicits._
 
 import TraverseHelpers._
 
@@ -210,7 +209,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     *
     */
   def sequencing(res0: Option[List[Int]], res1: Option[List[Int]]) = {
-    import cats.std.option._
+    import cats.implicits._
 
     List(Option(1), Option(2), Option(3)).traverse(identity) should be(res0)
     List(Option(1), None, Option(3)).traverse(identity) should be(res1)

@@ -192,7 +192,7 @@ object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.d
     import cats.data.NonEmptyList
 
     invalid.isValid should be(res0)
-    val errors = NonEmptyList(MissingConfig("url"), ParseError("port"))
+    val errors = NonEmptyList(MissingConfig("url"), List(ParseError("port")))
     invalid == Validated.invalid(errors) should be(res1)
   }
 

@@ -3,7 +3,7 @@ package catslib
 import org.scalatest._
 
 import cats._
-import cats.std.all._
+import cats.implicits._
 
 /** `Applicative` extends `Apply` by adding a single method, `pure`:
   *
@@ -25,7 +25,7 @@ object ApplicativeSection extends FlatSpec with Matchers with org.scalaexercises
     */
   def pureMethod(res0: Option[Int], res1: List[Int]) = {
     import cats._
-    import cats.std.all._
+    import cats.implicits._
 
     Applicative[Option].pure(1) should be(res0)
     Applicative[List].pure(1) should be(res1)
