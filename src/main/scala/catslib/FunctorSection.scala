@@ -3,8 +3,7 @@ package catslib
 import org.scalatest._
 
 import cats._
-import cats.std.option._
-import cats.std.list._
+import cats.implicits._
 
 /** A `Functor` is a ubiquitous type class involving types that have one
   * "hole", i.e. types which have the shape `F[?]`, such as `Option`,

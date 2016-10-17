@@ -4,9 +4,7 @@ import org.scalatest._
 import ApplyHelpers._
 
 import cats._
-import cats.std.all._
-import cats.syntax.apply._
-import cats.syntax.cartesian._
+import cats.implicits._
 
 /** `Apply` extends the `Functor` type class (which features the familiar `map`
   * function) with a new function `ap`. The `ap` function is similar to `map`
@@ -48,7 +46,7 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
     * Since `Apply` extends `Functor`, we can use the `map` method from `Functor`:
     */
   def applyExtendsFunctor(res0: Option[String], res1: Option[Int], res2: Option[Int]) = {
-    import cats.std.all._
+    import cats.implicits._
 
     val intToString: Int ⇒ String = _.toString
     val double: Int ⇒ Int = _ * 2
@@ -124,7 +122,7 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
     *
     * The `|@|` operator offers an alternative syntax for the higher-arity `Apply`
     * functions (`apN`, `mapN` and `tupleN`).
-    * In order to use it, first import `cats.syntax.all._` or `cats.syntax.apply._`.
+    * In order to use it, first import `cats.implicits._`.
     *
     * All instances created by `|@|` have `map`, `ap`, and `tupled` methods of the appropriate arity:
     *

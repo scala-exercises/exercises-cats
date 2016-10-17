@@ -448,11 +448,11 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
 
   /** = Additional syntax =
     *
-    * For using Xor's syntax on arbitrary data types, you can import `cats.syntax.xor._`. This will
+    * For using Xor's syntax on arbitrary data types, you can import `cats.implicits._`. This will
     * make possible to use the `left` and `right` methods:
     *
     * {{{
-    * import cats.syntax.xor._
+    * import cats.implicits._
     *
     * val right: Xor[String, Int] = 7.right[String]
     *
@@ -463,7 +463,7 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
     *
     */
   def xorSyntax(res0: String Xor Int) = {
-    import cats.syntax.xor._
+    import cats.implicits._
 
     val right: Xor[String, Int] = 42.right[String]
     right should be(res0)

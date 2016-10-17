@@ -5,7 +5,7 @@ import cats.data.NonEmptyList
 import cats.data.Validated
 import cats.data.Validated.{ Invalid, Valid }
 import cats.data.Xor
-import cats.std.list._
+import cats.implicits._
 
 object ValidatedHelpers {
   case class ConnectionParams(url: String, port: Int)
@@ -59,7 +59,7 @@ object ValidatedHelpers {
 
   import cats.SemigroupK
   import cats.data.NonEmptyList
-  import cats.std.list._
+  import cats.implicits._
 
   implicit val nelSemigroup: Semigroup[NonEmptyList[ConfigError]] =
     SemigroupK[NonEmptyList].algebra[ConfigError]

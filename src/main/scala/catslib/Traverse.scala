@@ -3,8 +3,7 @@ package catslib
 import org.scalatest._
 
 import cats.data.{ Xor, ValidatedNel }
-import cats.std.all._
-import cats.syntax.all._
+import cats.implicits._
 
 import TraverseHelpers._
 
@@ -98,8 +97,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     * {{{
     * import cats.Semigroup
     * import cats.data.{NonEmptyList, OneAnd, Validated, ValidatedNel, Xor}
-    * import cats.std.list._
-    * import cats.syntax.traverse._
+    * import cats.implicits._
     *
     * def parseIntXor(s: String): Xor[NumberFormatException, Int] =
     * Xor.catchOnly[NumberFormatException](s.toInt)
@@ -210,7 +208,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     *
     */
   def sequencing(res0: Option[List[Int]], res1: Option[List[Int]]) = {
-    import cats.std.option._
+    import cats.implicits._
 
     List(Option(1), Option(2), Option(3)).traverse(identity) should be(res0)
     List(Option(1), None, Option(3)).traverse(identity) should be(res1)
@@ -236,7 +234,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     * If we traverse using this, we end up with a funny type.
     *
     * {{{
-    * import cats.std.future._
+    * import cats.implicits._
     * import scala.concurrent.ExecutionContext.Implicits.global
     *
     * def writeManyToStore(data: List[Data]) =
@@ -252,7 +250,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     *
     */
   def traversingForEffects(res0: Option[Unit], res1: Option[Unit]) = {
-    import cats.syntax.foldable._
+    import cats.implicits._
 
     List(Option(1), Option(2), Option(3)).sequence_ should be(res0)
     List(Option(1), None, Option(3)).sequence_ should be(res1)

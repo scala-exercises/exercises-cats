@@ -52,7 +52,7 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
     */
   def monadInstances(res0: Option[Int]) = {
     import cats._
-    import cats.std.option._
+    import cats.implicits._
 
     Monad[Option].pure(42) should be(res0)
   }
@@ -76,7 +76,7 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
     */
   def monadFlatmap(res0: List[Int]) = {
     import cats._
-    import cats.std.list._
+    import cats.implicits._
 
     Monad[List].flatMap(List(1, 2, 3))(x ⇒ List(x, x)) should be(res0)
   }
@@ -89,7 +89,7 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
     */
   def monadIfm(res0: Option[String], res1: List[Int]) = {
     import cats._
-    import cats.std.all._
+    import cats.implicits._
 
     Monad[Option].ifM(Option(true))(Option("truthy"), Option("falsy")) should be(res0)
     Monad[List].ifM(List(true, false, true))(List(1, 2), List(3, 4)) should be(res1)
@@ -106,18 +106,20 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
     *
     * {{{
     * case class OptionT[F[_], A](value: F[Option[A]])
-    *
+
     * implicit def optionTMonad[F[_]](implicit F : Monad[F]) = {
-    * new Monad[OptionT[F, ?]] {
-    *  def pure[A](a: A): OptionT[F, A] = OptionT(F.pure(Some(a)))
-    *  def flatMap[A, B](fa: OptionT[F, A])(f: A => OptionT[F, B]): OptionT[F, B] =
-    *    OptionT {
-    *      F.flatMap(fa.value) {
-    *        case None => F.pure(None)
-    *        case Some(a) => f(a).value
-    *      }
-    *    }
-    * }
+    *   new Monad[OptionT[F, ?]] {
+    *     def pure[A](a: A): OptionT[F, A] = OptionT(F.pure(Some(a)))
+    *     def flatMap[A, B](fa: OptionT[F, A])(f: A => OptionT[F, B]): OptionT[F, B] =
+    *       OptionT {
+    *         F.flatMap(fa.value) {
+    *           case None => F.pure(None)
+    *           case Some(a) => f(a).value
+    *         }
+    *       }
+    *     def tailRecM[A, B](a: A)(f: A => OptionT[F, Either[A, B]]): OptionT[F, B] =
+    *       defaultTailRecM(a)(f)
+    *   }
     * }
     * }}}
     *
@@ -126,7 +128,7 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
     *
     */
   def monadComposition(res0: List[Option[Int]]) = {
-    import cats.std.list._
+    import cats.implicits._
 
     optionTMonad[List].pure(42) should be(OptionT(res0))
   }
