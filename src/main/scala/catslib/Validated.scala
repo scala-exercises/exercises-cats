@@ -151,7 +151,7 @@ import ValidatedHelpers._
   * {{{
   * import cats.SemigroupK
   * import cats.data.NonEmptyList
-  * import cats.std.list._
+  * import cats.implicits._
   *
   * implicit val nelSemigroup: Semigroup[NonEmptyList[ConfigError]] =
   * SemigroupK[NonEmptyList].algebra[ConfigError]

@@ -29,8 +29,7 @@ object MonoidSection extends FlatSpec with Matchers with org.scalaexercises.defi
     *
     * {{{
     * import cats._
-    * import cats.std.all._
-    * import cats.syntax.all._
+    * import cats.implicits._
     * }}}
     *
     * And let's see the implicit instance of `Monoid[String]` in action.
