@@ -139,8 +139,8 @@ object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.de
     * them using `Applicative[G]` and discarding the results.
     *
     * This method is primarily useful when `G[_]` represents an action
-    * or effect, and the specific `A` aspect of `G[A]` is not otherwise
-    * needed. The `A` will be discarded and `Unit` returned instead.
+    * or effect, and the specific `B` aspect of `G[B]` is not otherwise
+    * needed. The `B` will be discarded and `Unit` returned instead.
     *
     */
   def foldableTraverse(res0: Option[Unit], res1: Option[Unit]) = {
