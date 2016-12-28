@@ -4,17 +4,15 @@ scala:
 jdk:
 - oraclejdk8
 script:
-- sbt test
-
+#- sbt test
 before_install:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
-     openssl aes-256-cbc -K $encrypted_00c350792894_key -iv $encrypted_00c350792894_iv -in secring.gpg.enc -out secring.gpg -d;
-  fi
-
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then openssl
+  aes-256-cbc -K $encrypted_00c350792894_key -iv $encrypted_00c350792894_iv -in secring.gpg.enc
+  -out secring.gpg -d; fi
 after_success:
-- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then
-     sbt compile publishSigned;
-  fi
-- if [ "$TRAVIS_PULL_REQUEST" = "true" ]; then
-     echo "Not in master branch, skipping deploy and release";
-  fi
+- if [ "$TRAVIS_BRANCH" = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt
+  compile publishSigned; fi
+- ./deploy.sh
+env:
+  global:
+    secure: h/9QnVKCXSBWrCEPHADj+g4jTdZtJPKAKasucHtde/3/cKwzSl7iPwfMpfrlfpeTBqw78cLLEfZqXYWo/kne/WnY0ENfqpkuTARAZJXOYrEIo+2avS4ihkzaZ0HSCkhDOnO2VWBMdWfcMtGOYs8N3PnhjaW31g+ndPcrCSFwWYKHb7TENGZVZ7q9etW2MpgUCodOJVVXKh+SAMcvv0A0vrZL5WSgWmtEQ43+zPBJ8DkDih41dmFw7GLJGpsgs+J0TVYkziOqxCaFpEzqnVvgMk7pQ12jU+ssX6FSFfFis0Hdh8YLa4m2bRQFmWRI7YgzfNxRTLsFuIjs5vjjG2gz4klu1PI2uk6EK2SStwwli70PrpcHjdocMoxc8i4qrWnuxBJz3joha5gAoiHUOR294xBBGVrSPyt2qgZ5YXThZTMfIbKGej75sIXzKyxzawPmeioRxZ92bVaq1kcFdQAEL6GD2ZO9F+RYcfe39fM8fh4YlPhLgPY8ubekwhpgcqtLPYm16ncUWASz+K8R41gkGMJ0yoQMAaRIn+O3wn5TGNVF+JrKuwbJlgElZzfR3v004uFs4NKuD9qF5Lswj5qD4cZJ6QNgMO44kJrDLzybhRaT1bZLaOsQaAyJnB5R7qx9Z85S5Hy7ofHOgegUBO/HoXV99+C4EYpRaZmp6/wyrvI=
