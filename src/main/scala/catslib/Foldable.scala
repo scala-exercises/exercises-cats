@@ -143,7 +143,7 @@ object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.de
     * needed. The `B` will be discarded and `Unit` returned instead.
     *
     */
-  def foldableTraverse(res0: Option[Unit], res1: Option[Unit]) = {
+  def foldableTraverse(res0: Option[Any], res1: Option[Unit]) = {
     import cats.implicits._
     import cats.data.Xor
 
