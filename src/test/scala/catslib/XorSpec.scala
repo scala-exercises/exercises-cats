@@ -1,3 +1,8 @@
+/*
+ * scala-exercises - exercises-cats
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package catslib
 
 import cats.data.Xor
@@ -66,7 +71,8 @@ class XorSpec extends Spec with Checkers {
     check(
       Test.testSuccess(
         XorSection.xorInTheLarge _,
-        Xor.right[String, Int](42) :: Xor.left[String, Int]("Hello") :: Xor.left[String, Int]("olleH") :: HNil
+        Xor.right[String, Int](42) :: Xor.left[String, Int]("Hello") :: Xor.left[String, Int](
+          "olleH") :: HNil
       )
     )
   }

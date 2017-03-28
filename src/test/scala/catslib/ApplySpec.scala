@@ -1,3 +1,8 @@
+/*
+ * scala-exercises - exercises-cats
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package catslib
 
 import org.scalacheck.Shapeless._
@@ -70,7 +75,7 @@ class ApplySpec extends Spec with Checkers {
   }
 
   def `builder syntax` = {
-    val aNone: Option[Int] = None
+    val aNone: Option[Int]                   = None
     val anotherNone: Option[(Int, Int, Int)] = None
 
     check(

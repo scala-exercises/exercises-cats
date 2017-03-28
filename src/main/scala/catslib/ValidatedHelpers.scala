@@ -1,9 +1,14 @@
+/*
+ * scala-exercises - exercises-cats
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package catslib
 
-import cats.{ Semigroup, SemigroupK }
+import cats.{Semigroup, SemigroupK}
 import cats.data.NonEmptyList
 import cats.data.Validated
-import cats.data.Validated.{ Invalid, Valid }
+import cats.data.Validated.{Invalid, Valid}
 import cats.data.Xor
 import cats.implicits._
 
@@ -30,10 +35,10 @@ object ValidatedHelpers {
 
   sealed abstract class ConfigError
   final case class MissingConfig(field: String) extends ConfigError
-  final case class ParseError(field: String) extends ConfigError
+  final case class ParseError(field: String)    extends ConfigError
 
   import cats.data.Validated
-  import cats.data.Validated.{ Invalid, Valid }
+  import cats.data.Validated.{Invalid, Valid}
 
   case class Config(map: Map[String, String]) {
     def parse[A: Read](key: String): Validated[ConfigError, A] =
@@ -49,7 +54,8 @@ object ValidatedHelpers {
 
   import cats.Semigroup
 
-  def parallelValidate[E: Semigroup, A, B, C](v1: Validated[E, A], v2: Validated[E, B])(f: (A, B) ⇒ C): Validated[E, C] =
+  def parallelValidate[E: Semigroup, A, B, C](v1: Validated[E, A], v2: Validated[E, B])(
+      f: (A, B) ⇒ C): Validated[E, C] =
     (v1, v2) match {
       case (Valid(a), Valid(b))       ⇒ Valid(f(a, b))
       case (Valid(_), i @ Invalid(_)) ⇒ i
@@ -65,7 +71,7 @@ object ValidatedHelpers {
     SemigroupK[NonEmptyList].algebra[ConfigError]
 
   implicit val readString: Read[String] = Read.stringRead
-  implicit val readInt: Read[Int] = Read.intRead
+  implicit val readInt: Read[Int]       = Read.intRead
 
   def positive(field: String, i: Int): ConfigError Xor Int = {
     if (i >= 0) Xor.right(i)
