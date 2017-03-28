@@ -1,3 +1,8 @@
+/*
+ * scala-exercises - exercises-cats
+ * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ */
+
 package catslib
 
 import org.scalacheck.Shapeless._
@@ -17,7 +22,7 @@ class MonoidSpec extends Spec with Checkers {
   }
 
   def `advantages of using monoid operations` = {
-    val aMap: Map[String, Int] = Map("a" → 4, "b" → 2)
+    val aMap: Map[String, Int]       = Map("a" → 4, "b" → 2)
     val anotherMap: Map[String, Int] = Map()
 
     check(
