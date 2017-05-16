@@ -7,11 +7,11 @@ package catslib
 
 import org.scalacheck.Shapeless._
 import org.scalaexercises.Test
-import org.scalatest.Spec
 import org.scalatest.prop.Checkers
+import org.scalatest.refspec.RefSpec
 import shapeless.HNil
 
-class MonadSpec extends Spec with Checkers {
+class MonadSpec extends RefSpec with Checkers {
   def `flatten function` = {
     val aNone: Option[Int] = None
 

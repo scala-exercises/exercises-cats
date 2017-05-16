@@ -7,12 +7,12 @@ package catslib
 
 import org.scalacheck.Shapeless._
 import org.scalaexercises.Test
-import org.scalatest.Spec
 import org.scalatest.prop.Checkers
+import org.scalatest.refspec.RefSpec
 import shapeless.HNil
 
-class TraverseSpec extends Spec with Checkers {
-  def `traverseu function with xor` = {
+class TraverseSpec extends RefSpec with Checkers {
+  def `traverseu function with either` = {
     check(
       Test.testSuccess(
         TraverseSection.traverseuFunction _,
