@@ -72,7 +72,7 @@ object ValidatedHelpers {
   implicit val readString: Read[String] = Read.stringRead
   implicit val readInt: Read[Int]       = Read.intRead
 
-  def positive(field: String, i: Int): ConfigError Either Int = {
+  def positive(field: String, i: Int): Either[ConfigError, Int] = {
     if (i >= 0) Either.right(i)
     else Either.left(ParseError(field))
   }

@@ -348,7 +348,7 @@ object ValidatedSection
    * {{{
    * import cats.data.Either
    *
-   * def positive(field: String, i: Int): ConfigError Either Int = {
+   * def positive(field: String, i: Int): Either[ConfigError, Int] = {
    * if (i >= 0) Either.right(i)
    * else Either.left(ParseError(field))
    * }
@@ -363,7 +363,7 @@ object ValidatedSection
     val config = Config(Map("house_number" → "-42"))
 
     val houseNumber = config.parse[Int]("house_number").withEither {
-      either: ConfigError Either Int ⇒
+      either: Either[ConfigError, Int] ⇒
         either.flatMap { i ⇒
           positive("house_number", i)
         }

@@ -83,12 +83,12 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
   /** More often than not we want to just bias towards one side and call it a day - by convention,
    * the right side is most often chosen.
    */
-  def eitherMapRightBias(res0: String Either Int, res1: String Either Int) = {
+  def eitherMapRightBias(res0: Either[String, Int], res1: Either[String, Int]) = {
 
-    val right: String Either Int = Either.right(5)
+    val right: Either[String, Int] = Either.right(5)
     right.map(_ + 1) should be(res0)
 
-    val left: String Either Int = Either.left("Something went wrong")
+    val left: Either[String, Int] = Either.left("Something went wrong")
     left.map(_ + 1) should be(res1)
   }
 
@@ -113,12 +113,12 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * So the `flatMap` method is right-biased:
    *
    */
-  def eitherMonad(res0: String Either Int, res1: String Either Int) = {
+  def eitherMonad(res0: Either[String, Int], res1: Either[String, Int]) = {
 
-    val right: String Either Int = Either.right(5)
+    val right: Either[String, Int] = Either.right(5)
     right.flatMap(x ⇒ Either.right(x + 1)) should be(res0)
 
-    val left: String Either Int = Either.left("Something went wrong")
+    val left: Either[String, Int] = Either.left("Something went wrong")
     left.flatMap(x ⇒ Either.right(x + 1)) should be(res1)
   }
 
@@ -368,11 +368,11 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * Let's review the `leftMap` and `map` methods:
    *
    */
-  def eitherInTheLarge(res0: String Either Int, res1: String Either Int, res2: String Either Int) = {
-    val right: String Either Int = Right(41)
+  def eitherInTheLarge(res0: Either[String, Int], res1: Either[String, Int], res2: Either[String, Int]) = {
+    val right: Either[String, Int] = Right(41)
     right.map(_ + 1) should be(res0)
 
-    val left: String Either Int = Left("Hello")
+    val left: Either[String, Int] = Left("Hello")
     left.map(_ + 1) should be(res1)
     left.leftMap(_.reverse) should be(res2)
   }
@@ -424,7 +424,7 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * These method promote values to the `Either` data type:
    *
    */
-  def eitherSyntax(res0: String Either Int) = {
+  def eitherSyntax(res0: Either[String, Int]) = {
     import cats.implicits._
 
     val right: Either[String, Int] = 42.asRight[String]
