@@ -7,7 +7,7 @@ package catslib
 
 import org.scalatest._
 
-import cats.data.{ValidatedNel, Xor}
+import cats.data.ValidatedNel
 import cats.implicits._
 
 import TraverseHelpers._
@@ -116,8 +116,8 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
    * and accumulating failures with `Xor`.
    */
   def traverseuFunction(res0: List[Int], res1: Boolean) = {
-    List("1", "2", "3").traverseU(parseIntXor) should be(Xor.Right(res0))
-    List("1", "abc", "3").traverseU(parseIntXor).isLeft should be(res1)
+    List("1", "2", "3").traverseU(parseIntEither) should be(Right(res0))
+    List("1", "abc", "3").traverseU(parseIntEither).isLeft should be(res1)
   }
 
   /** We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for

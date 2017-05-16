@@ -39,10 +39,10 @@ class ValidatedSpec extends RefSpec with Checkers {
     )
   }
 
-  def `validation with xor` = {
+  def `validation with either` = {
     check(
       Test.testSuccess(
-        ValidatedSection.validatedAsXor _,
+        ValidatedSection.validatedAsEither _,
         false :: true :: HNil
       )
     )

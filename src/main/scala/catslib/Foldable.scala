@@ -152,10 +152,9 @@ object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.de
    */
   def foldableTraverse(res0: Option[Unit], res1: Option[Unit]) = {
     import cats.implicits._
-    import cats.data.Xor
 
     def parseInt(s: String): Option[Int] =
-      Xor.catchOnly[NumberFormatException](s.toInt).toOption
+      Either.catchOnly[NumberFormatException](s.toInt).toOption
 
     Foldable[List].traverse_(List("1", "2", "3"))(parseInt) should be(res0)
     Foldable[List].traverse_(List("a", "b", "c"))(parseInt) should be(res1)

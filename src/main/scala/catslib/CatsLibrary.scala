@@ -25,7 +25,7 @@ object CatsLibrary extends org.scalaexercises.definitions.Library {
     FoldableSection,
     TraverseSection,
     IdentitySection,
-    XorSection,
+    EitherSection,
     ValidatedSection
   )
 

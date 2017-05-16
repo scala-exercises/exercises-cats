@@ -5,41 +5,41 @@
 
 package catslib
 
+import cats.implicits._
+
 import org.scalatest._
 
-import cats.data.Xor
+object EitherStyle {
+  def parse(s: String): Either[NumberFormatException, Int] =
+    if (s.matches("-?[0-9]+")) Either.right(s.toInt)
+    else Either.left(new NumberFormatException(s"${s} is not a valid integer."))
 
-object XorStyle {
-  def parse(s: String): Xor[NumberFormatException, Int] =
-    if (s.matches("-?[0-9]+")) Xor.right(s.toInt)
-    else Xor.left(new NumberFormatException(s"${s} is not a valid integer."))
-
-  def reciprocal(i: Int): Xor[IllegalArgumentException, Double] =
-    if (i == 0) Xor.left(new IllegalArgumentException("Cannot take reciprocal of 0."))
-    else Xor.right(1.0 / i)
+  def reciprocal(i: Int): Either[IllegalArgumentException, Double] =
+    if (i == 0) Either.left(new IllegalArgumentException("Cannot take reciprocal of 0."))
+    else Either.right(1.0 / i)
 
   def stringify(d: Double): String = d.toString
 
-  def magic(s: String): Xor[Exception, String] =
+  def magic(s: String): Either[Exception, String] =
     parse(s).flatMap(reciprocal).map(stringify)
 }
 
-object XorStyleWithAdts {
+object EitherStyleWithAdts {
   sealed abstract class Error
   final case class NotANumber(string: String) extends Error
   final case object NoZeroReciprocal          extends Error
 
-  def parse(s: String): Xor[Error, Int] =
-    if (s.matches("-?[0-9]+")) Xor.right(s.toInt)
-    else Xor.left(NotANumber(s))
+  def parse(s: String): Either[Error, Int] =
+    if (s.matches("-?[0-9]+")) Either.right(s.toInt)
+    else Either.left(NotANumber(s))
 
-  def reciprocal(i: Int): Xor[Error, Double] =
-    if (i == 0) Xor.left(NoZeroReciprocal)
-    else Xor.right(1.0 / i)
+  def reciprocal(i: Int): Either[Error, Double] =
+    if (i == 0) Either.left(NoZeroReciprocal)
+    else Either.right(1.0 / i)
 
   def stringify(d: Double): String = d.toString
 
-  def magic(s: String): Xor[Error, String] =
+  def magic(s: String): Either[Error, String] =
     parse(s).flatMap(reciprocal).map(stringify)
 }
 
@@ -112,7 +112,7 @@ object XorStyleWithAdts {
  *
  * @param name xor
  */
-object XorSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object EitherSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** More often than not we want to just bias towards one side and call it a day - by convention,
    * the right side is most often chosen. This is the primary difference between `Xor` and `Either` -
@@ -120,13 +120,12 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * crucial one is the right-biased being built-in.
    *
    */
-  def xorMapRightBias(res0: String Xor Int, res1: String Xor Int) = {
-    import cats.data.Xor
+  def eitherMapRightBias(res0: String Either Int, res1: String Either Int) = {
 
-    val right: String Xor Int = Xor.right(5)
+    val right: String Either Int = Either.right(5)
     right.map(_ + 1) should be(res0)
 
-    val left: String Xor Int = Xor.left("Something went wrong")
+    val left: String Either Int = Either.left("Something went wrong")
     left.map(_ + 1) should be(res1)
   }
 
@@ -155,14 +154,13 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * So the `flatMap` method is right-biased:
    *
    */
-  def xorMonad(res0: String Xor Int, res1: String Xor Int) = {
-    import cats.data.Xor
+  def eitherMonad(res0: String Either Int, res1: String Either Int) = {
 
-    val right: String Xor Int = Xor.right(5)
-    right.flatMap(x ⇒ Xor.right(x + 1)) should be(res0)
+    val right: String Either Int = Either.right(5)
+    right.flatMap(x ⇒ Either.right(x + 1)) should be(res0)
 
-    val left: String Xor Int = Xor.left("Something went wrong")
-    left.flatMap(x ⇒ Xor.right(x + 1)) should be(res1)
+    val left: String Either Int = Either.left("Something went wrong")
+    left.flatMap(x ⇒ Either.right(x + 1)) should be(res1)
   }
 
   /** = Using `Xor` instead of exceptions =
@@ -209,16 +207,16 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * Do these calls return a `Xor.Right` value?
    *
    */
-  def xorStyleParse(res0: Boolean, res1: Boolean) = {
-    XorStyle.parse("Not a number").isRight should be(res0)
-    XorStyle.parse("2").isRight should be(res1)
+  def eitherStyleParse(res0: Boolean, res1: Boolean) = {
+    EitherStyle.parse("Not a number").isRight should be(res0)
+    EitherStyle.parse("2").isRight should be(res1)
   }
 
   /** Now, using combinators like `flatMap` and `map`, we can compose our functions together. Will the following incantations return a `Xor.Right` value?
    *
    */
-  def xorComposition(res0: Boolean, res1: Boolean, res2: Boolean) = {
-    import XorStyle._
+  def eitherComposition(res0: Boolean, res1: Boolean, res2: Boolean) = {
+    import EitherStyle._
 
     magic("0").isRight should be(res0)
     magic("1").isRight should be(res1)
@@ -238,14 +236,14 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * This implies that there is still room to improve.
    *
    */
-  def xorExceptions(res0: String) = {
-    import XorStyle._
+  def eitherExceptions(res0: String) = {
+    import EitherStyle._
 
     val result = magic("2") match {
-      case Xor.Left(_: NumberFormatException)    ⇒ "Not a number!"
-      case Xor.Left(_: IllegalArgumentException) ⇒ "Can't take reciprocal of 0!"
-      case Xor.Left(_)                           ⇒ "Unknown error"
-      case Xor.Right(result)                     ⇒ s"Got reciprocal: ${result}"
+      case Left(_: NumberFormatException)    ⇒ "Not a number!"
+      case Left(_: IllegalArgumentException) ⇒ "Can't take reciprocal of 0!"
+      case Left(_)                           ⇒ "Unknown error"
+      case Right(result)                     ⇒ s"Got reciprocal: ${result}"
     }
     result should be(res0)
   }
@@ -280,13 +278,13 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * add additional subtypes which we might fail to handle.
    *
    */
-  def xorErrorsAsAdts(res0: String) = {
-    import XorStyleWithAdts._
+  def eitherErrorsAsAdts(res0: String) = {
+    import EitherStyleWithAdts._
 
     val result = magic("2") match {
-      case Xor.Left(NotANumber(_))    ⇒ "Not a number!"
-      case Xor.Left(NoZeroReciprocal) ⇒ "Can't take reciprocal of 0!"
-      case Xor.Right(result)          ⇒ s"Got reciprocal: ${result}"
+      case Left(NotANumber(_))    ⇒ "Not a number!"
+      case Left(NoZeroReciprocal) ⇒ "Can't take reciprocal of 0!"
+      case Right(result)          ⇒ s"Got reciprocal: ${result}"
     }
     result should be(res0)
   }
@@ -411,11 +409,11 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * Let's review the `leftMap` and `map` methods:
    *
    */
-  def xorInTheLarge(res0: String Xor Int, res1: String Xor Int, res2: String Xor Int) = {
-    val right: String Xor Int = Xor.Right(41)
+  def eitherInTheLarge(res0: String Either Int, res1: String Either Int, res2: String Either Int) = {
+    val right: String Either Int = Right(41)
     right.map(_ + 1) should be(res0)
 
-    val left: String Xor Int = Xor.Left("Hello")
+    val left: String Either Int = Left("Hello")
     left.map(_ + 1) should be(res1)
     left.leftMap(_.reverse) should be(res2)
   }
@@ -445,10 +443,10 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    *
    *
    */
-  def xorWithExceptions(res0: Boolean, res1: Boolean) = {
-    Xor.catchOnly[NumberFormatException]("abc".toInt).isRight should be(res0)
+  def eitherWithExceptions(res0: Boolean, res1: Boolean) = {
+    Either.catchOnly[NumberFormatException]("abc".toInt).isRight should be(res0)
 
-    Xor.catchNonFatal(1 / 0).isLeft should be(res1)
+    Either.catchNonFatal(1 / 0).isLeft should be(res1)
   }
 
   /** = Additional syntax =
@@ -467,10 +465,10 @@ object XorSection extends FlatSpec with Matchers with org.scalaexercises.definit
    * These method promote values to the `Xor` data type:
    *
    */
-  def xorSyntax(res0: String Xor Int) = {
+  def eitherSyntax(res0: String Either Int) = {
     import cats.implicits._
 
-    val right: Xor[String, Int] = 42.right[String]
+    val right: Either[String, Int] = 42.asRight[String]
     right should be(res0)
   }
 }

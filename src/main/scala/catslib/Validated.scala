@@ -8,8 +8,6 @@ package catslib
 import org.scalatest._
 
 import cats.data.Validated
-import cats.data.NonEmptyList
-import cats.data.Xor
 
 import ValidatedHelpers._
 
@@ -359,13 +357,16 @@ object ValidatedSection
    * So we can get `Xor`'s short-circuiting behaviour when using the `Validated` type.
    *
    */
-  def validatedAsXor(res0: Boolean, res1: Boolean) = {
+  def validatedAsEither(res0: Boolean, res1: Boolean) = {
+    import cats.implicits._
+
     val config = Config(Map("house_number" → "-42"))
 
-    val houseNumber = config.parse[Int]("house_number").withXor { xor: ConfigError Xor Int ⇒
-      xor.flatMap { i ⇒
-        positive("house_number", i)
-      }
+    val houseNumber = config.parse[Int]("house_number").withEither {
+      either: ConfigError Either Int ⇒
+        either.flatMap { i ⇒
+          positive("house_number", i)
+        }
     }
 
     houseNumber.isValid should be(res0)
