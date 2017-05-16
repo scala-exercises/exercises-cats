@@ -71,54 +71,17 @@ object EitherStyleWithAdts {
  *
  * How then do we communicate an error? By making it explicit in the data type we return.
  *
- * =`Xor` vs `Validated`=
+ * =`Either` vs `Validated`=
  *
- * In general, `Validated` is used to accumulate errors, while `Xor` is used to short-circuit a computation upon the first error. For more information, see the `Validated` vs `Xor` section of the `Validated` documentation.
+ * In general, `Validated` is used to accumulate errors, while `Either` is used to short-circuit a computation upon the
+ * first error. For more information, see the `Validated` vs `Either` section of the `Validated` documentation.
  *
- * =Why not `Either`=
- *
- * `Xor` is very similar to `scala.util.Either` - in fact, they are *isomorphic* (that is,
- * any `Either` value can be rewritten as an `Xor` value, and vice versa).
- *
- * {{{
- * sealed abstract class Xor[+A, +B]
- *
- * object Xor {
- * final case class Left[+A](a: A) extends Xor[A, Nothing]
- * final case class Right[+B](b: B) extends Xor[Nothing, B]
- * }
- * }}}
- *
- * Just like `Either`, it has two type parameters. Instances of `Xor` either hold a value
- * of one type parameter, or the other. Why then does it exist at all?
- *
- * Taking a look at `Either`, we notice it lacks `flatMap` and `map` methods. In order to map
- * over an `Either[A, B]` value, we have to state which side we want to map over. For example,
- * if we want to map `Either[A, B]` to `Either[A, C]` we would need to map over the right side.
- * This can be accomplished by using the `Either#right` method, which returns a `RightProjection`
- * instance. `RightProjection` does have `flatMap` and `map` on it, which acts on the right side
- * and ignores the left - this property is referred to as "right-bias."
- *
- * {{{
- * val e1: Either[String, Int] = Right(5)
- * e1.right.map(_ + 1)
- *
- * val e2: Either[String, Int] = Left("hello")
- * e2.right.map(_ + 1)
- * }}}
- *
- * Note the return types are themselves back to `Either`, so if we want to make more calls to
- * `flatMap` or `map` then we again must call `right` or `left`.
- *
- * @param name xor
+ * @param name either
  */
 object EitherSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** More often than not we want to just bias towards one side and call it a day - by convention,
-   * the right side is most often chosen. This is the primary difference between `Xor` and `Either` -
-   * `Xor` is right-biased. `Xor` also has some more convenient methods on it, but the most
-   * crucial one is the right-biased being built-in.
-   *
+   * the right side is most often chosen.
    */
   def eitherMapRightBias(res0: String Either Int, res1: String Either Int) = {
 
@@ -129,25 +92,21 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
     left.map(_ + 1) should be(res1)
   }
 
-  /** Because `Xor` is right-biased, it is possible to define a `Monad` instance for it. You
-   * could also define one for `Either` but due to how it's encoded it may seem strange to fix a
-   * bias direction despite it intending to be flexible in that regard. The `Monad` instance for
-   * `Xor` is consistent with the behavior of the data type itself, whereas the one for `Either`
-   * would only introduce bias when `Either` is used in a generic context (a function abstracted
-   * over `M[_] : Monad`).
+  /** Because `Either` is right-biased, it is possible to define a `Monad` instance for it.
    *
-   * Since we only ever want the computation to continue in the case of `Xor.Right` (as captured
+   * Since we only ever want the computation to continue in the case of `Right` (as captured
    * by the right-bias nature), we fix the left type parameter and leave the right one free.
    *
    * {{{
+   * import cats.implicits._
    * import cats.Monad
    *
-   * implicit def xorMonad[Err]: Monad[Xor[Err, ?]] =
-   * new Monad[Xor[Err, ?]] {
-   *  def flatMap[A, B](fa: Xor[Err, A])(f: A => Xor[Err, B]): Xor[Err, B] =
+   * implicit def eitherMonad[Err]: Monad[Either[Err, ?]] =
+   * new Monad[Either[Err, ?]] {
+   *  def flatMap[A, B](fa: Either[Err, A])(f: A => Either[Err, B]): Either[Err, B] =
    *    fa.flatMap(f)
    *
-   *  def pure[A](x: A): Xor[Err, A] = Xor.right(x)
+   *  def pure[A](x: A): Either[Err, A] = Either.right(x)
    * }
    * }}}
    *
@@ -163,7 +122,7 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
     left.flatMap(x ⇒ Either.right(x + 1)) should be(res1)
   }
 
-  /** = Using `Xor` instead of exceptions =
+  /** = Using `Either` instead of exceptions =
    *
    * As a running example, we will have a series of functions that will parse a string into an integer,
    * take the reciprocal, and then turn the reciprocal into a string.
@@ -188,23 +147,23 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * Instead, let's make the fact that some of our functions can fail explicit in the return type.
    *
    * {{{
-   * object XorStyle {
-   * def parse(s: String): Xor[NumberFormatException, Int] =
-   *  if (s.matches("-?[0-9]+")) Xor.right(s.toInt)
-   *  else Xor.left(new NumberFormatException(s"${s} is not a valid integer."))
+   * object EitherStyle {
+   * def parse(s: String): Either[NumberFormatException, Int] =
+   *  if (s.matches("-?[0-9]+")) Either.right(s.toInt)
+   *  else Either.left(new NumberFormatException(s"${s} is not a valid integer."))
    *
-   * def reciprocal(i: Int): Xor[IllegalArgumentException, Double] =
-   *  if (i == 0) Xor.left(new IllegalArgumentException("Cannot take reciprocal of 0."))
-   *  else Xor.right(1.0 / i)
+   * def reciprocal(i: Int): Either[IllegalArgumentException, Double] =
+   *  if (i == 0) Either.left(new IllegalArgumentException("Cannot take reciprocal of 0."))
+   *  else Either.right(1.0 / i)
    *
    * def stringify(d: Double): String = d.toString
    *
-   * def magic(s: String): Xor[Exception, String] =
+   * def magic(s: String): Either[Exception, String] =
    *  parse(s).flatMap(reciprocal).map(stringify)
    * }
    * }}}
    *
-   * Do these calls return a `Xor.Right` value?
+   * Do these calls return a `Right` value?
    *
    */
   def eitherStyleParse(res0: Boolean, res1: Boolean) = {
@@ -212,7 +171,7 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
     EitherStyle.parse("2").isRight should be(res1)
   }
 
-  /** Now, using combinators like `flatMap` and `map`, we can compose our functions together. Will the following incantations return a `Xor.Right` value?
+  /** Now, using combinators like `flatMap` and `map`, we can compose our functions together. Will the following incantations return a `Right` value?
    *
    */
   def eitherComposition(res0: Boolean, res1: Boolean, res2: Boolean) = {
@@ -224,13 +183,13 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
   }
 
   /** With the composite function that we actually care about, we can pass in strings and then pattern
-   * match on the exception. Because `Xor` is a sealed type (often referred to as an algebraic data type,
+   * match on the exception. Because `Either` is a sealed type (often referred to as an algebraic data type,
    * or ADT), the compiler will complain if we do not check both the `Left` and `Right` case.
    *
-   * In the following exercise we pattern-match on every case the `Xor` returned by `magic` can be in.
+   * In the following exercise we pattern-match on every case the `Either` returned by `magic` can be in.
    * If we leave out any of those clauses the compiler will yell at us, as it should. However,
-   * note the `Xor.Left(_)` clause - the compiler will complain if we leave that out because it knows
-   * that given the type `Xor[Exception, String]`, there can be inhabitants of `Xor.Left` that are not
+   * note the `Left(_)` clause - the compiler will complain if we leave that out because it knows
+   * that given the type `Either[Exception, String]`, there can be inhabitants of `Left` that are not
    * `NumberFormatException` or `IllegalArgumentException`. However, we "know" by inspection of the source
    * that those will be the only exceptions thrown, so it seems strange to have to account for other exceptions.
    * This implies that there is still room to improve.
@@ -252,22 +211,22 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * can go wrong in our program.
    *
    * {{{
-   * object XorStyleWithAdts {
+   * object EitherStyleWithAdts {
    * sealed abstract class Error
    * final case class NotANumber(string: String) extends Error
    * final case object NoZeroReciprocal extends Error
    *
-   * def parse(s: String): Xor[Error, Int] =
-   *  if (s.matches("-?[0-9]+")) Xor.right(s.toInt)
-   *  else Xor.left(NotANumber(s))
+   * def parse(s: String): Either[Error, Int] =
+   *  if (s.matches("-?[0-9]+")) Either.right(s.toInt)
+   *  else Either.left(NotANumber(s))
    *
-   * def reciprocal(i: Int): Xor[Error, Double] =
-   *  if (i == 0) Xor.left(NoZeroReciprocal)
-   *  else Xor.right(1.0 / i)
+   * def reciprocal(i: Int): Either[Error, Double] =
+   *  if (i == 0) Either.left(NoZeroReciprocal)
+   *  else Either.right(1.0 / i)
    *
    * def stringify(d: Double): String = d.toString
    *
-   * def magic(s: String): Xor[Error, String] =
+   * def magic(s: String): Either[Error, String] =
    *  parse(s).flatMap(reciprocal).map(stringify)
    * }
    * }}}
@@ -289,9 +248,9 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
     result should be(res0)
   }
 
-  /** = Xor in the small, Xor in the large =
+  /** = Either in the small, Either in the large =
    *
-   * Once you start using `Xor` for all your error-handling, you may quickly run into an issue where
+   * Once you start using `Either` for all your error-handling, you may quickly run into an issue where
    * you need to call into two separate modules which give back separate kinds of errors.
    *
    * {{{
@@ -299,14 +258,14 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * trait DatabaseValue
    *
    * object Database {
-   * def databaseThings(): Xor[DatabaseError, DatabaseValue] = ???
+   * def databaseThings(): Either[DatabaseError, DatabaseValue] = ???
    * }
    *
    * sealed abstract class ServiceError
    * trait ServiceValue
    *
    * object Service {
-   * def serviceThings(v: DatabaseValue): Xor[ServiceError, ServiceValue] = ???
+   * def serviceThings(v: DatabaseValue): Either[ServiceError, ServiceValue] = ???
    * }
    * }}}
    *
@@ -317,18 +276,18 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * def doApp = Database.databaseThings().flatMap(Service.serviceThings)
    * }}}
    *
-   * This doesn't work! Well, it does, but it gives us `Xor[Object, ServiceValue]` which isn't
+   * This doesn't work! Well, it does, but it gives us `Either[Object, ServiceValue]` which isn't
    * particularly useful for us. Now if we inspect the `Left`s, we have no clue what it could be.
-   * The reason this occurs is because the first type parameter in the two `Xor`s are different -
+   * The reason this occurs is because the first type parameter in the two `Either`s are different -
    * `databaseThings()` can give us a `DatabaseError` whereas `serviceThings()` can give us a
-   * `ServiceError`: two completely unrelated types. Recall that the type parameters of `Xor`
-   * are covariant, so when it sees an `Xor[E1, A1]` and an `Xor[E2, A2]`, it will happily try
+   * `ServiceError`: two completely unrelated types. Recall that the type parameters of `Either`
+   * are covariant, so when it sees an `Either[E1, A1]` and an `Either[E2, A2]`, it will happily try
    * to unify the `E1` and `E2` in a `flatMap` call - in our case, the closest common supertype is
    * `Object`, leaving us with practically no type information to use in our pattern match.
    *
    * == Solution 1: Application-wide errors ==
    *
-   * So clearly in order for us to easily compose `Xor` values, the left type parameter must be the same.
+   * So clearly in order for us to easily compose `Either` values, the left type parameter must be the same.
    * We may then be tempted to make our entire application share an error data type.
    *
    * {{{
@@ -341,18 +300,18 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * trait DatabaseValue
    *
    * object Database {
-   * def databaseThings(): Xor[AppError, DatabaseValue] = ???
+   * def databaseThings(): Either[AppError, DatabaseValue] = ???
    * }
    *
    * object Service {
-   * def serviceThings(v: DatabaseValue): Xor[AppError, ServiceValue] = ???
+   * def serviceThings(v: DatabaseValue): Either[AppError, ServiceValue] = ???
    * }
    *
    * def doApp = Database.databaseThings().flatMap(Service.serviceThings)
    * }}}
    *
    * This certainly works, or at least it compiles. But consider the case where another module wants to just use
-   * `Database`, and gets an `Xor[AppError, DatabaseValue]` back. Should it want to inspect the errors, it
+   * `Database`, and gets an `Either[AppError, DatabaseValue]` back. Should it want to inspect the errors, it
    * must inspect **all** the `AppError` cases, even though it was only intended for `Database` to use
    * `DatabaseError1` or `DatabaseError2`.
    *
@@ -366,14 +325,14 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * trait DatabaseValue
    *
    * object Database {
-   * def databaseThings(): Xor[DatabaseError, DatabaseValue] = ???
+   * def databaseThings(): Either[DatabaseError, DatabaseValue] = ???
    * }
    *
    * sealed abstract class ServiceError
    * trait ServiceValue
    *
    * object Service {
-   * def serviceThings(v: DatabaseValue): Xor[ServiceError, ServiceValue] = ???
+   * def serviceThings(v: DatabaseValue): Either[ServiceError, ServiceValue] = ???
    * }
    *
    * sealed abstract class AppError
@@ -384,11 +343,11 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * }}}
    *
    * Now in our outer application, we can wrap/lift each module-specific error into `AppError` and then
-   * call our combinators as usual. `Xor` provides a convenient method to assist with this, called `Xor.leftMap` -
+   * call our combinators as usual. `Either` provides a convenient method to assist with this, called `Either.leftMap` -
    * it can be thought of as the same as `map`, but for the `Left` side.
    *
    * {{{
-   * def doApp: Xor[AppError, ServiceValue] =
+   * def doApp: Either[AppError, ServiceValue] =
    * Database.databaseThings().leftMap(AppError.Database).
    * flatMap(dv => Service.serviceThings(dv).leftMap(AppError.Service))
    * }}}
@@ -400,9 +359,9 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * {{{
    * def awesome =
    * doApp match {
-   *  case Xor.Left(AppError.Database(_)) => "something in the database went wrong"
-   *  case Xor.Left(AppError.Service(_))  => "something in the service went wrong"
-   *  case Xor.Right(_)                   => "everything is alright!"
+   *  case Left(AppError.Database(_)) => "something in the database went wrong"
+   *  case Left(AppError.Service(_))  => "something in the service went wrong"
+   *  case Right(_)                   => "everything is alright!"
    * }
    * }}}
    *
@@ -418,25 +377,25 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
     left.leftMap(_.reverse) should be(res2)
   }
 
-  /** There will inevitably come a time when your nice `Xor` code will have to interact with exception-throwing
+  /** There will inevitably come a time when your nice `Either` code will have to interact with exception-throwing
    * code. Handling such situations is easy enough.
    *
    * {{{
-   * val xor: Xor[NumberFormatException, Int] =
+   * val either: Either[NumberFormatException, Int] =
    * try {
-   *  Xor.right("abc".toInt)
+   *  Either.right("abc".toInt)
    * } catch {
-   *  case nfe: NumberFormatException => Xor.left(nfe)
+   *  case nfe: NumberFormatException => Either.left(nfe)
    * }
    * }}}
    *
-   * However, this can get tedious quickly. `Xor` provides a `catchOnly` method on its companion object
+   * However, this can get tedious quickly. `Either` provides a `catchOnly` method on its companion object
    * that allows you to pass it a function, along with the type of exception you want to catch, and does the
    * above for you.
    *
    * {{{
-   * val xor: Xor[NumberFormatException, Int] =
-   * Xor.catchOnly[NumberFormatException]("abc".toInt)
+   * val either: Either[NumberFormatException, Int] =
+   * Either.catchOnly[NumberFormatException]("abc".toInt)
    * }}}
    *
    * If you want to catch all (non-fatal) throwables, you can use `catchNonFatal`.
@@ -451,18 +410,18 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
 
   /** = Additional syntax =
    *
-   * For using Xor's syntax on arbitrary data types, you can import `cats.implicits._`. This will
-   * make possible to use the `left` and `right` methods:
+   * For using Either's syntax on arbitrary data types, you can import `cats.implicits._`. This will
+   * make possible to use the `asLeft` and `asRight` methods:
    *
    * {{{
    * import cats.implicits._
    *
-   * val right: Xor[String, Int] = 7.right[String]
+   * val right: Either[String, Int] = 7.asRight[String]
    *
-   * val left: Xor[String, Int] = "hello 🐈s".left[Int]
+   * val left: Either[String, Int] = "hello 🐈s".asLeft[Int]
    * }}}
    *
-   * These method promote values to the `Xor` data type:
+   * These method promote values to the `Either` data type:
    *
    */
   def eitherSyntax(res0: String Either Int) = {
