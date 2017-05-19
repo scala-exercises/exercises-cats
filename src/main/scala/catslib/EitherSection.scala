@@ -368,7 +368,10 @@ object EitherSection extends FlatSpec with Matchers with org.scalaexercises.defi
    * Let's review the `leftMap` and `map` methods:
    *
    */
-  def eitherInTheLarge(res0: Either[String, Int], res1: Either[String, Int], res2: Either[String, Int]) = {
+  def eitherInTheLarge(
+      res0: Either[String, Int],
+      res1: Either[String, Int],
+      res2: Either[String, Int]) = {
     val right: Either[String, Int] = Right(41)
     right.map(_ + 1) should be(res0)
 
