@@ -1,7 +1,6 @@
 val scalaExerciesV = "0.4.0-SNAPSHOT"
 
-def dep(artifactId: String) =
-  "org.scala-exercises" %% artifactId % scalaExerciesV excludeAll ExclusionRule("org.typelevel")
+def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExerciesV
 
 lazy val cats = (project in file("."))
   .enablePlugins(ExerciseCompilerPlugin)
