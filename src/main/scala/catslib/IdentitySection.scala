@@ -36,7 +36,7 @@ object IdentitySection extends FlatSpec with Matchers with org.scalaexercises.de
   /** We can freely compare values of `Id[T]` with unadorned
    * values of type `T`.
    */
-  def identityType(res0: Int) {
+  def identityType(res0: Int) = {
     val anId: Id[Int] = 42
     anId should be(res0)
   }

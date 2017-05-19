@@ -7,11 +7,11 @@ package catslib
 
 import org.scalacheck.Shapeless._
 import org.scalaexercises.Test
-import org.scalatest.Spec
 import org.scalatest.prop.Checkers
+import org.scalatest.refspec.RefSpec
 import shapeless.HNil
 
-class ValidatedSpec extends Spec with Checkers {
+class ValidatedSpec extends RefSpec with Checkers {
   def `with no errors` = {
     check(
       Test.testSuccess(
@@ -39,10 +39,10 @@ class ValidatedSpec extends Spec with Checkers {
     )
   }
 
-  def `validation with xor` = {
+  def `validation with either` = {
     check(
       Test.testSuccess(
-        ValidatedSection.validatedAsXor _,
+        ValidatedSection.validatedAsEither _,
         false :: true :: HNil
       )
     )

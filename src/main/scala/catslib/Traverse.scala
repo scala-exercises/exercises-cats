@@ -7,13 +7,13 @@ package catslib
 
 import org.scalatest._
 
-import cats.data.{ValidatedNel, Xor}
+import cats.data.ValidatedNel
 import cats.implicits._
 
 import TraverseHelpers._
 
 /** In functional programming it is very common to encode "effects" as data types - common effects
- * include `Option` for possibly missing values, `Xor` and `Validated` for possible errors, and
+ * include `Option` for possibly missing values, `Either` and `Validated` for possible errors, and
  * `Future` for asynchronous computations.
  *
  * These effects tend to show up in functions working on a single piece of data - for instance
@@ -21,7 +21,6 @@ import TraverseHelpers._
  * information for a user.
  *
  * {{{
- * import cats.data.Xor
  * import scala.concurrent.Future
  *
  * def parseInt(s: String): Option[Int] = ???
@@ -29,7 +28,7 @@ import TraverseHelpers._
  * trait SecurityError
  * trait Credentials
  *
- * def validateLogin(cred: Credentials): Xor[SecurityError, Unit] = ???
+ * def validateLogin(cred: Credentials): Either[SecurityError, Unit] = ???
  *
  * trait Profile
  * trait User
@@ -71,7 +70,7 @@ import TraverseHelpers._
  * }
  * }}}
  *
- * In our above example, `F` is `List`, and `G` is `Option`, `Xor`, or `Future`. For the profile example,
+ * In our above example, `F` is `List`, and `G` is `Option`, `Either`, or `Future`. For the profile example,
  * `traverse` says given a `List[User]` and a function `User => Future[Profile]`, it can give you a
  * `Future[List[Profile]]`.
  *
@@ -81,7 +80,7 @@ import TraverseHelpers._
  *
  * In the most general form, `F[_]` is some sort of context which may contain a value (or several). While
  * `List` tends to be among the most general cases, there also exist `Traverse` instances for `Option`,
- * `Xor`, and `Validated` (among others).
+ * `Either`, and `Validated` (among others).
  *
  * @param name traverse
  */
@@ -96,28 +95,28 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
    * Note in the following code snippet we are using `traverseU` instead of `traverse`.
    * `traverseU` is for all intents and purposes the same as `traverse`, but with some
    * [[http://typelevel.org/blog/2013/09/11/using-scalaz-Unapply.html type-level trickery]]
-   * to allow it to infer the `Applicative[Xor[A, ?]]` and `Applicative[Validated[A, ?]]`
+   * to allow it to infer the `Applicative[Either[A, ?]]` and `Applicative[Validated[A, ?]]`
    * instances - `scalac` has issues inferring the instances for data types that do not
    * trivially satisfy the `F[_]` shape required by `Applicative`.
    *
    * {{{
    * import cats.Semigroup
-   * import cats.data.{NonEmptyList, OneAnd, Validated, ValidatedNel, Xor}
+   * import cats.data.{NonEmptyList, OneAnd, Validated, ValidatedNel}
    * import cats.implicits._
    *
-   * def parseIntXor(s: String): Xor[NumberFormatException, Int] =
-   * Xor.catchOnly[NumberFormatException](s.toInt)
+   * def parseIntEither(s: String): Either[NumberFormatException, Int] =
+   * Either.catchOnly[NumberFormatException](s.toInt)
    *
    * def parseIntValidated(s: String): ValidatedNel[NumberFormatException, Int] =
    * Validated.catchOnly[NumberFormatException](s.toInt).toValidatedNel
    * }}}
    *
    * We can now traverse structures that contain strings parsing them into integers
-   * and accumulating failures with `Xor`.
+   * and accumulating failures with `Either`.
    */
   def traverseuFunction(res0: List[Int], res1: Boolean) = {
-    List("1", "2", "3").traverseU(parseIntXor) should be(Xor.Right(res0))
-    List("1", "abc", "3").traverseU(parseIntXor).isLeft should be(res1)
+    List("1", "2", "3").traverseU(parseIntEither) should be(Right(res0))
+    List("1", "abc", "3").traverseU(parseIntEither).isLeft should be(res1)
   }
 
   /** We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for
@@ -137,7 +136,7 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
     List("1", "2", "3").traverseU(parseIntValidated).isValid should be(res0)
   }
 
-  /** Notice that in the `Xor` case, should any string fail to parse the entire traversal
+  /** Notice that in the `Either` case, should any string fail to parse the entire traversal
    * is considered a failure. Moreover, once it hits its first bad parse, it will not
    * attempt to parse any others down the line (similar behavior would be found with
    * using `Option` as the effect). Contrast this with `Validated` where even

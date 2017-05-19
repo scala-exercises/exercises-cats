@@ -10,7 +10,7 @@ lazy val cats = (project in file("."))
     libraryDependencies ++= Seq(
       dep("exercise-compiler"),
       dep("definitions"),
-      %%("cats-core", "0.7.2"),
+      %%("cats-core", "0.9.0"),
       %%("shapeless"),
       %%("scalatest"),
       %%("scalacheck"),

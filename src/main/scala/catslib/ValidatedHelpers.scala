@@ -9,7 +9,6 @@ import cats.{Semigroup, SemigroupK}
 import cats.data.NonEmptyList
 import cats.data.Validated
 import cats.data.Validated.{Invalid, Valid}
-import cats.data.Xor
 import cats.implicits._
 
 object ValidatedHelpers {
@@ -73,8 +72,8 @@ object ValidatedHelpers {
   implicit val readString: Read[String] = Read.stringRead
   implicit val readInt: Read[Int]       = Read.intRead
 
-  def positive(field: String, i: Int): ConfigError Xor Int = {
-    if (i >= 0) Xor.right(i)
-    else Xor.left(ParseError(field))
+  def positive(field: String, i: Int): Either[ConfigError, Int] = {
+    if (i >= 0) Either.right(i)
+    else Either.left(ParseError(field))
   }
 }

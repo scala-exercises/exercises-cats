@@ -5,6 +5,7 @@
 
 package catslib
 
+import cats.implicits._
 import cats.Monad
 
 object MonadHelpers {
@@ -22,7 +23,12 @@ object MonadHelpers {
         }
 
       def tailRecM[A, B](a: A)(f: A => OptionT[F, Either[A, B]]): OptionT[F, B] =
-        defaultTailRecM(a)(f)
+        OptionT(
+          F.tailRecM(a)(
+            a0 =>
+              F.map(f(a0).value)(
+                _.fold(Either.right[A, Option[B]](None))(_.map(b => Some(b): Option[B]))
+            )))
     }
   }
 }

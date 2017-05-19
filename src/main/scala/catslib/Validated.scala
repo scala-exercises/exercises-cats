@@ -8,8 +8,6 @@ package catslib
 import org.scalatest._
 
 import cats.data.Validated
-import cats.data.NonEmptyList
-import cats.data.Xor
 
 import ValidatedHelpers._
 
@@ -19,7 +17,7 @@ import ValidatedHelpers._
  * resubmit. Password needs to have at least one number.
  *
  * Or perhaps you're reading from a configuration file. One could imagine the configuration library you're using returns
- * a `scala.util.Try`, or maybe a `scala.util.Either` (or `cats.data.Xor`). Your parsing may look something like:
+ * a `scala.util.Try`, or maybe a `scala.util.Either`. Your parsing may look something like:
  *
  * {{{
  * case class ConnectionParams(url: String, port: Int)
@@ -269,9 +267,9 @@ object ValidatedSection
    *
    * We can now rewrite validations in terms of `Apply`.
    *
-   * == Of `flatMap`s and `Xor`s ==
+   * == Of `flatMap`s and `Either`s ==
    *
-   * `Option` has `flatMap`, `Xor` has `flatMap`, where's `Validated`'s? Let's try to implement it—better yet,
+   * `Option` has `flatMap`, `Either` has `flatMap`, where's `Validated`'s? Let's try to implement it—better yet,
    * let's implement the `Monad` type class.
    *
    * {{{
@@ -321,7 +319,7 @@ object ValidatedSection
    *
    * == `andThen` ===
    *
-   * The `andThen` method is similar to `flatMap` (such as `Xor.flatMap`). In the case of success, it passes the valid value into a function that returns a new `Validated` instance.
+   * The `andThen` method is similar to `flatMap` (such as `Either.flatMap`). In the case of success, it passes the valid value into a function that returns a new `Validated` instance.
    *
    * {{{
    * val houseNumber = config.parse[Int]("house_number").andThen{ n =>
@@ -343,29 +341,32 @@ object ValidatedSection
     houseNumber == Validated.invalid(error) should be(res1)
   }
 
-  /** == `withXor` ==
+  /** == `withEither` ==
    *
-   * The `withXor` method allows you to temporarily turn a `Validated` instance into an `Xor` instance and apply it to a function.
+   * The `withEither` method allows you to temporarily turn a `Validated` instance into an `Either` instance and apply it to a function.
    *
    * {{{
-   * import cats.data.Xor
+   * import cats.data.Either
    *
-   * def positive(field: String, i: Int): ConfigError Xor Int = {
-   * if (i >= 0) Xor.right(i)
-   * else Xor.left(ParseError(field))
+   * def positive(field: String, i: Int): Either[ConfigError, Int] = {
+   * if (i >= 0) Either.right(i)
+   * else Either.left(ParseError(field))
    * }
    * }}}
    *
-   * So we can get `Xor`'s short-circuiting behaviour when using the `Validated` type.
+   * So we can get `Either`'s short-circuiting behaviour when using the `Validated` type.
    *
    */
-  def validatedAsXor(res0: Boolean, res1: Boolean) = {
+  def validatedAsEither(res0: Boolean, res1: Boolean) = {
+    import cats.implicits._
+
     val config = Config(Map("house_number" → "-42"))
 
-    val houseNumber = config.parse[Int]("house_number").withXor { xor: ConfigError Xor Int ⇒
-      xor.flatMap { i ⇒
-        positive("house_number", i)
-      }
+    val houseNumber = config.parse[Int]("house_number").withEither {
+      either: Either[ConfigError, Int] ⇒
+        either.flatMap { i ⇒
+          positive("house_number", i)
+        }
     }
 
     houseNumber.isValid should be(res0)

@@ -7,11 +7,11 @@ package catslib
 
 import org.scalacheck.Shapeless._
 import org.scalaexercises.Test
-import org.scalatest.Spec
 import org.scalatest.prop.Checkers
+import org.scalatest.refspec.RefSpec
 import shapeless.HNil
 
-class ApplySpec extends Spec with Checkers {
+class ApplySpec extends RefSpec with Checkers {
   def `extends functor` = {
     val theNone: Option[Int] = None
 
