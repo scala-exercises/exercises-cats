@@ -4,6 +4,7 @@ def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercie
 
 lazy val cats = (project in file("."))
   .enablePlugins(ExerciseCompilerPlugin)
+  .disablePlugins(CoursierPlugin)
   .settings(
     name         := "exercises-cats",
     libraryDependencies ++= Seq(
