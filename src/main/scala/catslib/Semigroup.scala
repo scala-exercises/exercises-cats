@@ -61,7 +61,9 @@ object SemigroupSection
   /** And now try a slightly more complex combination:
    */
   def semigroupCombineComplex(res0: Int) = {
-          Semigroup[Int ⇒ Int]
+    import cats.implicits._
+      
+    Semigroup[Int ⇒ Int]
       .combine({ (x: Int) ⇒
         x + 1
       }, { (x: Int) ⇒
