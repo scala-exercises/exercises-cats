@@ -49,21 +49,27 @@ object SemigroupSection
       res0: Int,
       res1: List[Int],
       res2: Option[Int],
-      res3: Option[Int],
-      res4: Int) = {
+      res3: Option[Int]) = {
     import cats.implicits._
 
     Semigroup[Int].combine(1, 2) should be(res0)
     Semigroup[List[Int]].combine(List(1, 2, 3), List(4, 5, 6)) should be(res1)
     Semigroup[Option[Int]].combine(Option(1), Option(2)) should be(res2)
     Semigroup[Option[Int]].combine(Option(1), None) should be(res3)
+  }
+        
+  /** And now try a slightly more complex combination:
+   */
+  def semigroupCombineComplex(res0: Int) = {
+    import cats.implicits._
+      
     Semigroup[Int ⇒ Int]
       .combine({ (x: Int) ⇒
         x + 1
       }, { (x: Int) ⇒
         x * 10
       })
-      .apply(6) should be(res4)
+      .apply(6) should be(res0)
   }
 
   /** Many of these types have methods defined directly on them,
