@@ -16,7 +16,16 @@ class SemigroupSpec extends RefSpec with Checkers {
     check(
       Test.testSuccess(
         SemigroupSection.semigroupCombine _,
-        3 :: List(1, 2, 3, 4, 5, 6) :: Option(3) :: Option(1) :: 67 :: HNil
+        3 :: List(1, 2, 3, 4, 5, 6) :: Option(3) :: Option(1) :: HNil
+      )
+    )
+  }
+
+  def `has an advanced combine operation` = {
+    check(
+      Test.testSuccess(
+        SemigroupSection.semigroupCombineComplex _,
+        67 :: HNil
       )
     )
   }
