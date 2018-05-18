@@ -5,6 +5,7 @@
 
 package catslib
 
+import cats.kernel.Semigroup
 import org.scalatest._
 
 /** A semigroup for some given type A has a single operation
