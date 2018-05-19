@@ -58,7 +58,7 @@ object SemigroupSection
   def semigroupCombineComplex(res0: Int) = {
     import cats.implicits._
 
-    Semigroup[Int => Int].combine(_ + 1 ,  _ * 10).apply(6) should be(res0)
+    Semigroup[Int => Int].combine(_ + 1, _ * 10).apply(6) should be(res0)
 
   }
 
