@@ -5,9 +5,8 @@
 
 package catslib
 
+import cats.kernel.Semigroup
 import org.scalatest._
-
-import cats._
 
 /** A semigroup for some given type A has a single operation
  * (which we will call `combine`), which takes two values of type A, and
@@ -59,13 +58,8 @@ object SemigroupSection
   def semigroupCombineComplex(res0: Int) = {
     import cats.implicits._
 
-    Semigroup[Int ⇒ Int]
-      .combine({ (x: Int) ⇒
-        x + 1
-      }, { (x: Int) ⇒
-        x * 10
-      })
-      .apply(6) should be(res0)
+    Semigroup[Int => Int].combine(_ + 1, _ * 10).apply(6) should be(res0)
+
   }
 
   /** Many of these types have methods defined directly on them,
