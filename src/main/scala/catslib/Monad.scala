@@ -138,4 +138,11 @@ object MonadSection extends FlatSpec with Matchers with org.scalaexercises.defin
 
     optionTMonad[List].pure(42) should be(OptionT(res0))
   }
+ /** There are also instances for other monads available for user in Cats library:
+   *  'EitherT' for 'Either'
+   *  'ReaderT' for 'Reader'
+   *  'WriterT' for 'Writer'
+   *  'StateT' for 'State'
+   *  'IdT' for 'Id'
+   */
 }
