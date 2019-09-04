@@ -1,11 +1,11 @@
 # Scala Exercises - Cats library
 ------------------------
 
-This repository hosts a content library for the [Scala Exercises](https://www.scala-exercises.org/) platform, that includes interactive exercises related to the [Cats library](https://github.com/typelevel/cats) by Typelevel.
+This repository hosts a content library for the [Scala Exercises](https://www.scala-exercises.org/) platform that includes interactive exercises related to the [Cats library](https://github.com/typelevel/cats) by Typelevel.
 
-## About Scala exercises
+## About Scala Exercises
 
-"Scala Exercises" brings exercises for the Stdlib, Cats, Shapeless and many other great libraries for Scala to your browser. Offering hundreds of solvable exercises organized into several categories covering the basics of the Scala language and its most important libraries.
+"Scala Exercises" brings exercises for the Stdlib, Cats, Shapeless, and many other great libraries for Scala to your browser. It offers hundreds of solvable exercises organized into several categories covering the basics of the Scala language and its most important libraries.
 
 Scala Exercises is available at [scala-exercises.org](https://scala-exercises.org).
 
@@ -16,7 +16,7 @@ to get involved, or visit our [GitHub site](https://github.com/scala-exercises).
 
 ## License
 
-Copyright (C) 2015-2016 47 Degrees, LLC.
+Copyright (C) 2015-2019 47 Degrees, LLC.
 Reactive, scalable software solutions.
 http://47deg.com
 hello@47deg.com
