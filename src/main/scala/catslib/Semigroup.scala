@@ -1,6 +1,7 @@
 /*
- * scala-exercises - exercises-cats
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-cats
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
 package catslib
@@ -35,10 +36,7 @@ import org.scalatest._
  *
  * @param name semigroup
  */
-object SemigroupSection
-    extends FlatSpec
-    with Matchers
-    with org.scalaexercises.definitions.Section {
+object SemigroupSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** Now that you've learned about the `Semigroup` instance for `Int` try to
    * guess how it works in the following examples:

@@ -1,6 +1,7 @@
 /*
- * scala-exercises - exercises-cats
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-cats
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
 package catslib
@@ -147,11 +148,11 @@ object ApplySection extends FlatSpec with Matchers with org.scalaexercises.defin
       res5: Option[(Int, Int, Int)]
   ) = {
     import cats.implicits._
-    val option2 = Option(1) |@| Option(2)
-    val option3 = option2 |@| Option.empty[Int]
+    val option2 = (Option(1), Option(2))
+    val option3 = (option2._1, option2._2, Option.empty[Int])
 
-    option2 map addArity2 should be(res0)
-    option3 map addArity3 should be(res1)
+    option2 mapN addArity2 should be(res0)
+    option3 mapN addArity3 should be(res1)
 
     option2 apWith Some(addArity2) should be(res2)
     option3 apWith Some(addArity3) should be(res3)

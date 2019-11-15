@@ -1,13 +1,13 @@
 /*
- * scala-exercises - exercises-cats
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-cats
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
 package catslib
 
 import org.scalatest._
 
-import cats.data.ValidatedNel
 import cats.implicits._
 
 import TraverseHelpers._
@@ -92,13 +92,6 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
    * walks the `F[A]` depends on the effect of the function. Let's see some examples where `F` is taken to be
    * `List`.
    *
-   * Note in the following code snippet we are using `traverseU` instead of `traverse`.
-   * `traverseU` is for all intents and purposes the same as `traverse`, but with some
-   * [[http://typelevel.org/blog/2013/09/11/using-scalaz-Unapply.html type-level trickery]]
-   * to allow it to infer the `Applicative[Either[A, ?]]` and `Applicative[Validated[A, ?]]`
-   * instances - `scalac` has issues inferring the instances for data types that do not
-   * trivially satisfy the `F[_]` shape required by `Applicative`.
-   *
    * {{{
    * import cats.Semigroup
    * import cats.data.{NonEmptyList, OneAnd, Validated, ValidatedNel}
@@ -115,8 +108,8 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
    * and accumulating failures with `Either`.
    */
   def traverseuFunction(res0: List[Int], res1: Boolean) = {
-    List("1", "2", "3").traverseU(parseIntEither) should be(Right(res0))
-    List("1", "abc", "3").traverseU(parseIntEither).isLeft should be(res1)
+    List("1", "2", "3").traverse(parseIntEither) should be(Right(res0))
+    List("1", "abc", "3").traverse(parseIntEither).isLeft should be(res1)
   }
 
   /** We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for
@@ -129,12 +122,8 @@ object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.de
    *
    * Now that we've provided such evidence, we can use `ValidatedNel` as an applicative.
    */
-  def traverseuValidated(res0: Boolean) = {
-    import cats.Semigroup
-    import cats.data.{NonEmptyList, OneAnd, ValidatedNel}
-
-    List("1", "2", "3").traverseU(parseIntValidated).isValid should be(res0)
-  }
+  def traverseuValidated(res0: Boolean) =
+    List("1", "2", "3").traverse(parseIntValidated).isValid should be(res0)
 
   /** Notice that in the `Either` case, should any string fail to parse the entire traversal
    * is considered a failure. Moreover, once it hits its first bad parse, it will not
