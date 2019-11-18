@@ -1,15 +1,10 @@
 /*
- * scala-exercises - exercises-cats
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-cats
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
 package catslib
-
-import cats.{Semigroup, SemigroupK}
-import cats.data.NonEmptyList
-import cats.data.Validated
-import cats.data.Validated.{Invalid, Valid}
-import cats.implicits._
 
 object ValidatedHelpers {
   case class ConnectionParams(url: String, port: Int)
@@ -72,8 +67,7 @@ object ValidatedHelpers {
   implicit val readString: Read[String] = Read.stringRead
   implicit val readInt: Read[Int]       = Read.intRead
 
-  def positive(field: String, i: Int): Either[ConfigError, Int] = {
+  def positive(field: String, i: Int): Either[ConfigError, Int] =
     if (i >= 0) Either.right(i)
     else Either.left(ParseError(field))
-  }
 }

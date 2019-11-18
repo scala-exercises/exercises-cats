@@ -1,6 +1,7 @@
 /*
- * scala-exercises - exercises-cats
- * Copyright (C) 2015-2016 47 Degrees, LLC. <http://www.47deg.com>
+ *  scala-exercises - exercises-cats
+ *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *
  */
 
 package catslib
@@ -165,10 +166,7 @@ import ValidatedHelpers._
  *
  * @param name validated
  */
-object ValidatedSection
-    extends FlatSpec
-    with Matchers
-    with org.scalaexercises.definitions.Section {
+object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** When no errors are present in the configuration, we get a `ConnectionParams` wrapped in a `Valid` instance.
    */
@@ -358,8 +356,6 @@ object ValidatedSection
    *
    */
   def validatedAsEither(res0: Boolean, res1: Boolean) = {
-    import cats.implicits._
-
     val config = Config(Map("house_number" → "-42"))
 
     val houseNumber = config.parse[Int]("house_number").withEither {

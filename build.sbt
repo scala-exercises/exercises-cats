@@ -1,21 +1,22 @@
-val scalaExercisesV = "0.4.0-SNAPSHOT"
+import ProjectPlugin.autoImport._
+val scalaExercisesV = "0.5.0-SNAPSHOT"
 
 def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercisesV
 
 lazy val cats = (project in file("."))
   .enablePlugins(ExerciseCompilerPlugin)
-  .disablePlugins(CoursierPlugin)
   .settings(
     name         := "exercises-cats",
     libraryDependencies ++= Seq(
       dep("exercise-compiler"),
       dep("definitions"),
-      %%("cats"),
-      %%("shapeless"),
-      %%("scalatest"),
-      %%("scalacheck"),
-      %%("scheckShapeless")
-    )
+      %%("cats-core", V.cats),
+      %%("shapeless", V.shapeless),
+      %%("scalatest", V.scalatest),
+      %%("scalacheck", V.scalacheck),
+      "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless
+    ),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
   )
 
 // Distribution
