@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 import ApplyHelpers._
 
 import cats._
@@ -46,7 +47,7 @@ import cats.implicits._
  *
  * @param name apply
  */
-object ApplySection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** = map =
    *

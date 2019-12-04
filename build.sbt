@@ -14,7 +14,8 @@ lazy val cats = (project in file("."))
       %%("shapeless", V.shapeless),
       %%("scalatest", V.scalatest),
       %%("scalacheck", V.scalacheck),
-      "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless
+      "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % V.scalacheckShapeless,
+      "org.scalatestplus" %% "scalatestplus-scalacheck" % V.scalatestplusScheck
     ),
     addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
   )

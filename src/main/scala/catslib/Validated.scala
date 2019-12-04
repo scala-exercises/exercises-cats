@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import cats.data.Validated
 
@@ -166,7 +167,10 @@ import ValidatedHelpers._
  *
  * @param name validated
  */
-object ValidatedSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object ValidatedSection
+    extends AnyFlatSpec
+    with Matchers
+    with org.scalaexercises.definitions.Section {
 
   /** When no errors are present in the configuration, we get a `ConnectionParams` wrapped in a `Valid` instance.
    */

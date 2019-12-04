@@ -7,7 +7,8 @@
 package catslib
 
 import cats.kernel.Semigroup
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 /** A semigroup for some given type A has a single operation
  * (which we will call `combine`), which takes two values of type A, and
@@ -36,7 +37,10 @@ import org.scalatest._
  *
  * @param name semigroup
  */
-object SemigroupSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object SemigroupSection
+    extends AnyFlatSpec
+    with Matchers
+    with org.scalaexercises.definitions.Section {
 
   /** Now that you've learned about the `Semigroup` instance for `Int` try to
    * guess how it works in the following examples:

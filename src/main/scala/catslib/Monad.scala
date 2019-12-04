@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import MonadHelpers._
 
@@ -17,7 +18,7 @@ import MonadHelpers._
  *
  * @param name monad
  */
-object MonadSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** The name `flatten` should remind you of the functions of the same name on many
    * classes in the standard library.

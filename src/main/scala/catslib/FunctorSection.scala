@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import cats._
 import cats.implicits._
@@ -72,7 +73,10 @@ import cats.implicits._
  *
  * @param name functor
  */
-object FunctorSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object FunctorSection
+    extends AnyFlatSpec
+    with Matchers
+    with org.scalaexercises.definitions.Section {
 
   /** = Using Functor =
    *
