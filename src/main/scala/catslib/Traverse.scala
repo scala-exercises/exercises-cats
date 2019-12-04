@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import cats.implicits._
 
@@ -84,7 +85,10 @@ import TraverseHelpers._
  *
  * @param name traverse
  */
-object TraverseSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object TraverseSection
+    extends AnyFlatSpec
+    with Matchers
+    with org.scalaexercises.definitions.Section {
 
   /** == Choose your effect ==
    *

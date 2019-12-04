@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import cats._
 import cats.implicits._
@@ -39,7 +40,10 @@ import cats.implicits._
  *
  * @param name foldable
  */
-object FoldableSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object FoldableSection
+    extends AnyFlatSpec
+    with Matchers
+    with org.scalaexercises.definitions.Section {
 
   /** = foldLeft =
    *

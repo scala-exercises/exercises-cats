@@ -6,7 +6,8 @@
 
 package catslib
 
-import org.scalatest._
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AnyFlatSpec
 
 import cats._
 import cats.implicits._
@@ -30,7 +31,7 @@ import cats.implicits._
  *
  * @param name monoid
  */
-object MonoidSection extends FlatSpec with Matchers with org.scalaexercises.definitions.Section {
+object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /** First some imports.
    *
