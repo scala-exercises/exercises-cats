@@ -38,8 +38,8 @@ import TraverseHelpers._
  * }}}
  *
  * Each function asks only for the data it actually needs; in the case of `userInfo`, a single `User`. We
- * certainly could write one that takes a `List[User]` and fetch profile for all of them, would be a bit strange.
- * If we just wanted to fetch the profile of just one user, we would either have to wrap it in a `List` or write
+ * certainly could write one that takes a `List[User]` and fetch the profile for all of them, though it would be a bit strange since
+ * fetching a single user would require us to either wrap it in a `List`, or write
  * a separate function that takes in a single user anyways. More fundamentally, functional programming is about
  * building lots of small, independent pieces and composing them to make larger and larger pieces - does this
  * hold true in this case?
