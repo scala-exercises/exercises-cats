@@ -112,7 +112,7 @@ object FunctorSection
    *
    */
   def liftingToAFunctor(res0: Option[Int]) = {
-    val lenOption: Option[String] ⇒ Option[Int] = Functor[Option].lift(_.length)
+    val lenOption: Option[String] => Option[Int] = Functor[Option].lift(_.length)
     lenOption(Some("Hello")) should be(res0)
   }
 

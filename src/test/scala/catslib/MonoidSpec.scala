@@ -23,7 +23,7 @@ class MonoidSpec extends RefSpec with Checkers {
   }
 
   def `advantages of using monoid operations` = {
-    val aMap: Map[String, Int]       = Map("a" → 4, "b" → 2)
+    val aMap: Map[String, Int]       = Map("a" -> 4, "b" -> 2)
     val anotherMap: Map[String, Int] = Map()
 
     check(

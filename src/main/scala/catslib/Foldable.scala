@@ -64,7 +64,7 @@ object FoldableSection
    */
   def foldableFoldRight(res0: Int) = {
     val lazyResult =
-      Foldable[List].foldRight(List(1, 2, 3), Now(0))((x, rest) ⇒ Later(x + rest.value))
+      Foldable[List].foldRight(List(1, 2, 3), Now(0))((x, rest) => Later(x + rest.value))
     lazyResult.value should be(res0)
   }
 
