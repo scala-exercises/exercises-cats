@@ -87,8 +87,8 @@ object SemigroupSection
   def composingSemigroups(res0: Map[String, Int]) = {
     import cats.implicits._
 
-    val aMap        = Map("foo" → Map("bar" → 5))
-    val anotherMap  = Map("foo" → Map("bar" → 6))
+    val aMap        = Map("foo" -> Map("bar" -> 5))
+    val anotherMap  = Map("foo" -> Map("bar" -> 6))
     val combinedMap = Semigroup[Map[String, Map[String, Int]]].combine(aMap, anotherMap)
 
     combinedMap.get("foo") should be(Some(res0))

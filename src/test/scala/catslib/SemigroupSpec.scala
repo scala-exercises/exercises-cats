@@ -35,7 +35,7 @@ class SemigroupSpec extends RefSpec with Checkers {
     check(
       Test.testSuccess(
         SemigroupSection.composingSemigroups _,
-        Map("bar" → 11) :: HNil
+        Map("bar" -> 11) :: HNil
       )
     )
   }

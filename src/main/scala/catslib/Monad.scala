@@ -85,7 +85,7 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
     import cats._
     import cats.implicits._
 
-    Monad[List].flatMap(List(1, 2, 3))(x ⇒ List(x, x)) should be(res0)
+    Monad[List].flatMap(List(1, 2, 3))(x => List(x, x)) should be(res0)
   }
 
   /** = ifM =

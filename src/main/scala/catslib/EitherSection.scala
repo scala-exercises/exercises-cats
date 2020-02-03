@@ -118,10 +118,10 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
   def eitherMonad(res0: Either[String, Int], res1: Either[String, Int]) = {
 
     val right: Either[String, Int] = Either.right(5)
-    right.flatMap(x ⇒ Either.right(x + 1)) should be(res0)
+    right.flatMap(x => Either.right(x + 1)) should be(res0)
 
     val left: Either[String, Int] = Either.left("Something went wrong")
-    left.flatMap(x ⇒ Either.right(x + 1)) should be(res1)
+    left.flatMap(x => Either.right(x + 1)) should be(res1)
   }
 
   /** = Using `Either` instead of exceptions =
@@ -201,10 +201,10 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     import EitherStyle._
 
     val result = magic("2") match {
-      case Left(_: NumberFormatException)    ⇒ "Not a number!"
-      case Left(_: IllegalArgumentException) ⇒ "Can't take reciprocal of 0!"
-      case Left(_)                           ⇒ "Unknown error"
-      case Right(result)                     ⇒ s"Got reciprocal: ${result}"
+      case Left(_: NumberFormatException)    => "Not a number!"
+      case Left(_: IllegalArgumentException) => "Can't take reciprocal of 0!"
+      case Left(_)                           => "Unknown error"
+      case Right(result)                     => s"Got reciprocal: ${result}"
     }
     result should be(res0)
   }
@@ -243,9 +243,9 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     import EitherStyleWithAdts._
 
     val result = magic("2") match {
-      case Left(NotANumber(_))    ⇒ "Not a number!"
-      case Left(NoZeroReciprocal) ⇒ "Can't take reciprocal of 0!"
-      case Right(result)          ⇒ s"Got reciprocal: ${result}"
+      case Left(NotANumber(_))    => "Not a number!"
+      case Left(NoZeroReciprocal) => "Can't take reciprocal of 0!"
+      case Right(result)          => s"Got reciprocal: ${result}"
     }
     result should be(res0)
   }
