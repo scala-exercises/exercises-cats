@@ -331,9 +331,9 @@ object ValidatedSection
    * }}}
    */
   def sequentialValidation(res0: Boolean, res1: Boolean) = {
-    val config = Config(Map("house_number" → "-42"))
+    val config = Config(Map("house_number" -> "-42"))
 
-    val houseNumber = config.parse[Int]("house_number").andThen { n ⇒
+    val houseNumber = config.parse[Int]("house_number").andThen { n =>
       if (n >= 0) Validated.valid(n)
       else Validated.invalid(ParseError("house_number"))
     }
@@ -360,11 +360,11 @@ object ValidatedSection
    *
    */
   def validatedAsEither(res0: Boolean, res1: Boolean) = {
-    val config = Config(Map("house_number" → "-42"))
+    val config = Config(Map("house_number" -> "-42"))
 
     val houseNumber = config.parse[Int]("house_number").withEither {
-      either: Either[ConfigError, Int] ⇒
-        either.flatMap { i ⇒
+      either: Either[ConfigError, Int] =>
+        either.flatMap { i =>
           positive("house_number", i)
         }
     }

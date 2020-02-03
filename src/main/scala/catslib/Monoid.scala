@@ -55,7 +55,8 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * operate on more complex types, e.g.
    */
   def monoidAdvantage(res0: Map[String, Int], res1: Map[String, Int]) = {
-    Monoid[Map[String, Int]].combineAll(List(Map("a" → 1, "b" → 2), Map("a" → 3))) should be(res0)
+    Monoid[Map[String, Int]].combineAll(List(Map("a" -> 1, "b" -> 2), Map("a" -> 3))) should be(
+      res0)
     Monoid[Map[String, Int]].combineAll(List()) should be(res1)
   }
 
@@ -67,7 +68,7 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
   def monoidFoldmap(res0: Int, res1: String) = {
     val l = List(1, 2, 3, 4, 5)
     l.foldMap(identity) should be(res0)
-    l.foldMap(i ⇒ i.toString) should be(res1)
+    l.foldMap(i => i.toString) should be(res1)
   }
 
   /** To use this
@@ -91,6 +92,6 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    */
   def tupleMonoid(res0: (Int, String)) = {
     val l = List(1, 2, 3, 4, 5)
-    l.foldMap(i ⇒ (i, i.toString)) should be(res0)
+    l.foldMap(i => (i, i.toString)) should be(res0)
   }
 }

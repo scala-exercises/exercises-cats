@@ -15,7 +15,7 @@ object ProjectPlugin extends AutoPlugin {
   object autoImport {
 
     lazy val V = new {
-      val scala212: String            = "2.12.10"
+      val scala213: String            = "2.13.1"
       val cats: String                = "2.0.0"
       val shapeless: String           = "2.3.3"
       val scalatest: String           = "3.1.0"
@@ -40,14 +40,13 @@ object ProjectPlugin extends AutoPlugin {
         organizationEmail = "hello@47deg.com"
       ),
       orgLicenseSetting := ApacheLicense,
-      scalaVersion := V.scala212,
+      scalaVersion := V.scala213,
       scalaOrganization := "org.scala-lang",
       resolvers ++= Seq(
         Resolver.mavenLocal,
         Resolver.sonatypeRepo("snapshots"),
         Resolver.sonatypeRepo("releases")
       ),
-      scalacOptions += "-Ypartial-unification",
       headerLicense := Some(Custom(s"""| scala-exercises - ${name.value}
                                        | Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
                                        |

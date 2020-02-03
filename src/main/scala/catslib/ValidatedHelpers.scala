@@ -37,11 +37,11 @@ object ValidatedHelpers {
   case class Config(map: Map[String, String]) {
     def parse[A: Read](key: String): Validated[ConfigError, A] =
       map.get(key) match {
-        case None ⇒ Invalid(MissingConfig(key))
-        case Some(value) ⇒
+        case None => Invalid(MissingConfig(key))
+        case Some(value) =>
           Read[A].read(value) match {
-            case None    ⇒ Invalid(ParseError(key))
-            case Some(a) ⇒ Valid(a)
+            case None    => Invalid(ParseError(key))
+            case Some(a) => Valid(a)
           }
       }
   }
@@ -49,12 +49,12 @@ object ValidatedHelpers {
   import cats.Semigroup
 
   def parallelValidate[E: Semigroup, A, B, C](v1: Validated[E, A], v2: Validated[E, B])(
-      f: (A, B) ⇒ C): Validated[E, C] =
+      f: (A, B) => C): Validated[E, C] =
     (v1, v2) match {
-      case (Valid(a), Valid(b))       ⇒ Valid(f(a, b))
-      case (Valid(_), i @ Invalid(_)) ⇒ i
-      case (i @ Invalid(_), Valid(_)) ⇒ i
-      case (Invalid(e1), Invalid(e2)) ⇒ Invalid(Semigroup[E].combine(e1, e2))
+      case (Valid(a), Valid(b))       => Valid(f(a, b))
+      case (Valid(_), i @ Invalid(_)) => i
+      case (i @ Invalid(_), Valid(_)) => i
+      case (Invalid(e1), Invalid(e2)) => Invalid(Semigroup[E].combine(e1, e2))
     }
 
   import cats.SemigroupK

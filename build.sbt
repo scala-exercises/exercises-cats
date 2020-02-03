@@ -1,5 +1,5 @@
 import ProjectPlugin.autoImport._
-val scalaExercisesV = "0.5.0-SNAPSHOT"
+val scalaExercisesV = "0.6.0-SNAPSHOT"
 
 def dep(artifactId: String) = "org.scala-exercises" %% artifactId % scalaExercisesV
 

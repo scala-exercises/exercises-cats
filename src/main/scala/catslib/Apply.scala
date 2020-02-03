@@ -56,9 +56,9 @@ object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   def applyExtendsFunctor(res0: Option[String], res1: Option[Int], res2: Option[Int]) = {
     import cats.implicits._
 
-    val intToString: Int ⇒ String = _.toString
-    val double: Int ⇒ Int         = _ * 2
-    val addTwo: Int ⇒ Int         = _ + 2
+    val intToString: Int => String = _.toString
+    val double: Int => Int         = _ * 2
+    val addTwo: Int => Int         = _ + 2
 
     Apply[Option].map(Some(1))(intToString) should be(res0)
     Apply[Option].map(Some(1))(double) should be(res1)
@@ -71,7 +71,7 @@ object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    */
   def applyComposes(res0: List[Option[Int]]) = {
     val listOpt = Apply[List] compose Apply[Option]
-    val plusOne = (x: Int) ⇒ x + 1
+    val plusOne = (x: Int) => x + 1
     listOpt.ap(List(Some(plusOne)))(List(Some(1), None, Some(3))) should be(res0)
   }
 
@@ -102,11 +102,11 @@ object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    * are carried through the entire computation:
    */
   def applyApn(res0: Option[Int], res1: Option[Int], res2: Option[Int]) = {
-    val addArity2 = (a: Int, b: Int) ⇒ a + b
+    val addArity2 = (a: Int, b: Int) => a + b
     Apply[Option].ap2(Some(addArity2))(Some(1), Some(2)) should be(res0)
     Apply[Option].ap2(Some(addArity2))(Some(1), None) should be(res1)
 
-    val addArity3 = (a: Int, b: Int, c: Int) ⇒ a + b + c
+    val addArity3 = (a: Int, b: Int, c: Int) => a + b + c
     Apply[Option].ap3(Some(addArity3))(Some(1), Some(2), Some(3)) should be(res2)
   }
 
