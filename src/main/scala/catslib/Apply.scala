@@ -133,12 +133,8 @@ object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.de
 
   /** = apply builder syntax =
    *
-   * The `|@|` operator offers an alternative syntax for the higher-arity `Apply`
-   * functions (`apN`, `mapN` and `tupleN`).
-   * In order to use it, first import `cats.implicits._`.
-   *
-   * All instances created by `|@|` have `map`, `ap`, and `tupled` methods of the appropriate arity:
-   *
+   * In order to use functions `apN`, `mapN` and `tupleN` *infix*,
+   * import `cats.implicits._`.
    */
   def applyBuilderSyntax(
       res0: Option[Int],
