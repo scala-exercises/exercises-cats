@@ -16,7 +16,7 @@ to get involved, or visit our [GitHub site](https://github.com/scala-exercises).
 
 ## License
 
-Copyright (C) 2015-2019 47 Degrees, LLC.
+Copyright (C) 2015-2020 47 Degrees, LLC.
 Reactive, scalable software solutions.
 http://47deg.com
 hello@47deg.com

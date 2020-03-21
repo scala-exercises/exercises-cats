@@ -48,7 +48,7 @@ object ProjectPlugin extends AutoPlugin {
         Resolver.sonatypeRepo("releases")
       ),
       headerLicense := Some(Custom(s"""| scala-exercises - ${name.value}
-                                       | Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+                                       | Copyright (C) 2015-2020 47 Degrees, LLC. <http://www.47deg.com>
                                        |
                                        |""".stripMargin))
     )

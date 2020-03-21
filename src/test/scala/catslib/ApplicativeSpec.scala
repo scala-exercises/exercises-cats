@@ -1,6 +1,6 @@
 /*
  *  scala-exercises - exercises-cats
- *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *  Copyright (C) 2015-2020 47 Degrees, LLC. <http://www.47deg.com>
  *
  */
 

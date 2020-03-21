@@ -1,6 +1,6 @@
 /*
  *  scala-exercises - exercises-cats
- *  Copyright (C) 2015-2019 47 Degrees, LLC. <http://www.47deg.com>
+ *  Copyright (C) 2015-2020 47 Degrees, LLC. <http://www.47deg.com>
  *
  */
 
@@ -18,8 +18,8 @@ import scala.concurrent.Future
 
 /**
  * OptionT is a Monad Transformer that has two type parameters F and A.
- * F is the wrapping Monad and A is type inside Option. In which it results being OptionT[F[_], A] is a light wrapper on an F[Option[A]].
- * As OptionT is also a monad, it can be used in a for-comprehension, and it can more convenient to work with than using F[Option[A]] directly.
+ * F is the wrapping Monad and A is type inside Option. As a result, OptionT[F[_], A] is a light wrapper on an F[Option[A]].
+ * As OptionT is also a monad, it can be used in a for-comprehension and more convenient to work with it than using F[Option[A]] directly.
  *
  * @param name OptionT
  */
@@ -35,7 +35,7 @@ object OptionTSection
   }
 
   /** If you have only an A and you wish to lift it into an OptionT[F,A], assuming you
-   * have an Applicative instance for F you can use some which is an alias for pure.
+   * have an Applicative instance for F you can use `some` which is an alias for `pure`.
    * There also exists a none method which can be used to create an OptionT[F,A],
    * where the Option wrapped A type is actually a None:
    *
