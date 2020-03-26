@@ -19,7 +19,7 @@ import scala.concurrent.Future
 /**
  * OptionT is a Monad Transformer that has two type parameters F and A.
  * F is the wrapping Monad and A is type inside Option. As a result, OptionT[F[_], A] is a light wrapper on an F[Option[A]].
- * As OptionT is also a monad, it can be used in a for-comprehension and more convenient to work with it than using F[Option[A]] directly.
+ * As OptionT is also a monad, it can be used in a for-comprehension and be more convenient to work with than using F[Option[A]] directly.
  *
  * @param name OptionT
  */
