@@ -1,5 +1,4 @@
 # Scala Exercises - Cats library
-------------------------
 
 This repository hosts a content library for the [Scala Exercises](https://www.scala-exercises.org/) platform that includes interactive exercises related to the [Cats library](https://github.com/typelevel/cats) by Typelevel.
 

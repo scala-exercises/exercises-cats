@@ -88,7 +88,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    */
   def laterEval(resultList: List[Int], counterResult: Int) = {
     //given
-    val n = 2
+    val n       = 2
     var counter = 0
     val lazyEval = Eval.later {
       println("This is lazyly evaluated with caching")
@@ -119,7 +119,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    */
   def alwaysEval(resultList: List[Int], counterAfterListEval: Int, latestCounter: Int) = {
     //given
-    val n = 4
+    val n       = 4
     var counter = 0
     val alwaysEval = Eval.always {
       println("This is lazyly evaluated without caching")

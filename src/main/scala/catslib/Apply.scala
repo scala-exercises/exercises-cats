@@ -84,7 +84,8 @@ object ApplySection extends AnyFlatSpec with Matchers with org.scalaexercises.de
       res1: Option[Int],
       res2: Option[Int],
       res3: Option[Int],
-      res4: Option[Int]) = {
+      res4: Option[Int]
+  ) = {
     Apply[Option].ap(Some(intToString))(Some(1)) should be(res0)
     Apply[Option].ap(Some(double))(Some(1)) should be(res1)
     Apply[Option].ap(Some(double))(None) should be(res2)

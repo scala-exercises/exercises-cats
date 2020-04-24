@@ -75,7 +75,9 @@ object FoldableSection
    */
   def foldableFold(res0: String, res1: Int) = {
     Foldable[List].fold(List("a", "b", "c")) should be(res0)
-    Foldable[List].fold(List(1, 2, 3)) should be(res1) // Hint: the implicit monoid for `Int` is the Sum monoid
+    Foldable[List].fold(List(1, 2, 3)) should be(
+      res1
+    ) // Hint: the implicit monoid for `Int` is the Sum monoid
   }
 
   /** = foldMap =
