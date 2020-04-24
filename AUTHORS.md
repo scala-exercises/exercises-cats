@@ -8,6 +8,7 @@
 
 The maintainers of the project are:
 
+- [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
 - [![angoglez](https://avatars0.githubusercontent.com/u/10107285?v=4&s=20) **Ana Gómez González (angoglez)**](https://github.com/angoglez)
 - [![andyscott](https://avatars3.githubusercontent.com/u/310363?v=4&s=20) **Andy Scott (andyscott)**](https://github.com/andyscott)
 - [![dominv](https://avatars1.githubusercontent.com/u/3943031?v=4&s=20) **Domingo Valera (dominv)**](https://github.com/dominv)
@@ -32,6 +33,7 @@ These are the people that have contributed to the _exercises-cats_ project:
 - [![doub1ejack](https://avatars2.githubusercontent.com/u/1809882?v=4&s=20) **doub1ejack**](https://github.com/doub1ejack)
 - [![yilinwei](https://avatars0.githubusercontent.com/u/8933128?v=4&s=20) **yilinwei**](https://github.com/yilinwei)
 - [![angoglez](https://avatars0.githubusercontent.com/u/10107285?v=4&s=20) **angoglez**](https://github.com/angoglez)
+- [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
 - [![andyscott](https://avatars3.githubusercontent.com/u/310363?v=4&s=20) **andyscott**](https://github.com/andyscott)
 - [![ches](https://avatars3.githubusercontent.com/u/13277?v=4&s=20) **ches**](https://github.com/ches)
 - [![FRosner](https://avatars2.githubusercontent.com/u/3427394?v=4&s=20) **FRosner**](https://github.com/FRosner)
