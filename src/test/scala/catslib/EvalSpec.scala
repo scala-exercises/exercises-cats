@@ -18,7 +18,7 @@ class EvalSpec extends RefSpec with Checkers {
     check(
       Test.testSuccess(
         EvalSection.nowEval _,
-        List(1, 2, 3)  :: HNil
+        List(1, 2, 3) :: HNil
       )
     )
   }

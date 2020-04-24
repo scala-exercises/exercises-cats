@@ -56,7 +56,8 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    */
   def monoidAdvantage(res0: Map[String, Int], res1: Map[String, Int]) = {
     Monoid[Map[String, Int]].combineAll(List(Map("a" -> 1, "b" -> 2), Map("a" -> 3))) should be(
-      res0)
+      res0
+    )
     Monoid[Map[String, Int]].combineAll(List()) should be(res1)
   }
 

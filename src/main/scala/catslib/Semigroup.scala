@@ -107,7 +107,8 @@ object SemigroupSection
       res0: Option[Int],
       res1: Option[Int],
       res2: Option[Int],
-      res3: Option[Int]) = {
+      res3: Option[Int]
+  ) = {
     import cats.implicits._
 
     val one: Option[Int] = Option(1)

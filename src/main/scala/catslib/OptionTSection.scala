@@ -80,7 +80,8 @@ object OptionTSection
   def fromOptionT(
       maybeFrenchGreet: Option[String],
       maybeItalianGreet: Option[String],
-      maybeFailedGreet: Option[String]) = {
+      maybeFailedGreet: Option[String]
+  ) = {
     //given
     val frenchGreetFO: Future[Option[String]] = Future.successful(Option("Bonjour"))
     val italianGreetF: Future[String]         = Future.successful("Ciao")
@@ -133,7 +134,8 @@ object OptionTSection
       maybeGreetH: List[Option[String]],
       maybeGreetGuten: List[Option[String]],
       maybeGreetGutenTag: List[String],
-      maybeGreetGutenAbend: List[String]) = {
+      maybeGreetGutenAbend: List[String]
+  ) = {
     //given
     val germanGreetingsLO: List[Option[String]] =
       List("Hallo".some, "Hi".some, "Guten Morgen".some, none[String])
@@ -143,11 +145,13 @@ object OptionTSection
     //map
     germanGreetingsT.map(_ + "!") shouldBe OptionT(maybeGreet: List[Option[String]])
     germanGreetingsLO.map(_.map(_ + " World!")) shouldBe OptionT(
-      maybeGreetWorld: List[Option[String]]).value
+      maybeGreetWorld: List[Option[String]]
+    ).value
     //filter
     germanGreetingsT.filter(_.contains("H")) shouldBe OptionT(maybeGreetH: List[Option[String]])
     germanGreetingsLO.map(_.filter(_.contains("Guten"))) shouldBe OptionT(
-      maybeGreetGuten: List[Option[String]]).value
+      maybeGreetGuten: List[Option[String]]
+    ).value
     //getOrElse
     germanGreetingsT.getOrElse("Guten Tag") shouldBe (maybeGreetGutenTag: List[String])
     germanGreetingsLO.map(_.getOrElse("Guten Abend")) shouldBe (maybeGreetGutenAbend: List[String])

@@ -363,10 +363,7 @@ object ValidatedSection
     val config = Config(Map("house_number" -> "-42"))
 
     val houseNumber = config.parse[Int]("house_number").withEither {
-      either: Either[ConfigError, Int] =>
-        either.flatMap { i =>
-          positive("house_number", i)
-        }
+      either: Either[ConfigError, Int] => either.flatMap(i => positive("house_number", i))
     }
 
     houseNumber.isValid should be(res0)

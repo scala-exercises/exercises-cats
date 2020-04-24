@@ -37,9 +37,19 @@ class OptionTSpec extends RefSpec with Checkers {
       Test.testSuccess(
         OptionTSection.optionTMethods _,
         List(Option("Hallo!"), Option("Hi!"), Option("Guten Morgen!"), Option.empty[String]) ::
-          (List(Option("Hallo World!"), Option("Hi World!"), Option("Guten Morgen World!"), Option.empty[String])) ::
+          (List(
+            Option("Hallo World!"),
+            Option("Hi World!"),
+            Option("Guten Morgen World!"),
+            Option.empty[String]
+          )) ::
           List(Option("Hallo"), Option("Hi"), Option.empty[String], Option.empty[String]) ::
-          List(Option.empty[String], Option.empty[String], Option("Guten Morgen"), Option.empty[String]) ::
+          List(
+            Option.empty[String],
+            Option.empty[String],
+            Option("Guten Morgen"),
+            Option.empty[String]
+          ) ::
           List("Hallo", "Hi", "Guten Morgen", "Guten Tag") ::
           List("Hallo", "Hi", "Guten Morgen", "Guten Abend") :: HNil
       )
