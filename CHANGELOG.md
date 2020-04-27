@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.1](https://github.com/scala-exercises/exercises-cats/tree/v0.6.1) (2020-04-27)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.0...v0.6.1)
+
+**Merged pull requests:**
+
+- Compile when Publish [\#99](https://github.com/scala-exercises/exercises-cats/pull/99) ([juanpedromoreno](https://github.com/juanpedromoreno))
+
 ## [v0.6.0](https://github.com/scala-exercises/exercises-cats/tree/v0.6.0) (2020-04-24)
 
 [Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.4.0...v0.6.0)
