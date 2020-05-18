@@ -36,6 +36,7 @@ These are the people that have contributed to the _exercises-cats_ project:
 - [![angoglez](https://avatars0.githubusercontent.com/u/10107285?v=4&s=20) **angoglez**](https://github.com/angoglez)
 - [![andyscott](https://avatars3.githubusercontent.com/u/310363?v=4&s=20) **andyscott**](https://github.com/andyscott)
 - [![ches](https://avatars3.githubusercontent.com/u/13277?v=4&s=20) **ches**](https://github.com/ches)
+- [![dmarticus](https://avatars2.githubusercontent.com/u/4853149?v=4&s=20) **dmarticus**](https://github.com/dmarticus)
 - [![FRosner](https://avatars2.githubusercontent.com/u/3427394?v=4&s=20) **FRosner**](https://github.com/FRosner)
 - [![ikhoon](https://avatars1.githubusercontent.com/u/1866157?v=4&s=20) **ikhoon**](https://github.com/ikhoon)
 - [![jkmcclellan](https://avatars3.githubusercontent.com/u/52432856?v=4&s=20) **jkmcclellan**](https://github.com/jkmcclellan)
