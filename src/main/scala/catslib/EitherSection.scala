@@ -86,7 +86,9 @@ object EitherStyleWithAdts {
  * =`Either` vs `Validated`=
  *
  * In general, `Validated` is used to accumulate errors, while `Either` is used to short-circuit a computation upon the
- * first error. For more information, see the `Validated` vs `Either` section of the `Validated` documentation.
+ * first error. For more information, see the
+ * [`Validated` vs `Either`](https://typelevel.org/cats/datatypes/validated.html#validated-vs-either)
+ * section of the `Validated` documentation.
  *
  * @param name either
  */
