@@ -230,8 +230,8 @@ object ValidatedSection
    * {{{
    * import cats.Applicative
    *
-   * implicit def validatedApplicative[E : Semigroup]: Applicative[Validated[E, ?]] =
-   * new Applicative[Validated[E, ?]] {
+   * implicit def validatedApplicative[E : Semigroup]: Applicative[Validated[E, *]] =
+   * new Applicative[Validated[E, *]] {
    *  def ap[A, B](f: Validated[E, A => B])(fa: Validated[E, A]): Validated[E, B] =
    *    (fa, f) match {
    *      case (Valid(a), Valid(fab)) => Valid(fab(a))
@@ -269,7 +269,7 @@ object ValidatedSection
    *
    * {{{
    * val personFromConfig: ValidatedNel[ConfigError, Person] =
-   * Apply[ValidatedNel[ConfigError, ?]].map4(config.parse[String]("name").toValidatedNel,
+   * Apply[ValidatedNel[ConfigError, *]].map4(config.parse[String]("name").toValidatedNel,
    *                                         config.parse[Int]("age").toValidatedNel,
    *                                         config.parse[Int]("house_number").toValidatedNel,
    *                                         config.parse[String]("street").toValidatedNel) {
@@ -287,8 +287,8 @@ object ValidatedSection
    * {{{
    * import cats.Monad
    *
-   * implicit def validatedMonad[E]: Monad[Validated[E, ?]] =
-   * new Monad[Validated[E, ?]] {
+   * implicit def validatedMonad[E]: Monad[Validated[E, *]] =
+   * new Monad[Validated[E, *]] {
    *  def flatMap[A, B](fa: Validated[E, A])(f: A => Validated[E, B]): Validated[E, B] =
    *    fa match {
    *      case Valid(a)     => f(a)
