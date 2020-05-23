@@ -115,8 +115,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * import cats.implicits._
    * import cats.Monad
    *
-   * implicit def eitherMonad[Err]: Monad[Either[Err, ?]] =
-   * new Monad[Either[Err, ?]] {
+   * implicit def eitherMonad[Err]: Monad[Either[Err, *]] =
+   * new Monad[Either[Err, *]] {
    *  def flatMap[A, B](fa: Either[Err, A])(f: A => Either[Err, B]): Either[Err, B] =
    *    fa.flatMap(f)
    *
