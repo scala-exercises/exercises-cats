@@ -149,11 +149,12 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
 
     optionTMonad[List].pure(42) should be(OptionT(res0))
   }
+
   /** There are also instances for other monads available for user in Cats library:
- *  'EitherT' for 'Either'
- *  'ReaderT' for 'Reader'
- *  'WriterT' for 'Writer'
- *  'StateT' for 'State'
- *  'IdT' for 'Id'
- */
+   *  'EitherT' for 'Either'
+   *  'ReaderT' for 'Reader'
+   *  'WriterT' for 'Writer'
+   *  'StateT' for 'State'
+   *  'IdT' for 'Id'
+   */
 }
