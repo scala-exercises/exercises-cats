@@ -26,20 +26,21 @@ object CatsLibrary extends org.scalaexercises.definitions.Library {
 
   override def color = Some("#5B5988")
 
-  override def sections = List(
-    SemigroupSection,
-    MonoidSection,
-    FunctorSection,
-    ApplySection,
-    ApplicativeSection,
-    MonadSection,
-    FoldableSection,
-    TraverseSection,
-    IdentitySection,
-    EitherSection,
-    ValidatedSection,
-    EvalSection
-  )
+  override def sections =
+    List(
+      SemigroupSection,
+      MonoidSection,
+      FunctorSection,
+      ApplySection,
+      ApplicativeSection,
+      MonadSection,
+      FoldableSection,
+      TraverseSection,
+      IdentitySection,
+      EitherSection,
+      ValidatedSection,
+      EvalSection
+    )
 
   override def logoPath = "cats"
 }
