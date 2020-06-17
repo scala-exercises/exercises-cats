@@ -55,7 +55,8 @@ object EitherStyleWithAdts {
     parse(s).flatMap(reciprocal).map(stringify)
 }
 
-/** In day-to-day programming, it is fairly common to find ourselves writing functions that
+/**
+ * In day-to-day programming, it is fairly common to find ourselves writing functions that
  * can fail. For instance, querying a service may result in a connection issue, or some
  * unexpected JSON response.
  *
@@ -94,7 +95,8 @@ object EitherStyleWithAdts {
  */
 object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
-  /** More often than not we want to just bias towards one side and call it a day - by convention,
+  /**
+   * More often than not we want to just bias towards one side and call it a day - by convention,
    * the right side is most often chosen.
    */
   def eitherMapRightBias(res0: Either[String, Int], res1: Either[String, Int]) = {
@@ -106,7 +108,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     left.map(_ + 1) should be(res1)
   }
 
-  /** Because `Either` is right-biased, it is possible to define a `Monad` instance for it.
+  /**
+   * Because `Either` is right-biased, it is possible to define a `Monad` instance for it.
    *
    * Since we only ever want the computation to continue in the case of `Right` (as captured
    * by the right-bias nature), we fix the left type parameter and leave the right one free.
@@ -125,7 +128,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * }}}
    *
    * So the `flatMap` method is right-biased:
-   *
    */
   def eitherMonad(res0: Either[String, Int], res1: Either[String, Int]) = {
 
@@ -136,7 +138,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     left.flatMap(x => Either.right(x + 1)) should be(res1)
   }
 
-  /** = Using `Either` instead of exceptions =
+  /**
+   * = Using `Either` instead of exceptions =
    *
    * As a running example, we will have a series of functions that will parse a string into an integer,
    * take the reciprocal, and then turn the reciprocal into a string.
@@ -178,15 +181,14 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * }}}
    *
    * Do these calls return a `Right` value?
-   *
    */
   def eitherStyleParse(res0: Boolean, res1: Boolean) = {
     EitherStyle.parse("Not a number").isRight should be(res0)
     EitherStyle.parse("2").isRight should be(res1)
   }
 
-  /** Now, using combinators like `flatMap` and `map`, we can compose our functions together. Will the following incantations return a `Right` value?
-   *
+  /**
+   * Now, using combinators like `flatMap` and `map`, we can compose our functions together. Will the following incantations return a `Right` value?
    */
   def eitherComposition(res0: Boolean, res1: Boolean, res2: Boolean) = {
     import EitherStyle._
@@ -196,7 +198,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     magic("Not a number").isRight should be(res2)
   }
 
-  /** With the composite function that we actually care about, we can pass in strings and then pattern
+  /**
+   * With the composite function that we actually care about, we can pass in strings and then pattern
    * match on the exception. Because `Either` is a sealed type (often referred to as an algebraic data type,
    * or ADT), the compiler will complain if we do not check both the `Left` and `Right` case.
    *
@@ -207,7 +210,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * `NumberFormatException` or `IllegalArgumentException`. However, we "know" by inspection of the source
    * that those will be the only exceptions thrown, so it seems strange to have to account for other exceptions.
    * This implies that there is still room to improve.
-   *
    */
   def eitherExceptions(res0: String) = {
     import EitherStyle._
@@ -221,7 +223,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     result should be(res0)
   }
 
-  /** Instead of using exceptions as our error value, let's instead enumerate explicitly the things that
+  /**
+   * Instead of using exceptions as our error value, let's instead enumerate explicitly the things that
    * can go wrong in our program.
    *
    * {{{
@@ -249,7 +252,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * exception classes as error values, we use one of the enumerated cases. Now when we pattern
    * match, we get much nicer matching. Moreover, since `Error` is `sealed`, no outside code can
    * add additional subtypes which we might fail to handle.
-   *
    */
   def eitherErrorsAsAdts(res0: String) = {
     import EitherStyleWithAdts._
@@ -262,7 +264,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     result should be(res0)
   }
 
-  /** = Either in the small, Either in the large =
+  /**
+   * = Either in the small, Either in the large =
    *
    * Once you start using `Either` for all your error-handling, you may quickly run into an issue where
    * you need to call into two separate modules which give back separate kinds of errors.
@@ -380,7 +383,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * }}}
    *
    * Let's review the `leftMap` and `map` methods:
-   *
    */
   def eitherInTheLarge(
       res0: Either[String, Int],
@@ -395,7 +397,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     left.leftMap(_.reverse) should be(res2)
   }
 
-  /** There will inevitably come a time when your nice `Either` code will have to interact with exception-throwing
+  /**
+   * There will inevitably come a time when your nice `Either` code will have to interact with exception-throwing
    * code. Handling such situations is easy enough.
    *
    * {{{
@@ -417,8 +420,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * }}}
    *
    * If you want to catch all (non-fatal) throwables, you can use `catchNonFatal`.
-   *
-   *
    */
   def eitherWithExceptions(res0: Boolean, res1: Boolean) = {
     Either.catchOnly[NumberFormatException]("abc".toInt).isRight should be(res0)
@@ -426,7 +427,8 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     Either.catchNonFatal(1 / 0).isLeft should be(res1)
   }
 
-  /** = Additional syntax =
+  /**
+   * = Additional syntax =
    *
    * For using Either's syntax on arbitrary data types, you can import `cats.implicits._`. This will
    * make possible to use the `asLeft` and `asRight` methods:
@@ -440,7 +442,6 @@ object EitherSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
    * }}}
    *
    * These method promote values to the `Either` data type:
-   *
    */
   def eitherSyntax(res0: Either[String, Int]) = {
     import cats.implicits._

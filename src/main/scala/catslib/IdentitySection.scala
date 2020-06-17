@@ -20,7 +20,8 @@ import cats._
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AnyFlatSpec
 
-/** The identity monad can be seen as the ambient monad that encodes the
+/**
+ * The identity monad can be seen as the ambient monad that encodes the
  * effect of having no effect. It is ambient in the sense that plain pure
  * values are values of `Id`.
  *
@@ -48,7 +49,8 @@ object IdentitySection
     with Matchers
     with org.scalaexercises.definitions.Section {
 
-  /** We can freely compare values of `Id[T]` with unadorned
+  /**
+   * We can freely compare values of `Id[T]` with unadorned
    * values of type `T`.
    */
   def identityType(res0: Int) = {
@@ -56,7 +58,8 @@ object IdentitySection
     anId should be(res0)
   }
 
-  /** Using this type declaration, we can treat our Id type constructor as a
+  /**
+   * Using this type declaration, we can treat our Id type constructor as a
    * `Monad` and as a `Comonad`. The `pure`
    * method, which has type `A => Id[A]` just becomes the identity
    * function.  The `map` method from `Functor` just becomes function
@@ -68,12 +71,12 @@ object IdentitySection
    * val one: Int = 1
    * Functor[Id].map(one)(_ + 1)
    * }}}
-   *
    */
   def pureIdentity(res0: Int) =
     Applicative[Id].pure(42) should be(res0)
 
-  /** Compare the signatures of `map` and `flatMap` and `coflatMap`:
+  /**
+   * Compare the signatures of `map` and `flatMap` and `coflatMap`:
    *
    * {{{
    * def map[A, B](fa: Id[A])(f: A => B): Id[B]
@@ -95,7 +98,6 @@ object IdentitySection
    * Monad[Id].map(one)(_ + 1)
    * Monad[Id].flatMap(one)(_ + 1)
    * }}}
-   *
    */
   def idComonad(res0: Int) = {
     val fortytwo: Int = 42

@@ -22,7 +22,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 import cats._
 import cats.implicits._
 
-/** `Monoid` extends the `Semigroup` type class, adding an
+/**
+ * `Monoid` extends the `Semigroup` type class, adding an
  * `empty` method to semigroup's `combine`. The `empty` method must return a
  * value that when combined with any other instance of that type returns the
  * other instance, i.e.
@@ -43,7 +44,8 @@ import cats.implicits._
  */
 object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
-  /** First some imports.
+  /**
+   * First some imports.
    *
    * {{{
    * import cats._
@@ -60,7 +62,8 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     Monoid[String].combineAll(List()) should be(res2)
   }
 
-  /** The advantage of using these type class provided methods, rather than the
+  /**
+   * The advantage of using these type class provided methods, rather than the
    * specific ones for each type, is that we can compose monoids to allow us to
    * operate on more complex types, e.g.
    */
@@ -71,10 +74,10 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     Monoid[Map[String, Int]].combineAll(List()) should be(res1)
   }
 
-  /** This is also true if we define our own instances. As an example, let's use
+  /**
+   * This is also true if we define our own instances. As an example, let's use
    * `Foldable`'s `foldMap`, which maps over values accumulating
    * the results, using the available `Monoid` for the type mapped onto.
-   *
    */
   def monoidFoldmap(res0: Int, res1: String) = {
     val l = List(1, 2, 3, 4, 5)
@@ -82,7 +85,8 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
     l.foldMap(i => i.toString) should be(res1)
   }
 
-  /** To use this
+  /**
+   * To use this
    * with a function that produces a tuple, we can define a `Monoid` for a tuple
    * that will be valid for any tuple where the types it contains also have a
    * `Monoid` available. Note that cats already defines it for you.

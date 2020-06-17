@@ -44,7 +44,8 @@ object OptionTSection
       x.futureValue.eqv(y.futureValue)
   }
 
-  /** If you have only an A and you wish to lift it into an OptionT[F,A], assuming you
+  /**
+   * If you have only an A and you wish to lift it into an OptionT[F,A], assuming you
    * have an Applicative instance for F you can use `some` which is an alias for `pure`.
    * There also exists a none method which can be used to create an OptionT[F,A],
    * where the Option wrapped A type is actually a None:
@@ -54,7 +55,6 @@ object OptionTSection
    * import scala.concurrent.ExecutionContext.Implicits.global
    * import cats.implicits._ //imports implicit Applicative[Future]
    * }}}
-   *
    */
   def pureOption(spanishGreetValue: String, englishGreetValue: String, failedGreetValue: String) = {
     //given
@@ -75,7 +75,8 @@ object OptionTSection
     failedGreet.futureValue shouldBe (failedGreetValue: String)
   }
 
-  /** Sometimes you may have an Option[A] and/or F[A] and want to lift them into an OptionT[F, A].
+  /**
+   * Sometimes you may have an Option[A] and/or F[A] and want to lift them into an OptionT[F, A].
    * For this purpose OptionT exposes two useful methods, namely fromOption and liftF,
    * and the standard apply respectively. E.g.:
    * {{{
@@ -85,7 +86,6 @@ object OptionTSection
    *
    * val lastnameO: Option[String] = Some("Doe")
    * }}}
-   *
    */
   def fromOptionT(
       maybeFrenchGreet: Option[String],
@@ -126,7 +126,6 @@ object OptionTSection
    * val noWelcome: Future[Option[String]] = customGreeting.map(_.filterNot(_.contains("welcome")))
    * val withFallback: Future[String] = customGreeting.map(_.getOrElse("hello, there!"))
    *
-   *
    * //operating with transformer OptionT[Future, String]
    * import cats.data.OptionT
    * import cats.implicits._
@@ -136,7 +135,6 @@ object OptionTSection
    * val noWelcome: OptionT[Future, String] = customGreetingT.filterNot(_.contains("welcome")) //None
    * val withFallback: Future[String] = customGreetingT.getOrElse("hello, there!")
    * }}}
-   *
    */
   def optionTMethods(
       maybeGreet: List[Option[String]],
@@ -186,7 +184,6 @@ object OptionTSection
    *
    * val result: Future[Option[String]] = ot.value // Future(Some("Hello Jane Doe"))
    * }}}
-   *
    */
   def forComprehension(maybeOpResult: Option[Double]) = {
     //given

@@ -23,7 +23,8 @@ import cats.implicits._
 
 import TraverseHelpers._
 
-/** In functional programming it is very common to encode "effects" as data types - common effects
+/**
+ * In functional programming it is very common to encode "effects" as data types - common effects
  * include `Option` for possibly missing values, `Either` and `Validated` for possible errors, and
  * `Future` for asynchronous computations.
  *
@@ -100,7 +101,8 @@ object TraverseSection
     with Matchers
     with org.scalaexercises.definitions.Section {
 
-  /** == Choose your effect ==
+  /**
+   * == Choose your effect ==
    *
    * The type signature of `Traverse` appears highly abstract, and indeed it is - what `traverse` does as it
    * walks the `F[A]` depends on the effect of the function. Let's see some examples where `F` is taken to be
@@ -126,7 +128,8 @@ object TraverseSection
     List("1", "abc", "3").traverse(parseIntEither).isLeft should be(res1)
   }
 
-  /** We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for
+  /**
+   * We need proof that `NonEmptyList[A]` is a `Semigroup `for there to be an `Applicative` instance for
    * `ValidatedNel`.
    *
    * {{{
@@ -139,7 +142,8 @@ object TraverseSection
   def traverseuValidated(res0: Boolean) =
     List("1", "2", "3").traverse(parseIntValidated).isValid should be(res0)
 
-  /** Notice that in the `Either` case, should any string fail to parse the entire traversal
+  /**
+   * Notice that in the `Either` case, should any string fail to parse the entire traversal
    * is considered a failure. Moreover, once it hits its first bad parse, it will not
    * attempt to parse any others down the line (similar behavior would be found with
    * using `Option` as the effect). Contrast this with `Validated` where even
@@ -213,7 +217,6 @@ object TraverseSection
    * Sometimes you may find yourself with a collection of data, each of which is already in an effect,
    * for instance a `List[Option[A]]`. To make this easier to work with, you want a `Option[List[A]]`.
    * Given `Option` has an `Applicative` instance, we can traverse over the list with the identity function.
-   *
    */
   def sequencing(res0: Option[List[Int]], res1: Option[List[Int]]) = {
     import cats.implicits._
@@ -222,7 +225,8 @@ object TraverseSection
     List(Option(1), None, Option(3)).traverse(identity) should be(res1)
   }
 
-  /** `Traverse` provides a convenience method `sequence` that does exactly this.
+  /**
+   * `Traverse` provides a convenience method `sequence` that does exactly this.
    *
    * {{{
    * List(Option(1), Option(2), Option(3)).sequence
@@ -255,7 +259,6 @@ object TraverseSection
    * Traversing solely for the sake of the effect (ignoring any values that may be produced, `Unit` or otherwise)
    * is common, so `Foldable` (superclass of `Traverse`) provides `traverse_` and `sequence_` methods that do the
    * same thing as `traverse` and `sequence` but ignores any value produced along the way, returning `Unit` at the end.
-   *
    */
   def traversingForEffects(res0: Option[Unit], res1: Option[Unit]) = {
     import cats.implicits._
