@@ -20,7 +20,8 @@ import cats.kernel.Semigroup
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AnyFlatSpec
 
-/** A semigroup for some given type A has a single operation
+/**
+ * A semigroup for some given type A has a single operation
  * (which we will call `combine`), which takes two values of type A, and
  * returns a value of type A. This operation must be guaranteed to be
  * associative. That is to say that:
@@ -52,9 +53,9 @@ object SemigroupSection
     with Matchers
     with org.scalaexercises.definitions.Section {
 
-  /** Now that you've learned about the `Semigroup` instance for `Int` try to
+  /**
+   * Now that you've learned about the `Semigroup` instance for `Int` try to
    * guess how it works in the following examples:
-   *
    */
   def semigroupCombine(res0: Int, res1: List[Int], res2: Option[Int], res3: Option[Int]) = {
     import cats.implicits._
@@ -65,7 +66,8 @@ object SemigroupSection
     Semigroup[Option[Int]].combine(Option(1), None) should be(res3)
   }
 
-  /** And now try a slightly more complex combination:
+  /**
+   * And now try a slightly more complex combination:
    */
   def semigroupCombineComplex(res0: Int) = {
     import cats.implicits._
@@ -74,7 +76,8 @@ object SemigroupSection
 
   }
 
-  /** Many of these types have methods defined directly on them,
+  /**
+   * Many of these types have methods defined directly on them,
    * which allow for such combining, e.g. `++` on List, but the
    * value of having a `Semigroup` type class available is that these
    * compose, so for instance, we can say
@@ -104,7 +107,8 @@ object SemigroupSection
     combinedMap.get("foo") should be(Some(res0))
   }
 
-  /** There is inline syntax available for `Semigroup`. Here we are
+  /**
+   * There is inline syntax available for `Semigroup`. Here we are
    * following the convention from scalaz, that `|+|` is the
    * operator from `Semigroup`.
    *

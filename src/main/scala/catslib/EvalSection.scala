@@ -20,7 +20,8 @@ import cats._
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
-/** Eval is a data type for controlling synchronous evaluation.
+/**
+ * Eval is a data type for controlling synchronous evaluation.
  * Its implementation is designed to provide stack-safety at all times using a technique called trampolining.
  * There are two different factors that play into evaluation: memoization and laziness.
  * Memoized evaluation evaluates an expression only once and then remembers (memoizes) that value.
@@ -34,7 +35,8 @@ import org.scalatest.matchers.should.Matchers
  */
 object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
-  /** = Eval.now =
+  /**
+   * = Eval.now =
    *
    * First of the strategies is eager evaluation, we can construct an Eval eagerly using Eval.now:
    *
@@ -56,7 +58,6 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * We can run the computation using the given evaluation strategy anytime by using the value method.
    * eager.value
    * // res0: Int = 7
-   *
    */
   def nowEval(resultList: List[Int]) = {
     //given
@@ -69,7 +70,8 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     eagerEval.value shouldBe (resultList: List[Int])
   }
 
-  /** = Eval.later =
+  /**
+   * = Eval.later =
    *
    * If we want lazy evaluation, we can use Eval.later
    * In this case
@@ -94,7 +96,6 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * Eval.later is different to using a lazy val in a few different ways.
    * First, it allows the runtime to perform garbage collection of the thunk after evaluation, leading to more memory being freed earlier.
    * Secondly, when lazy vals are evaluated, in order to preserve thread-safety, the Scala compiler will lock the whole surrounding class, whereas Eval will only lock itself.
-   *
    */
   def laterEval(resultList: List[Int], counterResult: Int) = {
     //given
@@ -112,7 +113,8 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     counter shouldBe counterResult
   }
 
-  /** = Eval.always =
+  /**
+   * = Eval.always =
    *
    * If we want lazy evaluation, but without memoization akin to Function0, we can use Eval.always
    * Here we can see, that the expression is evaluated every time we call .value.
@@ -125,7 +127,6 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * //Always evaluated
    * alwaysEval.eval
    * }}}
-   *
    */
   def alwaysEval(resultList: List[Int], counterAfterListEval: Int, latestCounter: Int) = {
     //given
@@ -144,12 +145,12 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     counter shouldBe latestCounter
   }
 
-  /** = Eval.defer =
+  /**
+   * = Eval.defer =
    *
    * Defer a computation which produces an Eval[A] value
    * This is useful when you want to delay execution of an expression which produces an Eval[A] value. Like .flatMap, it is stack-safe.
    * Because Eval guarantees stack-safety, we can chain a lot of computations together using flatMap without fear of blowing up the stack.
-   *
    */
   def deferEval(resultList: List[Int]) = {
     //given

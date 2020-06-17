@@ -23,7 +23,8 @@ import cats.data.Validated
 
 import ValidatedHelpers._
 
-/** Imagine you are filling out a web form to sign up for an account. You input your username and password and submit.
+/**
+ * Imagine you are filling out a web form to sign up for an account. You input your username and password and submit.
  * Response comes back saying your username can't have dashes in it, so you make some changes and resubmit. Can't
  * have special characters either. Change, resubmit. Passwords need to have at least one capital letter. Change,
  * resubmit. Password needs to have at least one number.
@@ -182,7 +183,8 @@ object ValidatedSection
     with Matchers
     with org.scalaexercises.definitions.Section {
 
-  /** When no errors are present in the configuration, we get a `ConnectionParams` wrapped in a `Valid` instance.
+  /**
+   * When no errors are present in the configuration, we get a `ConnectionParams` wrapped in a `Valid` instance.
    */
   def noErrors(res0: Boolean, res1: String, res2: Int) = {
     val config = Config(Map(("url", "127.0.0.1"), ("port", "1337")))
@@ -196,7 +198,8 @@ object ValidatedSection
     valid.getOrElse(ConnectionParams("", 0)) should be(ConnectionParams(res1, res2))
   }
 
-  /** But what happens when having one or more errors? They are accumulated in a `NonEmptyList`
+  /**
+   * But what happens when having one or more errors? They are accumulated in a `NonEmptyList`
    * wrapped in an `Invalid` instance.
    */
   def someErrors(res0: Boolean, res1: Boolean) = {
@@ -215,7 +218,8 @@ object ValidatedSection
     invalid == Validated.invalid(errors) should be(res1)
   }
 
-  /** = Apply =
+  /**
+   * = Apply =
    *
    * Our `parallelValidate` function looks awfully like the `Apply#map2` function.
    *
@@ -353,7 +357,8 @@ object ValidatedSection
     houseNumber == Validated.invalid(error) should be(res1)
   }
 
-  /** == `withEither` ==
+  /**
+   * == `withEither` ==
    *
    * The `withEither` method allows you to temporarily turn a `Validated` instance into an `Either` instance and apply it to a function.
    *
@@ -367,7 +372,6 @@ object ValidatedSection
    * }}}
    *
    * So we can get `Either`'s short-circuiting behaviour when using the `Validated` type.
-   *
    */
   def validatedAsEither(res0: Boolean, res1: Boolean) = {
     val config = Config(Map("house_number" -> "-42"))

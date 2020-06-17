@@ -22,7 +22,8 @@ import org.scalatest.flatspec.AnyFlatSpec
 import cats._
 import cats.implicits._
 
-/** A `Functor` is a ubiquitous type class involving types that have one
+/**
+ * A `Functor` is a ubiquitous type class involving types that have one
  * "hole", i.e. types which have the shape `F[*]`, such as `Option`,
  * `List` and `Future`. (This is in contrast to a type like `Int` which has
  * no hole, or `Tuple2` which has two holes (`Tuple2[*,*]`)).
@@ -88,7 +89,8 @@ object FunctorSection
     with Matchers
     with org.scalaexercises.definitions.Section {
 
-  /** = Using Functor =
+  /**
+   * = Using Functor =
    *
    * == map ==
    *
@@ -100,14 +102,14 @@ object FunctorSection
    *
    * `Option` is a functor which only applies the function when the `Option` value
    * is a `Some`:
-   *
    */
   def usingFunctor(res0: Option[Int], res1: Option[Int]) = {
     Functor[Option].map(Option("Hello"))(_.length) should be(res0)
     Functor[Option].map(None: Option[String])(_.length) should be(res1)
   }
 
-  /** = Derived methods =
+  /**
+   * = Derived methods =
    *
    * == lift ==
    *
@@ -119,18 +121,17 @@ object FunctorSection
    * }}}
    *
    * We can now apply the `lenOption` function to `Option` instances.
-   *
    */
   def liftingToAFunctor(res0: Option[Int]) = {
     val lenOption: Option[String] => Option[Int] = Functor[Option].lift(_.length)
     lenOption(Some("Hello")) should be(res0)
   }
 
-  /** == fproduct ==
+  /**
+   * == fproduct ==
    *
    * `Functor` provides an `fproduct` function which pairs a value with the
    * result of applying a function to that value.
-   *
    */
   def usingFproduct(res0: Int, res1: Int, res2: Int) = {
     val source  = List("Cats", "is", "awesome")
@@ -141,7 +142,8 @@ object FunctorSection
     product.get("awesome").getOrElse(0) should be(res2)
   }
 
-  /** == compose ==
+  /**
+   * == compose ==
    *
    * Functors compose! Given any functor `F[_]` and any functor `G[_]` we can
    * create a new functor `F[G[_]]` by composing them:
@@ -152,7 +154,6 @@ object FunctorSection
    *
    * In the previous example the resulting functor will apply the `map` operation through the two
    * type constructors: `List` and `Option`.
-   *
    */
   def composingFunctors(res0: List[Option[Int]]) = {
     val listOpt = Functor[List] compose Functor[Option]
