@@ -1,5 +1,30 @@
 # Changelog
 
+## [v0.6.3](https://github.com/scala-exercises/exercises-cats/tree/v0.6.3) (2020-06-29)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.2...v0.6.3)
+
+📈 **Dependency updates**
+
+- Update sbt to 1.3.13 [\#121](https://github.com/scala-exercises/exercises-cats/pull/121) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.2.3 [\#120](https://github.com/scala-exercises/exercises-cats/pull/120) ([scala-steward](https://github.com/scala-steward))
+- Update scalafmt-core to 2.6.1 [\#119](https://github.com/scala-exercises/exercises-cats/pull/119) ([scala-steward](https://github.com/scala-steward))
+- Update scalacheck-1-14 to 3.2.0.0 [\#118](https://github.com/scala-exercises/exercises-cats/pull/118) ([scala-steward](https://github.com/scala-steward))
+- Update scalatest to 3.2.0 [\#117](https://github.com/scala-exercises/exercises-cats/pull/117) ([scala-steward](https://github.com/scala-steward))
+- Update sbt-mdoc to 2.2.2 [\#111](https://github.com/scala-exercises/exercises-cats/pull/111) ([scala-steward](https://github.com/scala-steward))
+- Update scalatest to 3.1.2 [\#103](https://github.com/scala-exercises/exercises-cats/pull/103) ([scala-steward](https://github.com/scala-steward))
+
+**Merged pull requests:**
+
+- Update definitions, exercise-compiler, ... to 0.6.3 [\#122](https://github.com/scala-exercises/exercises-cats/pull/122) ([scala-steward](https://github.com/scala-steward))
+- Update scalafmt-core to 2.6.0 [\#115](https://github.com/scala-exercises/exercises-cats/pull/115) ([BenFradet](https://github.com/BenFradet))
+- Update scalafmt-core to 2.5.3 [\#113](https://github.com/scala-exercises/exercises-cats/pull/113) ([BenFradet](https://github.com/BenFradet))
+- Prepare repository for next  release and SBT build improvements [\#110](https://github.com/scala-exercises/exercises-cats/pull/110) ([juanpedromoreno](https://github.com/juanpedromoreno))
+- Update sbt to 1.3.12 [\#109](https://github.com/scala-exercises/exercises-cats/pull/109) ([scala-steward](https://github.com/scala-steward))
+- Replace deprecated kind-projector syntax \[use '\*' instead of '?'\] [\#106](https://github.com/scala-exercises/exercises-cats/pull/106) ([Samehadar](https://github.com/Samehadar))
+- Add a link to the documentation referenced [\#104](https://github.com/scala-exercises/exercises-cats/pull/104) ([dmarticus](https://github.com/dmarticus))
+- Add doc section about other monad tranformers [\#68](https://github.com/scala-exercises/exercises-cats/pull/68) ([augustjune](https://github.com/augustjune))
+
 ## [v0.6.2](https://github.com/scala-exercises/exercises-cats/tree/v0.6.2) (2020-04-27)
 
 [Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.1...v0.6.2)
