@@ -26,8 +26,8 @@ These are the people that have contributed to the _exercises-cats_ project:
 
 - [![juanpedromoreno](https://avatars2.githubusercontent.com/u/4879373?v=4&s=20) **juanpedromoreno**](https://github.com/juanpedromoreno)
 - [![raulraja](https://avatars3.githubusercontent.com/u/456796?v=4&s=20) **raulraja**](https://github.com/raulraja)
-- [![kiroco12](https://avatars1.githubusercontent.com/u/48894338?v=4&s=20) **kiroco12**](https://github.com/kiroco12)
 - [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
+- [![kiroco12](https://avatars1.githubusercontent.com/u/48894338?v=4&s=20) **kiroco12**](https://github.com/kiroco12)
 - [![rafaparadela](https://avatars3.githubusercontent.com/u/315070?v=4&s=20) **rafaparadela**](https://github.com/rafaparadela)
 - [![aeons](https://avatars2.githubusercontent.com/u/1432894?v=4&s=20) **aeons**](https://github.com/aeons)
 - [![dominv](https://avatars1.githubusercontent.com/u/3943031?v=4&s=20) **dominv**](https://github.com/dominv)
