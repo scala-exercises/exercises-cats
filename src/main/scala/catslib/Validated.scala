@@ -70,7 +70,7 @@ import ValidatedHelpers._
  * def apply[A](implicit A: Read[A]): Read[A] = A
  *
  * implicit val stringRead: Read[String] =
- *  new Read[String] { def read(s: String): Option[String] = Some(s) }
+ *  new Read[String] { def read(s: String): Option[String] = Option(s) }
  *
  * implicit val intRead: Read[Int] =
  *  new Read[Int] {
