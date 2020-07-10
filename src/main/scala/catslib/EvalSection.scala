@@ -59,7 +59,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * eager.value
    * // res0: Int = 7
    */
-  def nowEval(resultList: List[Int]) = {
+  def nowEval(res0: List[Int]) = {
     //given
     val eagerEval = Eval.now {
       println("This is eagerly evaluated")
@@ -67,7 +67,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     }
 
     //when/then
-    eagerEval.value shouldBe (resultList: List[Int])
+    eagerEval.value shouldBe (res0)
   }
 
   /**
@@ -97,7 +97,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * First, it allows the runtime to perform garbage collection of the thunk after evaluation, leading to more memory being freed earlier.
    * Secondly, when lazy vals are evaluated, in order to preserve thread-safety, the Scala compiler will lock the whole surrounding class, whereas Eval will only lock itself.
    */
-  def laterEval(resultList: List[Int], counterResult: Int) = {
+  def laterEval(res0: List[Int], res1: Int) = {
     //given
     val n       = 2
     var counter = 0
@@ -109,8 +109,8 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
 
     //when/then
     List.fill(n)("").foreach(_ => lazyEval.value)
-    lazyEval.value shouldBe (resultList: List[Int])
-    counter shouldBe counterResult
+    lazyEval.value shouldBe res0
+    counter shouldBe res1
   }
 
   /**
@@ -128,7 +128,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * alwaysEval.eval
    * }}}
    */
-  def alwaysEval(resultList: List[Int], counterAfterListEval: Int, latestCounter: Int) = {
+  def alwaysEval(res0: Int, res1: List[Int], res2: Int) = {
     //given
     val n       = 4
     var counter = 0
@@ -140,9 +140,9 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
 
     //when/then
     List.fill(n)("").foreach(_ => alwaysEval.value)
-    counter shouldBe counterAfterListEval
-    alwaysEval.value shouldBe (resultList: List[Int])
-    counter shouldBe latestCounter
+    counter shouldBe res0
+    alwaysEval.value shouldBe res1
+    counter shouldBe res2
   }
 
   /**
@@ -152,7 +152,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * This is useful when you want to delay execution of an expression which produces an Eval[A] value. Like .flatMap, it is stack-safe.
    * Because Eval guarantees stack-safety, we can chain a lot of computations together using flatMap without fear of blowing up the stack.
    */
-  def deferEval(resultList: List[Int]) = {
+  def deferEval(res0: List[Int]) = {
     //given
     val list = List.fill(3)(0)
 
@@ -160,7 +160,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
     val deferedEval: Eval[List[Int]] = Eval.now(list).flatMap(e => Eval.defer(Eval.later(e)))
 
     //then
-    Eval.defer(deferedEval).value shouldBe (resultList: List[Int])
+    Eval.defer(deferedEval).value shouldBe res0
   }
 
 }
