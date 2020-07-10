@@ -46,7 +46,7 @@ class EvalSpec extends RefSpec with Checkers {
     check(
       Test.testSuccess(
         EvalSection.alwaysEval _,
-        List(1, 2, 3, 4) :: 4 :: 5 :: HNil
+        4 :: List(1, 2, 3, 4) :: 5 :: HNil
       )
     )
   }
