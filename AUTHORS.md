@@ -43,6 +43,7 @@ These are the people that have contributed to the _exercises-cats_ project:
 - [![ikhoon](https://avatars1.githubusercontent.com/u/1866157?v=4&s=20) **ikhoon**](https://github.com/ikhoon)
 - [![jkmcclellan](https://avatars3.githubusercontent.com/u/52432856?v=4&s=20) **jkmcclellan**](https://github.com/jkmcclellan)
 - [![jeremylaier](https://avatars1.githubusercontent.com/u/50848217?v=4&s=20) **jeremylaier**](https://github.com/jeremylaier)
+- [![chipmunklimo](https://avatars3.githubusercontent.com/u/4879096?v=4&s=20) **chipmunklimo**](https://github.com/chipmunklimo)
 - [![mayonesa](https://avatars3.githubusercontent.com/u/56529?v=4&s=20) **mayonesa**](https://github.com/mayonesa)
 - [![lloydmeta](https://avatars3.githubusercontent.com/u/914805?v=4&s=20) **lloydmeta**](https://github.com/lloydmeta)
 - [![mttkay](https://avatars3.githubusercontent.com/u/102802?v=4&s=20) **mttkay**](https://github.com/mttkay)
