@@ -1,5 +1,25 @@
 # Changelog
 
+## [v0.6.5](https://github.com/scala-exercises/exercises-cats/tree/v0.6.5) (2020-08-10)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.4...v0.6.5)
+
+📈 **Dependency updates**
+
+- Update sbt-mdoc to 2.2.4 [\#137](https://github.com/scala-exercises/exercises-cats/pull/137) ([47erbot](https://github.com/47erbot))
+- Update scalacheck-1-14 to 3.2.1.0 [\#136](https://github.com/scala-exercises/exercises-cats/pull/136) ([47erbot](https://github.com/47erbot))
+- Update scalatest to 3.2.1 [\#135](https://github.com/scala-exercises/exercises-cats/pull/135) ([47erbot](https://github.com/47erbot))
+- Update sbt-scalafmt to 2.4.2 [\#133](https://github.com/scala-exercises/exercises-cats/pull/133) ([47erbot](https://github.com/47erbot))
+- Update scalafmt-core to 2.6.4 [\#132](https://github.com/scala-exercises/exercises-cats/pull/132) ([47erbot](https://github.com/47erbot))
+- Update scalafmt-core to 2.6.3 [\#129](https://github.com/scala-exercises/exercises-cats/pull/129) ([scala-steward](https://github.com/scala-steward))
+- Update scalafmt-core to 2.6.2 [\#126](https://github.com/scala-exercises/exercises-cats/pull/126) ([scala-steward](https://github.com/scala-steward))
+
+**Merged pull requests:**
+
+- Update EitherSection.scala [\#130](https://github.com/scala-exercises/exercises-cats/pull/130) ([chipmunklimo](https://github.com/chipmunklimo))
+- Updated Eval Exercise to take input, spec was off as well [\#127](https://github.com/scala-exercises/exercises-cats/pull/127) ([jeremylaier](https://github.com/jeremylaier))
+- Fix minor bug in code snippet example [\#69](https://github.com/scala-exercises/exercises-cats/pull/69) ([tr4rex](https://github.com/tr4rex))
+
 ## [v0.6.4](https://github.com/scala-exercises/exercises-cats/tree/v0.6.4) (2020-06-30)
 
 [Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.3...v0.6.4)

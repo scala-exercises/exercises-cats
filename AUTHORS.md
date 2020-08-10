@@ -9,6 +9,7 @@
 The maintainers of the project are:
 
 - [![47erbot](https://avatars1.githubusercontent.com/u/24799081?v=4&s=20) **47erbot**](https://github.com/47erbot)
+- [![alejandrohdezma](https://avatars0.githubusercontent.com/u/9027541?v=4&s=20) **Alejandro Hernández (alejandrohdezma)**](https://github.com/alejandrohdezma)
 - [![angoglez](https://avatars0.githubusercontent.com/u/10107285?v=4&s=20) **Ana Gómez González (angoglez)**](https://github.com/angoglez)
 - [![andyscott](https://avatars3.githubusercontent.com/u/310363?v=4&s=20) **Andy Scott (andyscott)**](https://github.com/andyscott)
 - [![BenFradet](https://avatars2.githubusercontent.com/u/1737211?v=4&s=20) **Ben Fradet (BenFradet)**](https://github.com/BenFradet)
@@ -53,6 +54,7 @@ These are the people that have contributed to the _exercises-cats_ project:
 - [![sergiohgz](https://avatars3.githubusercontent.com/u/14012309?v=4&s=20) **sergiohgz**](https://github.com/sergiohgz)
 - [![Thangiee](https://avatars2.githubusercontent.com/u/4734933?v=4&s=20) **Thangiee**](https://github.com/Thangiee)
 - [![TobiasRoland](https://avatars2.githubusercontent.com/u/5878818?v=4&s=20) **TobiasRoland**](https://github.com/TobiasRoland)
+- [![alejandrohdezma](https://avatars0.githubusercontent.com/u/9027541?v=4&s=20) **alejandrohdezma**](https://github.com/alejandrohdezma)
 - [![tr4rex](https://avatars1.githubusercontent.com/u/13753704?v=4&s=20) **tr4rex**](https://github.com/tr4rex)
 - [![augustjune](https://avatars0.githubusercontent.com/u/29662354?v=4&s=20) **augustjune**](https://github.com/augustjune)
 - [![Kobenko](https://avatars0.githubusercontent.com/u/21039161?v=4&s=20) **Kobenko**](https://github.com/Kobenko)
