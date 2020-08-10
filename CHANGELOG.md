@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.6.6](https://github.com/scala-exercises/exercises-cats/tree/v0.6.6) (2020-08-10)
+
+[Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.5...v0.6.6)
+
+📈 **Dependency updates**
+
+- Update definitions, exercise-compiler, ... to 0.6.4 [\#138](https://github.com/scala-exercises/exercises-cats/pull/138) ([47erbot](https://github.com/47erbot))
+
 ## [v0.6.5](https://github.com/scala-exercises/exercises-cats/tree/v0.6.5) (2020-08-10)
 
 [Full Changelog](https://github.com/scala-exercises/exercises-cats/compare/v0.6.4...v0.6.5)
@@ -95,6 +103,7 @@
 - Updating libraries versions [\#57](https://github.com/scala-exercises/exercises-cats/pull/57) ([dominv](https://github.com/dominv))
 - Fixes missing cats Dependency [\#56](https://github.com/scala-exercises/exercises-cats/pull/56) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Update cats to 0.9.0 and change Xor to Either [\#55](https://github.com/scala-exercises/exercises-cats/pull/55) ([aeons](https://github.com/aeons))
+- SE-597 - Upgrade Libs [\#45](https://github.com/scala-exercises/exercises-cats/pull/45) ([juanpedromoreno](https://github.com/juanpedromoreno))
 
 ## [v0.4.0](https://github.com/scala-exercises/exercises-cats/tree/v0.4.0) (2017-03-28)
 
@@ -115,7 +124,6 @@
 - Update .travis.yml [\#50](https://github.com/scala-exercises/exercises-cats/pull/50) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Update Foldable.scala [\#49](https://github.com/scala-exercises/exercises-cats/pull/49) ([lloydmeta](https://github.com/lloydmeta))
 - Updates PGP keys [\#47](https://github.com/scala-exercises/exercises-cats/pull/47) ([juanpedromoreno](https://github.com/juanpedromoreno))
-- SE-597 - Upgrade Libs [\#45](https://github.com/scala-exercises/exercises-cats/pull/45) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Fix typos in Validated [\#44](https://github.com/scala-exercises/exercises-cats/pull/44) ([ches](https://github.com/ches))
 - Added README to content repository [\#43](https://github.com/scala-exercises/exercises-cats/pull/43) ([jdesiloniz](https://github.com/jdesiloniz))
 - Include logo in content library [\#42](https://github.com/scala-exercises/exercises-cats/pull/42) ([jdesiloniz](https://github.com/jdesiloniz))
