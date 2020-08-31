@@ -6,6 +6,7 @@
 
 📈 **Dependency updates**
 
+- Update definitions, exercise-compiler, ... to 0.6.7 [\#145](https://github.com/scala-exercises/exercises-cats/pull/145) ([47erbot](https://github.com/47erbot))
 - Update definitions, exercise-compiler, ... to 0.6.6 [\#143](https://github.com/scala-exercises/exercises-cats/pull/143) ([47erbot](https://github.com/47erbot))
 - Update scalacheck-1-14 to 3.2.2.0 [\#142](https://github.com/scala-exercises/exercises-cats/pull/142) ([47erbot](https://github.com/47erbot))
 - Update scalatest to 3.2.2 [\#141](https://github.com/scala-exercises/exercises-cats/pull/141) ([47erbot](https://github.com/47erbot))
@@ -124,8 +125,8 @@
 - Break apart a set of five tests [\#61](https://github.com/scala-exercises/exercises-cats/pull/61) ([doub1ejack](https://github.com/doub1ejack))
 - Updating sbt org policies [\#58](https://github.com/scala-exercises/exercises-cats/pull/58) ([dominv](https://github.com/dominv))
 - Updating libraries versions [\#57](https://github.com/scala-exercises/exercises-cats/pull/57) ([dominv](https://github.com/dominv))
-- Fixes missing cats Dependency [\#56](https://github.com/scala-exercises/exercises-cats/pull/56) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Update cats to 0.9.0 and change Xor to Either [\#55](https://github.com/scala-exercises/exercises-cats/pull/55) ([aeons](https://github.com/aeons))
+- Update .travis.yml [\#50](https://github.com/scala-exercises/exercises-cats/pull/50) ([juanpedromoreno](https://github.com/juanpedromoreno))
 
 ## [v0.4.0](https://github.com/scala-exercises/exercises-cats/tree/v0.4.0) (2017-03-28)
 
@@ -142,8 +143,8 @@
 
 **Merged pull requests:**
 
+- Fixes missing cats Dependency [\#56](https://github.com/scala-exercises/exercises-cats/pull/56) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Integrates sbt-org-policies plugin [\#52](https://github.com/scala-exercises/exercises-cats/pull/52) ([juanpedromoreno](https://github.com/juanpedromoreno))
-- Update .travis.yml [\#50](https://github.com/scala-exercises/exercises-cats/pull/50) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - Update Foldable.scala [\#49](https://github.com/scala-exercises/exercises-cats/pull/49) ([lloydmeta](https://github.com/lloydmeta))
 - Updates PGP keys [\#47](https://github.com/scala-exercises/exercises-cats/pull/47) ([juanpedromoreno](https://github.com/juanpedromoreno))
 - SE-597 - Upgrade Libs [\#45](https://github.com/scala-exercises/exercises-cats/pull/45) ([juanpedromoreno](https://github.com/juanpedromoreno))
