@@ -25,7 +25,7 @@ lazy val exercises = (project in file("."))
       "org.scalatestplus"          %% "scalacheck-1-14"           % "3.2.2.0",
       "com.github.alexarchambault" %% "scalacheck-shapeless_1.14" % "1.2.5"
     ),
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full)
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.1" cross CrossVersion.full)
   )
   .enablePlugins(ExerciseCompilerPlugin)
 
