@@ -114,6 +114,7 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
 
     Monad[Option].ifM(Option(true))(Option("truthy"), Option("falsy")) should be(res0)
     Monad[List].ifM(List(true, false, true))(List(1, 2), List(3, 4)) should be(res1)
+    Monad[List].ifM(List(false, true, false))(List(1, 2), List(3, 4)) should be(res2)
   }
 
   /**
