@@ -56,7 +56,7 @@ class MonadSpec extends RefSpec with Checkers {
     check(
       Test.testSuccess(
         MonadSection.monadIfm _,
-        Option("truthy") :: List(1, 2, 3, 4, 1, 2) :: HNil
+        Option("truthy") :: List(1, 2, 3, 4, 1, 2) :: List(3, 4, 1, 2, 3, 4) :: HNil
       )
     )
   }

@@ -108,12 +108,13 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    * the results of earlier ones. This is embodied in `ifM`, which lifts an `if`
    * statement into the monadic context.
    */
-  def monadIfm(res0: Option[String], res1: List[Int]) = {
+  def monadIfm(res0: Option[String], res1: List[Int], res2: List[Int]) = {
     import cats._
     import cats.implicits._
 
     Monad[Option].ifM(Option(true))(Option("truthy"), Option("falsy")) should be(res0)
     Monad[List].ifM(List(true, false, true))(List(1, 2), List(3, 4)) should be(res1)
+    Monad[List].ifM(List(false, true, false))(List(1, 2), List(3, 4)) should be(res2)
   }
 
   /**
