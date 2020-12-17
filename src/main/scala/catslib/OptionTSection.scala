@@ -68,8 +68,8 @@ object OptionTSection
     val failedGreet: Future[String]  = failedGreetOpT.getOrElse("")
 
     //then
-    englishGreet shouldBe a[Id[String]]
-    spanishGreet shouldBe a[Future[String]]
+    englishGreet shouldBe a[Id[_]]
+    spanishGreet shouldBe a[Future[_]]
     englishGreet shouldBe (englishGreetValue: String)
     spanishGreet.futureValue shouldBe (spanishGreetValue: String)
     failedGreet.futureValue shouldBe (failedGreetValue: String)
