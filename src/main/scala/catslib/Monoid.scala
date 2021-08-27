@@ -23,24 +23,23 @@ import cats._
 import cats.implicits._
 
 /**
- * `Monoid` extends the `Semigroup` type class, adding an
- * `empty` method to semigroup's `combine`. The `empty` method must return a
- * value that when combined with any other instance of that type returns the
- * other instance, i.e.
+ * `Monoid` extends the `Semigroup` type class, adding an `empty` method to semigroup's `combine`.
+ * The `empty` method must return a value that when combined with any other instance of that type
+ * returns the other instance, i.e.
  *
  * {{{
  * (combine(x, empty) == combine(empty, x) == x)
  * }}}
  *
- * For example, if we have a `Monoid[String]` with `combine` defined as string
- * concatenation, then `empty = ""`.
+ * For example, if we have a `Monoid[String]` with `combine` defined as string concatenation, then
+ * `empty = ""`.
  *
- * Having an `empty` defined allows us to combine all the elements of some
- * potentially empty collection of `T` for which a `Monoid[T]` is defined and
- * return a `T`, rather than an `Option[T]` as we have a sensible default to
- * fall back to.
+ * Having an `empty` defined allows us to combine all the elements of some potentially empty
+ * collection of `T` for which a `Monoid[T]` is defined and return a `T`, rather than an `Option[T]`
+ * as we have a sensible default to fall back to.
  *
- * @param name monoid
+ * @param name
+ *   monoid
  */
 object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
@@ -63,9 +62,8 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
   }
 
   /**
-   * The advantage of using these type class provided methods, rather than the
-   * specific ones for each type, is that we can compose monoids to allow us to
-   * operate on more complex types, e.g.
+   * The advantage of using these type class provided methods, rather than the specific ones for
+   * each type, is that we can compose monoids to allow us to operate on more complex types, e.g.
    */
   def monoidAdvantage(res0: Map[String, Int], res1: Map[String, Int]) = {
     Monoid[Map[String, Int]].combineAll(List(Map("a" -> 1, "b" -> 2), Map("a" -> 3))) should be(
@@ -75,9 +73,9 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
   }
 
   /**
-   * This is also true if we define our own instances. As an example, let's use
-   * `Foldable`'s `foldMap`, which maps over values accumulating
-   * the results, using the available `Monoid` for the type mapped onto.
+   * This is also true if we define our own instances. As an example, let's use `Foldable`'s
+   * `foldMap`, which maps over values accumulating the results, using the available `Monoid` for
+   * the type mapped onto.
    */
   def monoidFoldmap(res0: Int, res1: String) = {
     val l = List(1, 2, 3, 4, 5)
@@ -86,10 +84,9 @@ object MonoidSection extends AnyFlatSpec with Matchers with org.scalaexercises.d
   }
 
   /**
-   * To use this
-   * with a function that produces a tuple, we can define a `Monoid` for a tuple
-   * that will be valid for any tuple where the types it contains also have a
-   * `Monoid` available. Note that cats already defines it for you.
+   * To use this with a function that produces a tuple, we can define a `Monoid` for a tuple that
+   * will be valid for any tuple where the types it contains also have a `Monoid` available. Note
+   * that cats already defines it for you.
    *
    * {{{
    *     implicit def monoidTuple[A: Monoid, B: Monoid]: Monoid[(A, B)] =

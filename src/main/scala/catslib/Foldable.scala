@@ -23,13 +23,12 @@ import cats._
 import cats.implicits._
 
 /**
- * Foldable type class instances can be defined for data structures that can be
- * folded to a summary value.
+ * Foldable type class instances can be defined for data structures that can be folded to a summary
+ * value.
  *
- * In the case of a collection (such as `List` or `Set`), these methods will fold
- * together (combine) the values contained in the collection to produce a single
- * result. Most collection types have `foldLeft` methods, which will usually be
- * used by the associated `Foldable[_]` instance.
+ * In the case of a collection (such as `List` or `Set`), these methods will fold together (combine)
+ * the values contained in the collection to produce a single result. Most collection types have
+ * `foldLeft` methods, which will usually be used by the associated `Foldable[_]` instance.
  *
  * `Foldable[F]` is implemented in terms of two basic methods:
  *
@@ -46,9 +45,11 @@ import cats.implicits._
  * import cats.implicits._
  * }}}
  *
- * Apart from the familiar `foldLeft` and `foldRight`, `Foldable` has a number of other useful functions.
+ * Apart from the familiar `foldLeft` and `foldRight`, `Foldable` has a number of other useful
+ * functions.
  *
- * @param name foldable
+ * @param name
+ *   foldable
  */
 object FoldableSection
     extends AnyFlatSpec
@@ -56,7 +57,7 @@ object FoldableSection
     with org.scalaexercises.definitions.Section {
 
   /**
-   * = foldLeft =
+   * =foldLeft=
    *
    * `foldLeft` is an eager left-associative fold on `F` using the given function.
    */
@@ -66,11 +67,10 @@ object FoldableSection
   }
 
   /**
-   * = foldRight =
+   * =foldRight=
    *
-   * `foldRight` is a lazy right-associative fold on `F` using the given function.
-   * The function has the signature `(A, Eval[B]) => Eval[B]` to support laziness in
-   * a stack-safe way.
+   * `foldRight` is a lazy right-associative fold on `F` using the given function. The function has
+   * the signature `(A, Eval[B]) => Eval[B]` to support laziness in a stack-safe way.
    */
   def foldableFoldRight(res0: Int) = {
     val lazyResult =
@@ -79,9 +79,10 @@ object FoldableSection
   }
 
   /**
-   * = fold =
+   * =fold=
    *
-   * `fold`, also called `combineAll`, combines every value in the foldable using the given `Monoid` instance.
+   * `fold`, also called `combineAll`, combines every value in the foldable using the given `Monoid`
+   * instance.
    */
   def foldableFold(res0: String, res1: Int) = {
     Foldable[List].fold(List("a", "b", "c")) should be(res0)
@@ -91,10 +92,10 @@ object FoldableSection
   }
 
   /**
-   * = foldMap =
+   * =foldMap=
    *
-   * `foldMap` is similar to `fold` but maps every `A` value into `B` and then
-   * combines them using the given `Monoid[B]` instance.
+   * `foldMap` is similar to `fold` but maps every `A` value into `B` and then combines them using
+   * the given `Monoid[B]` instance.
    */
   def foldableFoldMap(res0: Int, res1: String) = {
     Foldable[List].foldMap(List("a", "b", "c"))(_.length) should be(res0)
@@ -102,10 +103,10 @@ object FoldableSection
   }
 
   /**
-   * = foldK =
+   * =foldK=
    *
-   * `foldK` is similar to `fold` but combines every value in the foldable using the given `MonoidK[G]` instance
-   * instead of `Monoid[G]`.
+   * `foldK` is similar to `fold` but combines every value in the foldable using the given
+   * `MonoidK[G]` instance instead of `Monoid[G]`.
    */
   def foldableFoldk(res0: List[Int], res1: Option[String]) = {
     Foldable[List].foldK(List(List(1, 2), List(3, 4, 5))) should be(res0)
@@ -113,7 +114,7 @@ object FoldableSection
   }
 
   /**
-   * = find =
+   * =find=
    *
    * `find` searches for the first element matching the predicate, if one exists.
    */
@@ -123,7 +124,7 @@ object FoldableSection
   }
 
   /**
-   * = exists =
+   * =exists=
    *
    * `exists` checks whether at least one element satisfies the predicate.
    */
@@ -133,7 +134,7 @@ object FoldableSection
   }
 
   /**
-   * = forall =
+   * =forall=
    *
    * `forall` checks whether all elements satisfy the predicate.
    */
@@ -143,7 +144,7 @@ object FoldableSection
   }
 
   /**
-   * = toList =
+   * =toList=
    *
    * Convert `F[A]` to `List[A]`.
    */
@@ -154,7 +155,7 @@ object FoldableSection
   }
 
   /**
-   * = filter_ =
+   * =filter_=
    *
    * Convert `F[A]` to `List[A]` only including the elements that match a predicate.
    */
@@ -164,14 +165,14 @@ object FoldableSection
   }
 
   /**
-   * = traverse_ =
+   * =traverse_=
    *
-   * `traverse` the foldable mapping `A` values to `G[B]`, and combining
-   * them using `Applicative[G]` and discarding the results.
+   * `traverse` the foldable mapping `A` values to `G[B]`, and combining them using `Applicative[G]`
+   * and discarding the results.
    *
-   * This method is primarily useful when `G[_]` represents an action
-   * or effect, and the specific `B` aspect of `G[B]` is not otherwise
-   * needed. The `B` will be discarded and `Unit` returned instead.
+   * This method is primarily useful when `G[_]` represents an action or effect, and the specific
+   * `B` aspect of `G[B]` is not otherwise needed. The `B` will be discarded and `Unit` returned
+   * instead.
    */
   def foldableTraverse(res0: Option[Unit], res1: Option[Unit]) = {
     import cats.implicits._
@@ -184,7 +185,7 @@ object FoldableSection
   }
 
   /**
-   * = compose =
+   * =compose=
    *
    * We can compose `Foldable[F[_]]` and `Foldable[G[_]]` instances to obtain `Foldable[F[G]]`.
    */
@@ -195,15 +196,14 @@ object FoldableSection
   }
 
   /**
-   * = More Foldable methods =
+   * =More Foldable methods=
    *
-   * Hence when defining some new data structure, if we can define a `foldLeft` and
-   * `foldRight` we are able to provide many other useful operations, if not always
-   * the most efficient implementations, over the structure without further
-   * implementation.
+   * Hence when defining some new data structure, if we can define a `foldLeft` and `foldRight` we
+   * are able to provide many other useful operations, if not always the most efficient
+   * implementations, over the structure without further implementation.
    *
-   * There are a few more methods that we haven't talked about but you probably can
-   * guess what they do:
+   * There are a few more methods that we haven't talked about but you probably can guess what they
+   * do:
    */
   def foldableMethods(res0: Boolean, res1: List[Int], res2: List[Int]) = {
     Foldable[List].isEmpty(List(1, 2, 3)) should be(res0)

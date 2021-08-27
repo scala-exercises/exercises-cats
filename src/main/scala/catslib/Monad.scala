@@ -22,18 +22,18 @@ import org.scalatest.flatspec.AnyFlatSpec
 import MonadHelpers._
 
 /**
- * `Monad` extends the `Applicative` type class with a
- * new function `flatten`. Flatten takes a value in a nested context (eg.
- * `F[F[A]]` where F is the context) and "joins" the contexts together so
+ * `Monad` extends the `Applicative` type class with a new function `flatten`. Flatten takes a value
+ * in a nested context (eg. `F[F[A]]` where F is the context) and "joins" the contexts together so
  * that we have a single context (ie. `F[A]`).
  *
- * @param name monad
+ * @param name
+ *   monad
  */
 object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.definitions.Section {
 
   /**
-   * The name `flatten` should remind you of the functions of the same name on many
-   * classes in the standard library.
+   * The name `flatten` should remind you of the functions of the same name on many classes in the
+   * standard library.
    */
   def flattenRecap(res0: Option[Int], res1: Option[Int], res2: List[Int]) = {
     Option(Option(1)).flatten should be(res0)
@@ -42,28 +42,27 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   }
 
   /**
-   * = Monad instances =
+   * =Monad instances=
    *
-   * If `Applicative` is already present and `flatten` is well-behaved,
-   * extending the `Applicative` to a `Monad` is trivial. To provide evidence
-   * that a type belongs in the `Monad` type class, cats' implementation
-   * requires us to provide an implementation of `pure` (which can be reused
+   * If `Applicative` is already present and `flatten` is well-behaved, extending the `Applicative`
+   * to a `Monad` is trivial. To provide evidence that a type belongs in the `Monad` type class,
+   * cats' implementation requires us to provide an implementation of `pure` (which can be reused
    * from `Applicative`) and `flatMap`.
    *
-   * We can use `flatten` to define `flatMap`: `flatMap` is just `map`
-   * followed by `flatten`. Conversely, `flatten` is just `flatMap` using
-   * the identity function `x => x` (i.e. `flatMap(_)(x => x)`).
+   * We can use `flatten` to define `flatMap`: `flatMap` is just `map` followed by `flatten`.
+   * Conversely, `flatten` is just `flatMap` using the identity function `x => x` (i.e.
+   * `flatMap(_)(x => x)`).
    *
    * {{{
    * import cats._
    *
    * implicit def optionMonad(implicit app: Applicative[Option]) =
    * new Monad[Option] {
-   *  // Define flatMap using Option's flatten method
-   *  override def flatMap[A, B](fa: Option[A])(f: A => Option[B]): Option[B] =
-   *    app.map(fa)(f).flatten
-   *  // Reuse this definition from Applicative.
-   *  override def pure[A](a: A): Option[A] = app.pure(a)
+   *   // Define flatMap using Option's flatten method
+   *   override def flatMap[A, B](fa: Option[A])(f: A => Option[B]): Option[B] =
+   *     app.map(fa)(f).flatten
+   *   // Reuse this definition from Applicative.
+   *   override def pure[A](a: A): Option[A] = app.pure(a)
    * }
    * }}}
    *
@@ -77,11 +76,11 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   }
 
   /**
-   * = flatMap =
+   * =flatMap=
    *
-   * `flatMap` is often considered to be the core function of `Monad`, and cats
-   * follows this tradition by providing implementations of `flatten` and `map`
-   * derived from `flatMap` and `pure`.
+   * `flatMap` is often considered to be the core function of `Monad`, and cats follows this
+   * tradition by providing implementations of `flatten` and `map` derived from `flatMap` and
+   * `pure`.
    *
    * {{{
    * implicit val listMonad = new Monad[List] {
@@ -90,9 +89,8 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    * }
    * }}}
    *
-   * Part of the reason for this is that name `flatMap` has special significance in
-   * scala, as for-comprehensions rely on this method to chain together operations
-   * in a monadic context.
+   * Part of the reason for this is that name `flatMap` has special significance in scala, as
+   * for-comprehensions rely on this method to chain together operations in a monadic context.
    */
   def monadFlatmap(res0: List[Int]) = {
     import cats._
@@ -102,11 +100,11 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   }
 
   /**
-   * = ifM =
+   * =ifM=
    *
-   * `Monad` provides the ability to choose later operations in a sequence based on
-   * the results of earlier ones. This is embodied in `ifM`, which lifts an `if`
-   * statement into the monadic context.
+   * `Monad` provides the ability to choose later operations in a sequence based on the results of
+   * earlier ones. This is embodied in `ifM`, which lifts an `if` statement into the monadic
+   * context.
    */
   def monadIfm(res0: Option[String], res1: List[Int], res2: List[Int]) = {
     import cats._
@@ -118,14 +116,14 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   }
 
   /**
-   * = Composition =
+   * =Composition=
    *
-   * Unlike `Functor`s and `Applicative`s, you cannot derive a monad instance for a generic `M[N[_]]`
-   * where both `M[_]` and `N[_]` have an instance of a monad.
+   * Unlike `Functor`s and `Applicative`s, you cannot derive a monad instance for a generic
+   * `M[N[_]]` where both `M[_]` and `N[_]` have an instance of a monad.
    *
-   * However, it is common to want to compose the effects of both `M[_]` and `N[_]`. One way of expressing this
-   * is to provide instructions on how to compose any outer monad (`F` in the following example) with a specific
-   * inner monad (`Option` in the following example).
+   * However, it is common to want to compose the effects of both `M[_]` and `N[_]`. One way of
+   * expressing this is to provide instructions on how to compose any outer monad (`F` in the
+   * following example) with a specific inner monad (`Option` in the following example).
    *
    * {{{
    * case class OptionT[F[_], A](value: F[Option[A]])
@@ -146,8 +144,8 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
    * }
    * }}}
    *
-   * This sort of construction is called a monad transformer. Cats already provides
-   * a monad transformer for `Option` called `OptionT`.
+   * This sort of construction is called a monad transformer. Cats already provides a monad
+   * transformer for `Option` called `OptionT`.
    */
   def monadComposition(res0: List[Option[Int]]) = {
     import cats.implicits._
@@ -156,11 +154,7 @@ object MonadSection extends AnyFlatSpec with Matchers with org.scalaexercises.de
   }
 
   /**
-   * There are also instances for other monads available for user in Cats library:
-   *  'EitherT' for 'Either'
-   *  'ReaderT' for 'Reader'
-   *  'WriterT' for 'Writer'
-   *  'StateT' for 'State'
-   *  'IdT' for 'Id'
+   * There are also instances for other monads available for user in Cats library: 'EitherT' for
+   * 'Either' 'ReaderT' for 'Reader' 'WriterT' for 'Writer' 'StateT' for 'State' 'IdT' for 'Id'
    */
 }

@@ -27,11 +27,13 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 /**
- * OptionT is a Monad Transformer that has two type parameters F and A.
- * F is the wrapping Monad and A is type inside Option. As a result, OptionT[F[_], A] is a light wrapper on an F[Option[A]].
- * As OptionT is also a monad, it can be used in a for-comprehension and be more convenient to work with than using F[Option[A]] directly.
+ * OptionT is a Monad Transformer that has two type parameters F and A. F is the wrapping Monad and
+ * A is type inside Option. As a result, OptionT[F[_], A] is a light wrapper on an F[Option[A]]. As
+ * OptionT is also a monad, it can be used in a for-comprehension and be more convenient to work
+ * with than using F[Option[A]] directly.
  *
- * @param name OptionT
+ * @param name
+ *   OptionT
  */
 object OptionTSection
     extends AnyFlatSpec
@@ -45,10 +47,10 @@ object OptionTSection
   }
 
   /**
-   * If you have only an A and you wish to lift it into an OptionT[F,A], assuming you
-   * have an Applicative instance for F you can use `some` which is an alias for `pure`.
-   * There also exists a none method which can be used to create an OptionT[F,A],
-   * where the Option wrapped A type is actually a None:
+   * If you have only an A and you wish to lift it into an OptionT[F,A], assuming you have an
+   * Applicative instance for F you can use `some` which is an alias for `pure`. There also exists a
+   * none method which can be used to create an OptionT[F,A], where the Option wrapped A type is
+   * actually a None:
    *
    * {{{
    * import scala.concurrent.Future
@@ -77,8 +79,8 @@ object OptionTSection
 
   /**
    * Sometimes you may have an Option[A] and/or F[A] and want to lift them into an OptionT[F, A].
-   * For this purpose OptionT exposes two useful methods, namely fromOption and liftF,
-   * and the standard apply respectively. E.g.:
+   * For this purpose OptionT exposes two useful methods, namely fromOption and liftF, and the
+   * standard apply respectively. E.g.:
    * {{{
    * val greetingFO: Future[Option[String]] = Future.successful(Some("Hello"))
    *
@@ -109,12 +111,11 @@ object OptionTSection
   }
 
   /**
-   * As you can see, the implementations of all of these variations are very similar.
-   * We want to call the Option operation (map, filter, filterNot, getOrElse),
-   * but since our Option is wrapped in a Future, we first need to map over the Future.
-   * OptionT can help remove some of this boilerplate.
-   * It exposes methods that look like those on Option,
-   * but it handles the outer map call on the Future so we don’t have to:
+   * As you can see, the implementations of all of these variations are very similar. We want to
+   * call the Option operation (map, filter, filterNot, getOrElse), but since our Option is wrapped
+   * in a Future, we first need to map over the Future. OptionT can help remove some of this
+   * boilerplate. It exposes methods that look like those on Option, but it handles the outer map
+   * call on the Future so we don’t have to:
    *
    * {{{
    * //operating with flattened Future[Option[String]

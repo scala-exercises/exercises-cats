@@ -17,9 +17,11 @@
 package catslib
 
 /**
- * Cats is a library which provides abstractions for functional programming in the Scala programming language.
+ * Cats is a library which provides abstractions for functional programming in the Scala programming
+ * language.
  *
- * @param name cats
+ * @param name
+ *   cats
  */
 object CatsLibrary extends org.scalaexercises.definitions.Library {
   override def owner      = "scala-exercises"
