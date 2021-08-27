@@ -23,10 +23,9 @@ import cats._
 import cats.implicits._
 
 /**
- * A `Functor` is a ubiquitous type class involving types that have one
- * "hole", i.e. types which have the shape `F[*]`, such as `Option`,
- * `List` and `Future`. (This is in contrast to a type like `Int` which has
- * no hole, or `Tuple2` which has two holes (`Tuple2[*,*]`)).
+ * A `Functor` is a ubiquitous type class involving types that have one "hole", i.e. types which
+ * have the shape `F[*]`, such as `Option`, `List` and `Future`. (This is in contrast to a type like
+ * `Int` which has no hole, or `Tuple2` which has two holes (`Tuple2[*,*]`)).
  *
  * The `Functor` category involves a single operation, named `map`:
  *
@@ -34,10 +33,9 @@ import cats.implicits._
  * def map[A, B](fa: F[A])(f: A => B): F[B]
  * }}}
  *
- * This method takes a function `A => B` and turns an `F[A]` into an
- * `F[B]`.  The name of the method `map` should remind you of the `map`
- * method that exists on many classes in the Scala standard library, for
- * example:
+ * This method takes a function `A => B` and turns an `F[A]` into an `F[B]`. The name of the method
+ * `map` should remind you of the `map` method that exists on many classes in the Scala standard
+ * library, for example:
  *
  * {{{
  * Option(1).map(_ + 1)
@@ -45,10 +43,9 @@ import cats.implicits._
  * Vector(1,2,3).map(_.toString)
  * }}}
  *
- * = Creating Functor instances =
+ * =Creating Functor instances=
  *
- * We can trivially create a `Functor` instance for a type which has a well
- * behaved `map` method:
+ * We can trivially create a `Functor` instance for a type which has a well behaved `map` method:
  *
  * {{{
  * import cats._
@@ -62,27 +59,26 @@ import cats.implicits._
  * }
  * }}}
  *
- * However, functors can also be created for types which don't have a `map`
- * method. For example, if we create a `Functor` for `Function1[In, *]`
- * we can use `andThen` to implement `map`:
+ * However, functors can also be created for types which don't have a `map` method. For example, if
+ * we create a `Functor` for `Function1[In, *]` we can use `andThen` to implement `map`:
  *
  * {{{
  * implicit def function1Functor[In]: Functor[Function1[In, *]] =
  * new Functor[Function1[In, *]] {
- *  def map[A,B](fa: In => A)(f: A => B): Function1[In,B] = fa andThen f
+ *   def map[A,B](fa: In => A)(f: A => B): Function1[In,B] = fa andThen f
  * }
  * }}}
  *
  * This example demonstrates the use of the
- * [[https://github.com/non/kind-projector kind-projector compiler plugin]]
- * This compiler plugin can help us when we need to change the number of type
- * holes. In the example above, we took a type which normally has two type holes,
- * `Function1[*,*]` and constrained one of the holes to be the `In` type,
- * leaving just one hole for the return type, resulting in `Function1[In,*]`.
- * Without kind-projector, we'd have to write this as something like
- * `({type F[A] = Function1[In,A]})#F`, which is much harder to read and understand.
+ * [[https://github.com/non/kind-projector kind-projector compiler plugin]] This compiler plugin can
+ * help us when we need to change the number of type holes. In the example above, we took a type
+ * which normally has two type holes, `Function1[*,*]` and constrained one of the holes to be the
+ * `In` type, leaving just one hole for the return type, resulting in `Function1[In,*]`. Without
+ * kind-projector, we'd have to write this as something like `({type F[A] = Function1[In,A]})#F`,
+ * which is much harder to read and understand.
  *
- * @param name functor
+ * @param name
+ *   functor
  */
 object FunctorSection
     extends AnyFlatSpec
@@ -90,9 +86,9 @@ object FunctorSection
     with org.scalaexercises.definitions.Section {
 
   /**
-   * = Using Functor =
+   * =Using Functor=
    *
-   * == map ==
+   * ==map==
    *
    * `List` is a functor which applies the function to each element of the list:
    *
@@ -100,8 +96,7 @@ object FunctorSection
    * Functor[List].map(List("qwer", "adsfg"))(_.length)
    * }}}
    *
-   * `Option` is a functor which only applies the function when the `Option` value
-   * is a `Some`:
+   * `Option` is a functor which only applies the function when the `Option` value is a `Some`:
    */
   def usingFunctor(res0: Option[Int], res1: Option[Int]) = {
     Functor[Option].map(Option("Hello"))(_.length) should be(res0)
@@ -109,9 +104,9 @@ object FunctorSection
   }
 
   /**
-   * = Derived methods =
+   * =Derived methods=
    *
-   * == lift ==
+   * ==lift==
    *
    * We can use `Functor` to "lift" a function from `A => B` to `F[A] => F[B]`:
    *
@@ -128,10 +123,10 @@ object FunctorSection
   }
 
   /**
-   * == fproduct ==
+   * ==fproduct==
    *
-   * `Functor` provides an `fproduct` function which pairs a value with the
-   * result of applying a function to that value.
+   * `Functor` provides an `fproduct` function which pairs a value with the result of applying a
+   * function to that value.
    */
   def usingFproduct(res0: Int, res1: Int, res2: Int) = {
     val source  = List("Cats", "is", "awesome")
@@ -143,10 +138,10 @@ object FunctorSection
   }
 
   /**
-   * == compose ==
+   * ==compose==
    *
-   * Functors compose! Given any functor `F[_]` and any functor `G[_]` we can
-   * create a new functor `F[G[_]]` by composing them:
+   * Functors compose! Given any functor `F[_]` and any functor `G[_]` we can create a new functor
+   * `F[G[_]]` by composing them:
    *
    * {{{
    * val listOpt = Functor[List] compose Functor[Option]

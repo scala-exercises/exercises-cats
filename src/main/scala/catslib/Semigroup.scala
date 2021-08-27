@@ -21,10 +21,9 @@ import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AnyFlatSpec
 
 /**
- * A semigroup for some given type A has a single operation
- * (which we will call `combine`), which takes two values of type A, and
- * returns a value of type A. This operation must be guaranteed to be
- * associative. That is to say that:
+ * A semigroup for some given type A has a single operation (which we will call `combine`), which
+ * takes two values of type A, and returns a value of type A. This operation must be guaranteed to
+ * be associative. That is to say that:
  *
  * {{{
  * ((a combine b) combine c)
@@ -38,15 +37,16 @@ import org.scalatest.flatspec.AnyFlatSpec
  *
  * for all possible values of a,b,c.
  *
- * There are instances of `Semigroup` defined for many types found in the
- * scala common library. For example, `Int` values are combined using addition
- * by default but multiplication is also associative and forms another `Semigroup`.
+ * There are instances of `Semigroup` defined for many types found in the scala common library. For
+ * example, `Int` values are combined using addition by default but multiplication is also
+ * associative and forms another `Semigroup`.
  *
  * {{{
  * import cats.Semigroup
  * }}}
  *
- * @param name semigroup
+ * @param name
+ *   semigroup
  */
 object SemigroupSection
     extends AnyFlatSpec
@@ -54,8 +54,8 @@ object SemigroupSection
     with org.scalaexercises.definitions.Section {
 
   /**
-   * Now that you've learned about the `Semigroup` instance for `Int` try to
-   * guess how it works in the following examples:
+   * Now that you've learned about the `Semigroup` instance for `Int` try to guess how it works in
+   * the following examples:
    */
   def semigroupCombine(res0: Int, res1: List[Int], res2: Option[Int], res3: Option[Int]) = {
     import cats.implicits._
@@ -77,10 +77,9 @@ object SemigroupSection
   }
 
   /**
-   * Many of these types have methods defined directly on them,
-   * which allow for such combining, e.g. `++` on List, but the
-   * value of having a `Semigroup` type class available is that these
-   * compose, so for instance, we can say
+   * Many of these types have methods defined directly on them, which allow for such combining, e.g.
+   * `++` on List, but the value of having a `Semigroup` type class available is that these compose,
+   * so for instance, we can say
    *
    * {{{
    * Map("foo" -> Map("bar" -> 5)).combine(Map("foo" -> Map("bar" -> 6), "baz" -> Map()))
@@ -94,8 +93,8 @@ object SemigroupSection
    * Map("foo" -> List(1, 2)) ++ Map("foo" -> List(3,4), "bar" -> List(42))
    * }}}
    *
-   * since the first version uses the Semigroup's `combine` operation, it will merge
-   * the map's values with `combine`.
+   * since the first version uses the Semigroup's `combine` operation, it will merge the map's
+   * values with `combine`.
    */
   def composingSemigroups(res0: Map[String, Int]) = {
     import cats.implicits._
@@ -108,14 +107,12 @@ object SemigroupSection
   }
 
   /**
-   * There is inline syntax available for `Semigroup`. Here we are
-   * following the convention from scalaz, that `|+|` is the
-   * operator from `Semigroup`.
+   * There is inline syntax available for `Semigroup`. Here we are following the convention from
+   * scalaz, that `|+|` is the operator from `Semigroup`.
    *
-   * You'll notice that instead of declaring `one` as `Some(1)`, I chose
-   * `Option(1)`, and I added an explicit type declaration for `n`. This is
-   * because there aren't type class instances for Some or None, but for
-   * Option.
+   * You'll notice that instead of declaring `one` as `Some(1)`, I chose `Option(1)`, and I added an
+   * explicit type declaration for `n`. This is because there aren't type class instances for Some
+   * or None, but for Option.
    */
   def semigroupSpecialSyntax(
       res0: Option[Int],
