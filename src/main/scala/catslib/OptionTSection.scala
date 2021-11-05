@@ -59,17 +59,17 @@ object OptionTSection
    * }}}
    */
   def pureOption(spanishGreetValue: String, englishGreetValue: String, failedGreetValue: String) = {
-    //given
+    // given
     val englishGreetOpT: OptionT[Id, String]     = OptionT.some[Id]("Hello")
     val spanishGreetOpT: OptionT[Future, String] = OptionT.pure[Future]("Hola")
     val failedGreetOpT: OptionT[Future, String]  = OptionT.none
 
-    //when
+    // when
     val englishGreet: Id[String]     = englishGreetOpT.getOrElse("")
     val spanishGreet: Future[String] = spanishGreetOpT.getOrElse("")
     val failedGreet: Future[String]  = failedGreetOpT.getOrElse("")
 
-    //then
+    // then
     englishGreet shouldBe a[Id[_]]
     spanishGreet shouldBe a[Future[_]]
     englishGreet shouldBe (englishGreetValue: String)
@@ -94,17 +94,17 @@ object OptionTSection
       maybeItalianGreet: Option[String],
       maybeFailedGreet: Option[String]
   ) = {
-    //given
+    // given
     val frenchGreetFO: Future[Option[String]] = Future.successful(Option("Bonjour"))
     val italianGreetF: Future[String]         = Future.successful("Ciao")
     val failedGreetO: Option[String]          = None
 
-    //when
+    // when
     val frenchGreetOpT: OptionT[Future, String]  = OptionT(frenchGreetFO)
     val italianGreetOpT: OptionT[Future, String] = OptionT.liftF(italianGreetF)
     val failedGreetOpT: OptionT[Future, String]  = OptionT.fromOption(failedGreetO)
 
-    //then
+    // then
     assert(frenchGreetOpT === OptionT.fromOption[Future](maybeFrenchGreet))
     assert(italianGreetOpT === OptionT.fromOption[Future](maybeItalianGreet))
     assert(failedGreetOpT === OptionT.fromOption[Future](maybeFailedGreet))
@@ -145,26 +145,26 @@ object OptionTSection
       maybeGreetGutenTag: List[String],
       maybeGreetGutenAbend: List[String]
   ) = {
-    //given
+    // given
     val germanGreetingsLO: List[Option[String]] =
       List("Hallo".some, "Hi".some, "Guten Morgen".some, none[String])
     val germanGreetingsT: OptionT[List, String] = OptionT(germanGreetingsLO)
 
-    //when/then (optionT vs flatten)
-    //map
+    // when/then (optionT vs flatten)
+    // map
     germanGreetingsT.map(_ + "!") shouldBe OptionT(maybeGreet: List[Option[String]])
     germanGreetingsLO.map(_.map(_ + " World!")) shouldBe OptionT(
       maybeGreetWorld: List[Option[String]]
     ).value
-    //filter
+    // filter
     germanGreetingsT.filter(_.contains("H")) shouldBe OptionT(maybeGreetH: List[Option[String]])
     germanGreetingsLO.map(_.filter(_.contains("Guten"))) shouldBe OptionT(
       maybeGreetGuten: List[Option[String]]
     ).value
-    //getOrElse
+    // getOrElse
     germanGreetingsT.getOrElse("Guten Tag") shouldBe (maybeGreetGutenTag: List[String])
     germanGreetingsLO.map(_.getOrElse("Guten Abend")) shouldBe (maybeGreetGutenAbend: List[String])
-    //...
+    // ...
   }
 
   /**
@@ -187,17 +187,17 @@ object OptionTSection
    * }}}
    */
   def forComprehension(maybeOpResult: Option[Double]) = {
-    //given
+    // given
     val initialNumber: Future[Option[Double]] = Future(0.0.some)
 
-    //when
+    // when
     val opResult: OptionT[Future, Double] = for {
       a <- OptionT(initialNumber).map(_ + 2)
       b <- OptionT.liftF(Future(a)).map(_ * 6)
       c <- OptionT.liftF(Future(b)).map(_ / 8)
     } yield c
 
-    //then
+    // then
     opResult.value.futureValue shouldBe (maybeOpResult: Option[Double])
 
   }
