@@ -61,13 +61,13 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * method. eager.value // res0: Int = 7
    */
   def nowEval(res0: List[Int]) = {
-    //given
+    // given
     val eagerEval = Eval.now {
       println("This is eagerly evaluated")
       1 :: 2 :: 3 :: Nil
     }
 
-    //when/then
+    // when/then
     eagerEval.value shouldBe (res0)
   }
 
@@ -99,7 +99,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * will lock the whole surrounding class, whereas Eval will only lock itself.
    */
   def laterEval(res0: List[Int], res1: Int) = {
-    //given
+    // given
     val n       = 2
     var counter = 0
     val lazyEval = Eval.later {
@@ -108,7 +108,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
       (1 to n)
     }
 
-    //when/then
+    // when/then
     List.fill(n)("").foreach(_ => lazyEval.value)
     lazyEval.value shouldBe res0
     counter shouldBe res1
@@ -130,7 +130,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * }}}
    */
   def alwaysEval(res0: Int, res1: List[Int], res2: Int) = {
-    //given
+    // given
     val n       = 4
     var counter = 0
     val alwaysEval = Eval.always {
@@ -139,7 +139,7 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
       (1 to n)
     }
 
-    //when/then
+    // when/then
     List.fill(n)("").foreach(_ => alwaysEval.value)
     counter shouldBe res0
     alwaysEval.value shouldBe res1
@@ -155,13 +155,13 @@ object EvalSection extends AnyFlatSpec with Matchers with org.scalaexercises.def
    * without fear of blowing up the stack.
    */
   def deferEval(res0: List[Int]) = {
-    //given
+    // given
     val list = List.fill(3)(0)
 
-    //when
+    // when
     val deferedEval: Eval[List[Int]] = Eval.now(list).flatMap(e => Eval.defer(Eval.later(e)))
 
-    //then
+    // then
     Eval.defer(deferedEval).value shouldBe res0
   }
 
