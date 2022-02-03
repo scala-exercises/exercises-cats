@@ -343,7 +343,7 @@ object ValidatedSection
    * If you do want error accumulation but occasionally run into places where sequential validation
    * is needed, then `Validated` provides a couple methods that may be helpful.
    *
-   * == `andThen` ===
+   * \== `andThen` ===
    *
    * The `andThen` method is similar to `flatMap` (such as `Either.flatMap`). In the case of
    * success, it passes the valid value into a function that returns a new `Validated` instance.
