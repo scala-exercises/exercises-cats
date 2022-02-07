@@ -4,6 +4,8 @@ ThisBuild / organization       := "org.scala-exercises"
 ThisBuild / githubOrganization := "47degrees"
 ThisBuild / scalaVersion       := "2.13.8"
 
+ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % "always"
+
 // This is required by the exercises compiler:
 publishLocal  := (publishLocal dependsOn compile).value
 publishSigned := (publishSigned dependsOn compile).value
