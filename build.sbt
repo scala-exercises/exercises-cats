@@ -2,7 +2,7 @@ import com.jsuereth.sbtpgp.PgpKeys.publishSigned
 
 ThisBuild / organization       := "org.scala-exercises"
 ThisBuild / githubOrganization := "47degrees"
-ThisBuild / scalaVersion       := "2.13.9"
+ThisBuild / scalaVersion       := "2.13.10"
 
 ThisBuild / libraryDependencySchemes += "org.scala-lang.modules" %% "scala-xml" % "always"
 
